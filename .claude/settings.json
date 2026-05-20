@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Screen]::AllScreens | ForEach-Object { [PSCustomObject]@{ Name=$_.DeviceName; Primary=$_.Primary; Bounds=$_.Bounds.ToString\\(\\); Working=$_.WorkingArea.ToString\\(\\) } } | Format-List)",
+      "PowerShell($dest = \"$env:LOCALAPPDATA\\\\DyctoVoice\\\\models\"; if \\(-not \\(Test-Path $dest\\)\\) { New-Item -ItemType Directory -Path $dest -Force | Out-Null }; Get-ChildItem $dest | Select-Object Name, @{Name='SizeMB'; Expression={[math]::Round\\($_.Length/1MB, 1\\)}} | Format-Table)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\joaopedro.martin_v4c\\AppData\\Local\\DyctoVoice"
+    ]
+  }
+}
