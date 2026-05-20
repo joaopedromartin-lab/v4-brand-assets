@@ -71,7 +71,7 @@ h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-backg
 
 <!-- GLOBAL STYLES (design tokens from reference) -->
 <style id="global-styles-inline-css">
-:root{--wp--preset--color--black: #050505;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #FFFFFF;--wp--preset--color--yellow: #FDFF87;--wp--preset--color--light-gray: #F2F2F2;--wp--preset--color--gray: #606060;--wp--preset--color--dark-gray: #1E2124;--wp--preset--color--black-70: #1c1c1cb3;--wp--preset--color--white-70: #ffffffb3;--wp--preset--gradient--black-radial-yellow: radial-gradient(circle at 100% 150%, rgba(253,255,135,1) 0%, rgba(5,5,5,1) 50%);--wp--preset--gradient--brand-primary: linear-gradient(135deg, #560303 0%, #7A0A02 40%, #FB2E0A 100%);--wp--preset--gradient--brand-subtle: linear-gradient(160deg, #560303 0%, #8B1205 50%, #C41E08 100%);--wp--preset--gradient--brand-radial: radial-gradient(ellipse at 20% 80%, #FB2E0A 0%, #7A0A02 40%, #560303 100%);--wp--preset--font-size--small: 12px;--wp--preset--font-size--medium: clamp(14px, 0.875rem + ((1vw - 5.8px) * 0.448), 20px);--wp--preset--font-size--large: clamp(22.041px, 1.378rem + ((1vw - 5.8px) * 1.042), 36px);--wp--preset--font-size--x-large: clamp(25.014px, 1.563rem + ((1vw - 5.8px) * 1.268), 42px);--wp--preset--font-size--h-1: clamp(2.7rem, 2.7rem + ((1vw - 0.363rem) * 5.359), 115px);--wp--preset--font-size--h-2: clamp(2.188rem, 2.188rem + ((1vw - 0.363rem) * 4.104), 90px);--wp--preset--font-size--h-3: clamp(1.75rem, 1.75rem + ((1vw - 0.363rem) * 2.687), 64px);--wp--preset--font-size--h-4: clamp(28px, 1.75rem + ((1vw - 5.8px) * 1.493), 48px);--wp--preset--font-size--h-5: clamp(26px, 1.625rem + ((1vw - 5.8px) * 0.448), 32px);--wp--preset--font-size--p-1: clamp(1.2rem, 1.2rem + ((1vw - 0.363rem) * 0.358), 24px);--wp--preset--font-size--p-2: clamp(1rem, 1rem + ((1vw - 0.363rem) * 0.374), 21px);--wp--preset--font-size--p-3: clamp(1rem, 1rem + ((1vw - 0.363rem) * 0.149), 18px);--wp--preset--font-size--p-4: clamp(0.875rem, 0.875rem + ((1vw - 0.363rem) * 0.149), 16px);--wp--preset--font-family--pp-telegraf: 'IBM Plex Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 24px;--wp--preset--spacing--40: clamp(0.75rem, 0.1549rem + 1.6418vw, 2.125rem);--wp--preset--spacing--50: clamp(1.625rem, 1.0299rem + 1.6418vw, 3rem);--wp--preset--spacing--60: clamp(2rem, 1.2425rem + 2.0896vw, 3.75rem);--wp--preset--spacing--70: clamp(3.125rem, 1.7724rem + 3.7313vw, 6.25rem);--wp--preset--spacing--80: clamp(4.375rem, 2.2108rem + 5.9701vw, 9.375rem);--wp--preset--spacing--90: clamp(5rem, 1.7537rem + 8.9552vw, 12.5rem);--wp--style--global--content-size: 1720px;--wp--style--global--wide-size: 1720px;}:where(body) { margin: 0; }.wp-site-blocks { padding-top: var(--wp--style--root--padding-top); padding-bottom: var(--wp--style--root--padding-bottom); }.has-global-padding { padding-right: var(--wp--style--root--padding-right); padding-left: var(--wp--style--root--padding-left); }.has-global-padding > .alignfull { margin-right: calc(var(--wp--style--root--padding-right) * -1); margin-left: calc(var(--wp--style--root--padding-left) * -1); }.has-global-padding :where(:not(.alignfull.is-layout-flow) > .has-global-padding:not(.wp-block-block, .alignfull)) { padding-right: 0; padding-left: 0; }.has-global-padding :where(:not(.alignfull.is-layout-flow) > .has-global-padding:not(.wp-block-block, .alignfull)) > .alignfull { margin-left: 0; margin-right: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{background-color: var(--wp--preset--color--white);color: var(--wp--preset--color--black-70);font-family: var(--wp--preset--font-family--pp-telegraf);font-size: var(--wp--preset--font-size--p-1);font-style: normal;font-weight: 400;line-height: 1.4;--wp--style--root--padding-top: 0px;--wp--style--root--padding-right: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);--wp--style--root--padding-bottom: 0px;--wp--style--root--padding-left: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);}a:where(:not(.wp-element-button)){color: var(--wp--preset--color--gray);text-decoration: none;}h1, h2, h3, h4, h5, h6{color: var(--wp--preset--color--black);font-style: normal;font-weight: 400;line-height: 1.15;margin-bottom: 0.4em;letter-spacing: -0.02em;}h1{font-size: var(--wp--preset--font-size--h-1);font-weight: 400;line-height: 1;letter-spacing: -0.03em;margin-bottom: clamp(1.125rem, 0.4216rem + 1.9403vw, 2.75rem);}h2{font-size: var(--wp--preset--font-size--h-2);margin-bottom: 0.5em;}h3{font-size: var(--wp--preset--font-size--h-3);}h4{font-size: var(--wp--preset--font-size--h-4);}h5{font-size: var(--wp--preset--font-size--h-5);}h6{font-size: var(--wp--preset--font-size--p-4);font-weight: 600;text-transform: uppercase;letter-spacing: 0.04em;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #00A86B;border-radius: 9999px;border-width: 0;color: var(--wp--preset--color--white);text-align: center;font-family: inherit;font-size: var(--wp--preset--font-size--p-4);font-style: inherit;font-weight: 600;letter-spacing: 0.06em;line-height: inherit;padding-top: clamp(0.875rem, 0.5612rem + 0.8657vw, 1.7rem);padding-right: clamp(1.625rem, 1.0299rem + 1.6418vw, 3rem);padding-bottom: clamp(0.875rem, 0.5612rem + 0.8657vw, 1.6rem);padding-left: clamp(1.625rem, 1.0299rem + 1.6418vw, 3rem);text-decoration: none;text-transform: uppercase;}:root :where(.wp-element-button:hover, .wp-block-button__link:hover){background-color: #FF6200;color: var(--wp--preset--color--white);}:root :where(.wp-element-button:focus, .wp-block-button__link:focus){outline-color: #FF6200;outline-offset: 2px;outline-style: dotted;outline-width: 1px;}:root :where(.wp-element-button:active, .wp-block-button__link:active){background-color: #E55700;color: var(--wp--preset--color--white);}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-yellow-color{color: var(--wp--preset--color--yellow) !important;}.has-light-gray-color{color: var(--wp--preset--color--light-gray) !important;}.has-gray-color{color: var(--wp--preset--color--gray) !important;}.has-dark-gray-color{color: var(--wp--preset--color--dark-gray) !important;}.has-black-70-color{color: var(--wp--preset--color--black-70) !important;}.has-white-70-color{color: var(--wp--preset--color--white-70) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-yellow-background-color{background-color: var(--wp--preset--color--yellow) !important;}.has-light-gray-background-color{background-color: var(--wp--preset--color--light-gray) !important;}.has-gray-background-color{background-color: var(--wp--preset--color--gray) !important;}.has-dark-gray-background-color{background-color: var(--wp--preset--color--dark-gray) !important;}.has-black-70-background-color{background-color: var(--wp--preset--color--black-70) !important;}.has-white-70-background-color{background-color: var(--wp--preset--color--white-70) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-black-radial-yellow-gradient-background{background: var(--wp--preset--gradient--black-radial-yellow) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-h-1-font-size{font-size: var(--wp--preset--font-size--h-1) !important;}.has-h-2-font-size{font-size: var(--wp--preset--font-size--h-2) !important;}.has-h-3-font-size{font-size: var(--wp--preset--font-size--h-3) !important;}.has-h-4-font-size{font-size: var(--wp--preset--font-size--h-4) !important;}.has-h-5-font-size{font-size: var(--wp--preset--font-size--h-5) !important;}.has-p-1-font-size{font-size: var(--wp--preset--font-size--p-1) !important;}.has-p-2-font-size{font-size: var(--wp--preset--font-size--p-2) !important;}.has-p-3-font-size{font-size: var(--wp--preset--font-size--p-3) !important;}.has-p-4-font-size{font-size: var(--wp--preset--font-size--p-4) !important;}.has-pp-telegraf-font-family{font-family: 'IBM Plex Sans', sans-serif !important;}body{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;letter-spacing: -0.01em;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:root :where(.wp-block-image img, .wp-block-image .wp-block-image__crop-area, .wp-block-image .components-placeholder){border-radius: 25px;}:root :where(p){margin-bottom: 1.2em;}
+:root{--wp--preset--color--black: #050505;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #FFFFFF;--wp--preset--color--yellow: #FDFF87;--wp--preset--color--light-gray: #F2F2F2;--wp--preset--color--gray: #606060;--wp--preset--color--dark-gray: #1E2124;--wp--preset--color--black-70: #1c1c1cb3;--wp--preset--color--white-70: #ffffffb3;--wp--preset--gradient--black-radial-yellow: radial-gradient(circle at 100% 150%, rgba(253,255,135,1) 0%, rgba(5,5,5,1) 50%);--wp--preset--gradient--brand-primary: linear-gradient(135deg, #560303 0%, #7A0A02 40%, #FB2E0A 100%);--wp--preset--gradient--brand-subtle: linear-gradient(160deg, #560303 0%, #8B1205 50%, #C41E08 100%);--wp--preset--gradient--brand-radial: radial-gradient(ellipse at 20% 80%, #FB2E0A 0%, #7A0A02 40%, #560303 100%);--wp--preset--font-size--small: 12px;--wp--preset--font-size--medium: clamp(14px, 0.875rem + ((1vw - 5.8px) * 0.448), 20px);--wp--preset--font-size--large: clamp(22.041px, 1.378rem + ((1vw - 5.8px) * 1.042), 36px);--wp--preset--font-size--x-large: clamp(25.014px, 1.563rem + ((1vw - 5.8px) * 1.268), 42px);--wp--preset--font-size--h-1: clamp(2.7rem, 2.7rem + ((1vw - 0.363rem) * 5.359), 115px);--wp--preset--font-size--h-2: clamp(2.188rem, 2.188rem + ((1vw - 0.363rem) * 4.104), 90px);--wp--preset--font-size--h-3: clamp(1.75rem, 1.75rem + ((1vw - 0.363rem) * 2.687), 64px);--wp--preset--font-size--h-4: clamp(28px, 1.75rem + ((1vw - 5.8px) * 1.493), 48px);--wp--preset--font-size--h-5: clamp(26px, 1.625rem + ((1vw - 5.8px) * 0.448), 32px);--wp--preset--font-size--p-1: clamp(1.2rem, 1.2rem + ((1vw - 0.363rem) * 0.358), 24px);--wp--preset--font-size--p-2: clamp(1rem, 1rem + ((1vw - 0.363rem) * 0.374), 21px);--wp--preset--font-size--p-3: clamp(1rem, 1rem + ((1vw - 0.363rem) * 0.149), 18px);--wp--preset--font-size--p-4: clamp(0.875rem, 0.875rem + ((1vw - 0.363rem) * 0.149), 16px);--wp--preset--font-family--pp-telegraf: 'IBM Plex Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 24px;--wp--preset--spacing--40: clamp(0.75rem, 0.1549rem + 1.6418vw, 2.125rem);--wp--preset--spacing--50: clamp(1.625rem, 1.0299rem + 1.6418vw, 3rem);--wp--preset--spacing--60: clamp(2rem, 1.2425rem + 2.0896vw, 3.75rem);--wp--preset--spacing--70: clamp(3.125rem, 1.7724rem + 3.7313vw, 6.25rem);--wp--preset--spacing--80: clamp(4.375rem, 2.2108rem + 5.9701vw, 9.375rem);--wp--preset--spacing--90: clamp(5rem, 1.7537rem + 8.9552vw, 12.5rem);--wp--style--global--content-size: 1720px;--wp--style--global--wide-size: 1720px;}:where(body) { margin: 0; }.wp-site-blocks { padding-top: var(--wp--style--root--padding-top); padding-bottom: var(--wp--style--root--padding-bottom); }.has-global-padding { padding-right: var(--wp--style--root--padding-right); padding-left: var(--wp--style--root--padding-left); }.has-global-padding > .alignfull { margin-right: calc(var(--wp--style--root--padding-right) * -1); margin-left: calc(var(--wp--style--root--padding-left) * -1); }.has-global-padding :where(:not(.alignfull.is-layout-flow) > .has-global-padding:not(.wp-block-block, .alignfull)) { padding-right: 0; padding-left: 0; }.has-global-padding :where(:not(.alignfull.is-layout-flow) > .has-global-padding:not(.wp-block-block, .alignfull)) > .alignfull { margin-left: 0; margin-right: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{background-color: var(--wp--preset--color--white);color: var(--wp--preset--color--black-70);font-family: var(--wp--preset--font-family--pp-telegraf);font-size: var(--wp--preset--font-size--p-1);font-style: normal;font-weight: 400;line-height: 1.4;--wp--style--root--padding-top: 0px;--wp--style--root--padding-right: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);--wp--style--root--padding-bottom: 0px;--wp--style--root--padding-left: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);}a:where(:not(.wp-element-button)){color: var(--wp--preset--color--gray);text-decoration: none;}h1, h2, h3, h4, h5, h6{color: var(--wp--preset--color--black);font-style: normal;font-weight: 400;line-height: 1.15;margin-bottom: 0.4em;letter-spacing: -0.02em;}h1{font-size: var(--wp--preset--font-size--h-1);font-weight: 400;line-height: 1;letter-spacing: -0.03em;margin-bottom: clamp(1.125rem, 0.4216rem + 1.9403vw, 2.75rem);}h2{font-size: var(--wp--preset--font-size--h-2);margin-bottom: 0.5em;}h3{font-size: var(--wp--preset--font-size--h-3);}h4{font-size: var(--wp--preset--font-size--h-4);}h5{font-size: var(--wp--preset--font-size--h-5);}h6{font-size: var(--wp--preset--font-size--p-4);font-weight: 600;text-transform: uppercase;letter-spacing: 0.04em;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #0E8420;border-radius: 9999px;border-width: 0;color: var(--wp--preset--color--white);text-align: center;font-family: inherit;font-size: var(--wp--preset--font-size--p-4);font-style: inherit;font-weight: 600;letter-spacing: 0.06em;line-height: inherit;padding-top: clamp(0.875rem, 0.5612rem + 0.8657vw, 1.7rem);padding-right: clamp(1.625rem, 1.0299rem + 1.6418vw, 3rem);padding-bottom: clamp(0.875rem, 0.5612rem + 0.8657vw, 1.6rem);padding-left: clamp(1.625rem, 1.0299rem + 1.6418vw, 3rem);text-decoration: none;text-transform: uppercase;}:root :where(.wp-element-button:hover, .wp-block-button__link:hover){background-color: #FF6200;color: var(--wp--preset--color--white);}:root :where(.wp-element-button:focus, .wp-block-button__link:focus){outline-color: #FF6200;outline-offset: 2px;outline-style: dotted;outline-width: 1px;}:root :where(.wp-element-button:active, .wp-block-button__link:active){background-color: #E55700;color: var(--wp--preset--color--white);}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-yellow-color{color: var(--wp--preset--color--yellow) !important;}.has-light-gray-color{color: var(--wp--preset--color--light-gray) !important;}.has-gray-color{color: var(--wp--preset--color--gray) !important;}.has-dark-gray-color{color: var(--wp--preset--color--dark-gray) !important;}.has-black-70-color{color: var(--wp--preset--color--black-70) !important;}.has-white-70-color{color: var(--wp--preset--color--white-70) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-yellow-background-color{background-color: var(--wp--preset--color--yellow) !important;}.has-light-gray-background-color{background-color: var(--wp--preset--color--light-gray) !important;}.has-gray-background-color{background-color: var(--wp--preset--color--gray) !important;}.has-dark-gray-background-color{background-color: var(--wp--preset--color--dark-gray) !important;}.has-black-70-background-color{background-color: var(--wp--preset--color--black-70) !important;}.has-white-70-background-color{background-color: var(--wp--preset--color--white-70) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-black-radial-yellow-gradient-background{background: var(--wp--preset--gradient--black-radial-yellow) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-h-1-font-size{font-size: var(--wp--preset--font-size--h-1) !important;}.has-h-2-font-size{font-size: var(--wp--preset--font-size--h-2) !important;}.has-h-3-font-size{font-size: var(--wp--preset--font-size--h-3) !important;}.has-h-4-font-size{font-size: var(--wp--preset--font-size--h-4) !important;}.has-h-5-font-size{font-size: var(--wp--preset--font-size--h-5) !important;}.has-p-1-font-size{font-size: var(--wp--preset--font-size--p-1) !important;}.has-p-2-font-size{font-size: var(--wp--preset--font-size--p-2) !important;}.has-p-3-font-size{font-size: var(--wp--preset--font-size--p-3) !important;}.has-p-4-font-size{font-size: var(--wp--preset--font-size--p-4) !important;}.has-pp-telegraf-font-family{font-family: 'IBM Plex Sans', sans-serif !important;}body{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;letter-spacing: -0.01em;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:root :where(.wp-block-image img, .wp-block-image .wp-block-image__crop-area, .wp-block-image .components-placeholder){border-radius: 25px;}:root :where(p){margin-bottom: 1.2em;}
 :root :where(.wp-block-button.is-style-outline-large--3 .wp-block-button__link){background-color: transparent;border-radius: 25px;color: var(--wp--preset--color--dark-gray);font-size: var(--wp--preset--font-size--p-4);font-weight: 700;padding-top: var(--wp--preset--spacing--50);padding-bottom: var(--wp--preset--spacing--50);text-transform: uppercase;}
 :root :where(.wp-block-button.is-style-arrow--6 .wp-block-button__link){background-color: transparent;border-radius: 25px;color: var(--wp--preset--color--yellow);font-size: var(--wp--preset--font-size--p-4);font-weight: 700;padding-top: 0;padding-bottom: 0;padding-left: 0;text-transform: uppercase;}
 </style>
@@ -775,7 +775,7 @@ h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-backg
 /* Buttons on gradient sections override */
 .ds-bg-gradient .wp-block-button__link,
 .ds-bg-gradient .wp-element-button {
-  background-color: #00A86B !important;
+  background-color: #0E8420 !important;
   color: #fff !important;
   box-shadow: none !important;
 }
@@ -1210,7 +1210,7 @@ footer .wp-block-group.has-black-background-color {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #00A86B;
+  background: #0E8420;
   flex-shrink: 0;
 }
 .ds-str-block--gradient .ds-str-label-dot {
@@ -1274,7 +1274,7 @@ footer .wp-block-group.has-black-background-color {
   border-radius: 50%;
   background: currentColor;
 }
-.bb-confidence--high   { color: #00A86B; }
+.bb-confidence--high   { color: #0E8420; }
 .bb-confidence--medium { color: #FF6200; }
 .bb-confidence--low    { color: #C41E08; }
 .bb-confidence--none   { color: rgba(0,0,0,0.45); }
@@ -1437,7 +1437,7 @@ footer .wp-block-group.has-black-background-color {
   display: inline-block;
 }
 .bb-do-dont__col--do .bb-do-dont__title { color: #5CFFB1; }
-.bb-do-dont__col--do .bb-do-dont__title::before { background: #00A86B; }
+.bb-do-dont__col--do .bb-do-dont__title::before { background: #0E8420; }
 .bb-do-dont__col--dont .bb-do-dont__title { color: #FFD3CB; }
 .bb-do-dont__col--dont .bb-do-dont__title::before { background: #FB2E0A; }
 .bb-do-dont__item {
@@ -1811,7 +1811,7 @@ footer .wp-block-group.has-black-background-color {
 }
 .bb-color__cta-block--green,
 .bb-color__cta-block--green.bb-color-copy {
-  background: #00A86B;
+  background: #0E8420;
   color: #FFFFFF;
 }
 .bb-color__cta-block:hover,
@@ -2050,22 +2050,25 @@ footer .wp-block-group.has-black-background-color {
   font-weight: 600;
   letter-spacing: 0.04em;
   line-height: 1.45;
-  cursor: pointer;
-  transition: filter 0.2s;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
 }
-.bb-color__gradient-stop:hover { filter: brightness(0.9); }
-.bb-color__gradient-stop::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: currentColor;
-  margin-right: 8px;
-  vertical-align: middle;
-  opacity: 0.7;
+.bb-color__gradient-stop-btn {
+  background: transparent;
+  border: 0;
+  padding: 2px 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  transition: filter 0.2s, opacity 0.2s;
 }
-.bb-color__gradient-stop strong { font-weight: 700; margin-right: 8px; }
+.bb-color__gradient-stop-btn:hover { filter: brightness(0.8); opacity: 0.85; }
+.bb-color__gradient-stop-btn strong { font-weight: 700; }
 .bb-color__gradient-stop--dark { color: #FFFFFF; }
 .bb-color__gradient-stop--light { color: rgba(5,5,5,0.85); }
 
@@ -3029,6 +3032,36 @@ footer .wp-block-group.has-black-background-color {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+.bb-photo-guide__title-main,
+.bb-photo-guide__title-sub { display: block; }
+.bb-photo-guide__title-sub {
+  font-weight: 400;
+  -webkit-text-fill-color: rgba(5,5,5,0.78);
+  color: rgba(5,5,5,0.78);
+  margin-top: 4px;
+}
+.bb-photo-guide__official-shots {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(24px, 3vw, 56px);
+  width: 100%;
+  min-height: clamp(360px, 60vh, 640px);
+}
+.bb-photo-guide__official-shot {
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+.bb-photo-guide__official-shot--big {
+  width: clamp(260px, 42vw, 600px);
+  height: auto;
+}
+.bb-photo-guide__official-shot--mini {
+  width: clamp(110px, 16vw, 220px);
+  height: auto;
+}
 .bb-photo-guide__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -3048,6 +3081,16 @@ footer .wp-block-group.has-black-background-color {
   color: rgba(5,5,5,0.82);
 }
 .bb-photo-guide__desc p { margin: 0; }
+.bb-photo-guide__desc { display: flex; flex-direction: column; gap: clamp(16px, 1.6vw, 24px); }
+.bb-photo-guide__spec {
+  display: block;
+  width: 100%;
+  max-width: clamp(220px, 22vw, 320px);
+  height: auto;
+  margin-top: clamp(8px, 1.2vw, 16px);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.06);
+}
 .bb-photo-guide__model {
   position: relative;
   min-height: clamp(460px, 68vh, 720px);
@@ -3518,8 +3561,8 @@ footer .wp-block-group.has-black-background-color {
   background-size: 12px 12px;
 }
 .bb-glass__legend-icon--ok {
-  color: #00A86B;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A86B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+  color: #0E8420;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E8420' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
 }
 .bb-glass__legend-icon--warn { color: #FF8A00; }
 .bb-glass__legend-icon--ko {
@@ -4111,8 +4154,16 @@ footer .wp-block-group.has-black-background-color {
     gap: clamp(24px, 4vw, 36px);
   }
   .bb-photo-guide__grid > .bb-photo-guide__desc { order: 2; }
-  .bb-photo-guide__grid > .bb-photo-guide__model { order: 1; }
+  .bb-photo-guide__grid > .bb-photo-guide__model,
+  .bb-photo-guide__grid > .bb-photo-guide__official-shots { order: 1; }
   .bb-photo-guide__model { min-height: clamp(380px, 56vh, 480px); }
+  .bb-photo-guide__official-shots {
+    min-height: 0;
+    gap: clamp(16px, 4vw, 28px);
+    justify-content: center;
+  }
+  .bb-photo-guide__official-shot--big { width: clamp(220px, 60vw, 360px); }
+  .bb-photo-guide__official-shot--mini { width: clamp(80px, 22vw, 140px); }
 
   /* Photography tabs (Luz / Figurino / Acting) — abandona o absolute
      no mobile pra (a) não estourar o min-height e grudar na próxima seção,
@@ -4496,10 +4547,10 @@ body.bb-lightbox-open { overflow: hidden; }
         <span class="bb-color__help">Clique em qualquer cor para copiar</span>
       </div>
       <div class="bb-color__cta-grid">
-        <div class="bb-color__cta-block bb-color__cta-block--green bb-color-copy" data-copy="#00A86B" role="button" tabindex="0" aria-label="Copiar HEX 00A86B">
+        <div class="bb-color__cta-block bb-color__cta-block--green bb-color-copy" data-copy="#0E8420" role="button" tabindex="0" aria-label="Copiar HEX 0E8420">
           <span class="bb-color__cta-label">CTA principal</span>
           <div class="bb-color__cta-codes">
-            <div><strong>HEX</strong> 00A86B</div>
+            <div><strong>HEX</strong> 0E8420</div>
             <div><strong>RGB</strong> 0 &nbsp;&nbsp;168 &nbsp;&nbsp;107</div>
             <div><strong>Pantone</strong> 7724 C</div>
             <div><strong>CMYK</strong> 100 &nbsp;&nbsp;0 &nbsp;&nbsp;36 &nbsp;&nbsp;34</div>
@@ -4588,21 +4639,48 @@ body.bb-lightbox-open { overflow: hidden; }
       <div class="bb-color__gradients">
         <!-- Print red -->
         <div class="bb-color__gradient" style="background:linear-gradient(180deg, #FF481F 0%, #C41E08 50%, #280001 100%)">
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 3516 C / CMYK 0 88 100 0"><strong>Pantone 3516 C</strong>CMYK 0 88 100 0</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 3546 C / CMYK 0 100 100 0"><strong>Pantone 3546 C</strong>CMYK 0 100 100 0</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 2449 C / CMYK 28 89 60 77"><strong>Pantone 2449 C</strong>CMYK 28 89 60 77</button>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--dark">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 3516 C"><strong>Pantone 3516 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 0 88 100 0">CMYK 0 88 100 0</button>
+          </div>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--dark">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 3546 C"><strong>Pantone 3546 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 0 100 100 0">CMYK 0 100 100 0</button>
+          </div>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--dark">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 2449 C"><strong>Pantone 2449 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 28 89 60 77">CMYK 28 89 60 77</button>
+          </div>
         </div>
         <!-- White to red dark -->
         <div class="bb-color__gradient" style="background:linear-gradient(180deg, #E1DCDC 0%, #E88A70 33%, #C41E08 66%, #280001 100%)">
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="Pantone 664 C / CMYK 6 8 0 0"><strong>Pantone 664 C</strong>CMYK 6 8 0 0</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="Pantone 486 C / CMYK 0 50 42 0"><strong>Pantone 486 C</strong>CMYK 0 50 42 0</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 3546 C / CMYK 0 100 100 0"><strong>Pantone 3546 C</strong>CMYK 0 100 100 0</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 2449 C / CMYK 28 89 60 77"><strong>Pantone 2449 C</strong>CMYK 28 89 60 77</button>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--light">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 664 C"><strong>Pantone 664 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 6 8 0 0">CMYK 6 8 0 0</button>
+          </div>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--light">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 486 C"><strong>Pantone 486 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 0 50 42 0">CMYK 0 50 42 0</button>
+          </div>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--dark">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 3546 C"><strong>Pantone 3546 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 0 100 100 0">CMYK 0 100 100 0</button>
+          </div>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--dark">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 2449 C"><strong>Pantone 2449 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 28 89 60 77">CMYK 28 89 60 77</button>
+          </div>
         </div>
         <!-- Red to dark -->
         <div class="bb-color__gradient" style="background:linear-gradient(180deg, #FF481F 0%, #650E0F 100%)">
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 3516 C / CMYK 0 88 100 0"><strong>Pantone 3516 C</strong>CMYK 0 88 100 0</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 1815 C / CMYK 2 97 72 52"><strong>Pantone 1815 C</strong>CMYK 2 97 72 52</button>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--dark">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 3516 C"><strong>Pantone 3516 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 0 88 100 0">CMYK 0 88 100 0</button>
+          </div>
+          <div class="bb-color__gradient-stop bb-color__gradient-stop--dark">
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="Pantone 1815 C"><strong>Pantone 1815 C</strong></button>
+            <button class="bb-color__gradient-stop-btn bb-color-copy" data-copy="CMYK 2 97 72 52">CMYK 2 97 72 52</button>
+          </div>
         </div>
       </div>
     </div>
@@ -4943,6 +5021,38 @@ body.bb-lightbox-open { overflow: hidden; }
       <div class="bb-photo-guide__model" data-aos="fade-in">
         <div class="bb-photo-guide__model-bg" aria-hidden="true"></div>
         <img src="assets/Mocasozinha.png" alt="Modelo fotográfico V4" class="bb-photo-guide__model-img"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<!-- PHOTOGRAPHY GUIDELINES — Fotos Oficiais                       -->
+<!-- ============================================================ -->
+<section id="photography_official" class="bb-photo-guide bb-photo-guide--official alignfull" aria-label="Diretrizes para fotos oficiais">
+  <div class="bb-photo-guide__inner">
+    <div class="bb-photo-guide__topbar">
+      <span class="bb-photo-guide__topbar-label">Identidade visual</span>
+      <div class="bb-photo-guide__topbar-meta">
+        <span>Fotografia</span>
+        <span>102</span>
+      </div>
+    </div>
+    <h2 class="bb-photo-guide__title">
+      <span class="bb-photo-guide__title-main">Diretrizes</span>
+      <span class="bb-photo-guide__title-sub">Fotos Oficiais</span>
+    </h2>
+
+    <div class="bb-photo-guide__grid">
+      <div class="bb-photo-guide__desc">
+        <p>As fotos oficiais dos colaboradores V4 devem manter um padrão único em todos os pontos de contato. A linguagem se divide em foto posada (principal/institucional) e foto ambientada (secundária/contextual), sempre com enquadramento meio-corpo, rosto em alta legibilidade e direção consistente (olhar para a câmera no institucional; variações leves no contextual).</p>
+        <p>O fundo deve usar obrigatoriamente o degradê radial indicado abaixo, com recorte limpo e acabamento cuidadoso, gerando as versões retangular (materiais e site) e circular (avatares). A iluminação e o tratamento devem ser uniformes e naturais, sem filtros, e o figurino deve priorizar peças neutras, evitando ruídos visuais.</p>
+        <img src="assets/FigmaSpec.png" alt="Especificação do degradê radial no Figma — stops em #FF481F, #E50914 e #280000" class="bb-photo-guide__spec"/>
+      </div>
+      <div class="bb-photo-guide__official-shots" data-aos="fade-in">
+        <img src="assets/DiretrizesFotosOficiaisBig.png" alt="Foto oficial V4 — retrato principal sobre fundo radial vermelho" class="bb-photo-guide__official-shot bb-photo-guide__official-shot--big"/>
+        <img src="assets/DiretrizesFotosOficiaisMini.png" alt="Foto oficial V4 — versão circular para avatar" class="bb-photo-guide__official-shot bb-photo-guide__official-shot--mini"/>
       </div>
     </div>
   </div>
