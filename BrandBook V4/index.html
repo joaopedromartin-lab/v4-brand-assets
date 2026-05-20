@@ -2847,22 +2847,18 @@ footer .wp-block-group.has-black-background-color {
 
 .bb-type__panel {
   position: relative;
-  background: linear-gradient(120deg, #7A0A02 0%, #C41E08 35%, #E50914 65%, #FB2E0A 100%);
+  background:
+    radial-gradient(ellipse at 95% 5%, rgba(255,200,170,0.85) 0%, rgba(255,140,80,0.4) 22%, rgba(255,140,80,0) 50%),
+    linear-gradient(135deg, #7A0A02 0%, #C41E08 35%, #E50914 65%, #FB2E0A 100%);
   border-radius: 4px;
-  padding: clamp(32px, 3.4vw, 56px) clamp(28px, 3vw, 48px);
-  min-height: clamp(520px, 72vh, 780px);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+  padding: clamp(28px, 3vw, 48px);
+  aspect-ratio: 16 / 9;
+  min-height: clamp(360px, 44vh, 540px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: #FFFFFF;
   overflow: hidden;
-}
-@media (min-width: 760px) {
-  .bb-type__panel {
-    grid-template-columns: minmax(180px, 240px) 1fr;
-    gap: clamp(32px, 4vw, 64px);
-    align-items: start;
-  }
 }
 .bb-type__panel-title {
   display: flex;
@@ -2923,21 +2919,27 @@ footer .wp-block-group.has-black-background-color {
 /* === BRANDBOOK V4 — TYPOGRAPHY MORGANITE (impact / display) === */
 .bb-type__panel-headline--morganite {
   font-family: 'Morganite', 'Anton', sans-serif;
-  font-size: clamp(72px, 11vw, 220px);
+  font-size: clamp(80px, 12vw, 200px);
   font-weight: 700;
   letter-spacing: 0;
   line-height: 0.9;
   text-transform: uppercase;
+  margin: 0;
+  color: #FFFFFF;
+  -webkit-text-stroke: 1.5px #FFFFFF;
+  text-stroke: 1.5px #FFFFFF;
 }
+.bb-type__panel-headline--morganite span { display: block; }
 .bb-type__panel-headline--plex {
   font-family: 'IBM Plex Sans', sans-serif;
-  font-size: clamp(44px, 5.4vw, 96px);
+  font-size: clamp(40px, 4.6vw, 80px);
   font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
   margin: 0;
   color: #FFFFFF;
 }
+.bb-type__panel-headline--plex span { display: block; }
 .bb-type__panel-divider {
   border: 0;
   border-top: 1px solid rgba(255,255,255,0.6);
@@ -4843,7 +4845,11 @@ body.bb-lightbox-open { overflow: hidden; }
       </div>
 
       <div class="bb-type__panel" data-aos="fade-in" style="display:flex;flex-direction:column;justify-content:space-between;grid-template-columns:none">
-        <p class="bb-type__panel-headline bb-type__panel-headline--plex">Apenas resultado importa.</p>
+        <p class="bb-type__panel-headline bb-type__panel-headline--plex">
+          <span>Apenas</span>
+          <span>resultado</span>
+          <span>importa.</span>
+        </p>
         <div>
           <hr class="bb-type__panel-divider"/>
           <div class="bb-type__panel-footer">
@@ -4885,8 +4891,8 @@ body.bb-lightbox-open { overflow: hidden; }
 
       <div class="bb-type__panel" data-aos="fade-in" style="display:flex;flex-direction:column;justify-content:space-between;grid-template-columns:none">
         <p class="bb-type__panel-headline bb-type__panel-headline--morganite">
-          <span>Sempre</span>
-          <span>à frente</span>
+          <span>Growth is the</span>
+          <span>new black</span>
         </p>
         <div>
           <hr class="bb-type__panel-divider"/>
