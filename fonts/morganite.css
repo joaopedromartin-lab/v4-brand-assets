@@ -1,0 +1,33 @@
+/* =====================================================================
+   Morganite — V4 Company brand font
+   Servido centralmente em https://joaopedromartin-lab.github.io/v4-brand-assets/fonts/
+   Carrega WOFF2 (rápido, ~25KB) com fallback TTF pra browsers antigos.
+   Pesos disponíveis: 500 (Medium) / 600 (SemiBold) / 700 (Bold)
+   ===================================================================== */
+
+@font-face {
+  font-family: 'Morganite';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('Morganite-Medium.woff2') format('woff2'),
+       url('Morganite-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Morganite';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('Morganite-SemiBold.woff2') format('woff2'),
+       url('Morganite-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Morganite';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('Morganite-Bold.woff2') format('woff2'),
+       url('Morganite-Bold.ttf') format('truetype');
+}
