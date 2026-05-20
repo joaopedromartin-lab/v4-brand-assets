@@ -1660,12 +1660,10 @@ footer .wp-block-group.has-black-background-color {
   color: #fff;
 }
 
-/* === BRANDBOOK V4 — COLOR PALETTE (sticky-stack, 4 cards) === */
+/* === BRANDBOOK V4 — COLOR PALETTE (stacked cards) === */
 .bb-color { position: relative; background: #FFFFFF; }
 .bb-color__card {
-  position: sticky;
-  top: 0;
-  min-height: calc(100vh + clamp(80px, 12vh, 160px));
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: clamp(28px, 4vh, 56px) clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem) clamp(96px, 14vh, 180px);
@@ -1676,7 +1674,46 @@ footer .wp-block-group.has-black-background-color {
 .bb-color__card--cta,
 .bb-color__card--digital,
 .bb-color__card--print,
-.bb-color__card--proportion { background: #FFFFFF; color: #050505; }
+.bb-color__card--proportion,
+.bb-color__card--system { background: #FFFFFF; color: #050505; }
+
+/* Sistema cromático: grid com vermelho (full), 3 secundárias (linha do meio) e amarelo (faixa inferior) */
+.bb-color__system {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: minmax(220px, 38vh) minmax(140px, 22vh) minmax(40px, 6vh);
+  gap: clamp(8px, 0.8vw, 12px);
+  width: 100%;
+  flex: 1;
+}
+.bb-color__system-cell {
+  position: relative;
+  border: 0;
+  border-radius: 4px;
+  padding: clamp(10px, 1vw, 16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+  transition: filter 0.2s ease;
+}
+.bb-color__system-cell:hover { filter: brightness(0.96); }
+.bb-color__system-cell--primary { grid-column: 1 / -1; grid-row: 1; }
+.bb-color__system-cell--white { grid-column: 1; grid-row: 2; border: 1px solid rgba(0,0,0,0.08); }
+.bb-color__system-cell--gray-light { grid-column: 2; grid-row: 2; border: 1px solid rgba(0,0,0,0.08); }
+.bb-color__system-cell--gray-dark { grid-column: 3; grid-row: 2; }
+.bb-color__system-cell--brown { grid-column: 4; grid-row: 2; }
+.bb-color__system-cell--yellow { grid-column: 1 / -1; grid-row: 3; }
+.bb-color__system-hex {
+  font-family: var(--wp--preset--font-family--pp-telegraf);
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+}
+.bb-color__system-hex--dark { color: #050505; }
 
 /* Proporção card: horizontal bar + legends */
 .bb-color__proportion-wrap { display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px); flex: 1; }
@@ -1744,8 +1781,9 @@ footer .wp-block-group.has-black-background-color {
 .bb-color__cta-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(16px, 1.6vw, 24px);
+  gap: clamp(14px, 1.4vw, 22px);
   width: 100%;
+  max-width: clamp(640px, 72vw, 1040px);
   align-items: stretch;
 }
 @media (min-width: 720px) {
@@ -1758,12 +1796,13 @@ footer .wp-block-group.has-black-background-color {
   background: #FFDD00;
   border: 0;
   border-radius: 4px;
-  padding: clamp(24px, 2.6vw, 40px);
-  min-height: clamp(420px, 64vh, 720px);
+  padding: clamp(14px, 1.5vw, 20px);
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  gap: clamp(20px, 2.4vw, 32px);
   cursor: pointer;
   text-align: left;
   font-family: inherit;
@@ -1795,13 +1834,12 @@ footer .wp-block-group.has-black-background-color {
 .bb-color__cta-codes {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   font-family: var(--wp--preset--font-family--pp-telegraf);
-  font-size: clamp(14px, 1.05vw, 17px);
+  font-size: clamp(13px, 0.95vw, 15px);
   font-weight: 500;
   line-height: 1.4;
   color: #050505;
-  margin-top: auto;
 }
 .bb-color__cta-codes div { display: flex; gap: 8px; }
 .bb-color__cta-codes strong { font-weight: 600; }
@@ -1966,13 +2004,16 @@ footer .wp-block-group.has-black-background-color {
   flex: 1;
   min-height: 460px;
 }
-/* Variant: force 4 colors in a single row */
+/* Variant: 4 colors in a 2x2 grid */
 .bb-color__cols--four {
-  grid-template-columns: repeat(4, 1fr);
-  min-height: 360px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: clamp(240px, 36vh, 360px);
+  gap: clamp(14px, 1.4vw, 22px);
+  min-height: 0;
+  max-width: clamp(480px, 52vw, 760px);
 }
-.bb-color__cols--four .bb-color__col { padding: 16px; }
-.bb-color__cols--four .bb-color__col-codes { font-size: 11px; }
+.bb-color__cols--four .bb-color__col { padding: 20px; min-height: 0; }
+.bb-color__cols--four .bb-color__col-codes { font-size: 13px; }
 .bb-color__col {
   display: flex;
   flex-direction: column;
@@ -2004,8 +2045,10 @@ footer .wp-block-group.has-black-background-color {
   min-height: 540px;
 }
 .bb-color__gradient-stop {
-  padding: 16px 20px;
-  font-size: 11px;
+  padding: 18px 22px;
+  font-size: clamp(13px, 1.05vw, 17px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
   line-height: 1.45;
   cursor: pointer;
   transition: filter 0.2s;
@@ -2205,14 +2248,12 @@ footer .wp-block-group.has-black-background-color {
   position: relative;
 }
 .bb-perso__card {
-  position: sticky;
-  top: 0;
-  min-height: 100vh;
+  position: relative;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
   padding-top: clamp(28px, 4vh, 56px);
-  padding-bottom: clamp(28px, 4vh, 56px);
+  padding-bottom: clamp(80px, 12vh, 140px);
   padding-left: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);
   padding-right: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);
 }
@@ -2413,12 +2454,10 @@ footer .wp-block-group.has-black-background-color {
   max-width: 460px;
 }
 
-/* === BRANDBOOK V4 — COLOR PALETTE (sticky-stack 4 cards) === */
+/* === BRANDBOOK V4 — COLOR PALETTE (stacked cards) === */
 .bb-color { position: relative; }
 .bb-color__card {
-  position: sticky;
-  top: 0;
-  min-height: calc(100vh + clamp(80px, 12vh, 160px));
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: clamp(28px, 4vh, 56px) clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem) clamp(96px, 14vh, 180px);
@@ -2889,6 +2928,35 @@ footer .wp-block-group.has-black-background-color {
   letter-spacing: 0;
   line-height: 0.9;
   text-transform: uppercase;
+}
+.bb-type__panel-headline--plex {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(44px, 5.4vw, 96px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  margin: 0;
+  color: #FFFFFF;
+}
+.bb-type__panel-divider {
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,0.6);
+  margin: 0 0 clamp(14px, 1.4vw, 20px);
+}
+.bb-type__panel-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: clamp(16px, 2vw, 32px);
+  color: #FFFFFF;
+}
+.bb-type__panel-foot-left--plex,
+.bb-type__panel-foot-right--plex {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: clamp(14px, 1.05vw, 18px);
+  font-weight: 400;
+  letter-spacing: 0;
+  margin: 0;
 }
 .bb-type__panel-foot-left--morganite,
 .bb-type__panel-foot-right--morganite {
@@ -3906,14 +3974,20 @@ footer .wp-block-group.has-black-background-color {
   .bb-color__split > .bb-color__cols,
   .bb-color__split > .bb-color__cta-grid,
   .bb-color__split > .bb-color__gradients,
-  .bb-color__split > .bb-color__proportion-wrap { order: 1; }
+  .bb-color__split > .bb-color__proportion-wrap,
+  .bb-color__split > .bb-color__system { order: 1; }
+
+  /* Sistema cromático no mobile — alturas reduzidas pra caber */
+  .bb-color__system {
+    grid-template-rows: minmax(180px, 30vh) minmax(100px, 16vh) minmax(32px, 5vh);
+  }
 
   /* CTA blocks (verde + amarelo) — mantém lado a lado pra ver os dois sem rolar */
   .bb-color__cta-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .bb-color__cta-block,
   .bb-color__cta-block.bb-color-copy {
-    min-height: clamp(220px, 36vh, 300px);
-    padding: clamp(16px, 4vw, 22px);
+    min-height: 0;
+    padding: clamp(14px, 4vw, 20px);
   }
   .bb-color__cta-label {
     font-size: 10px;
@@ -4360,56 +4434,42 @@ body.bb-lightbox-open { overflow: hidden; }
     </div>
   </article>
 
-  <!-- Card 2: Cores Secundárias -->
-  <article class="bb-color__card bb-color__card--secondary">
+  <!-- Card 1b: Sistema cromático -->
+  <article class="bb-color__card bb-color__card--system">
     <div class="bb-color__topbar">
       <span>Identidade visual</span>
       <div class="bb-color__topbar-meta"><span>Cores</span></div>
-      <span>46</span>
+      <span>54</span>
     </div>
     <h2 class="bb-color__title">
       <span class="bb-color__title-main">Cores</span>
-      <span class="bb-color__title-sub">Secundárias</span>
+      <span class="bb-color__title-sub">Sistema cromático</span>
     </h2>
     <div class="bb-color__split">
       <div class="bb-color__desc">
-        <p>Branco, cinza claro, cinza chumbo e marrom escuro formam a base cromática de apoio — estruturam, garantem contraste e sustentam o vermelho como protagonista.</p>
-        <p>Branco e cinza claro: base de organização e respiro. Marrom escuro: fundos, gradientes e texto corrido sobre claros. Em fundo vermelho, texto corrido em branco.</p>
-        <p>Cinza chumbo tem função semântica — estados negativos/desabilitados e texto corrido sobre branco ou cinza claro. Não usar como fundo ou em grandes áreas.</p>
+        <p>Ao lado, apresentamos a paleta de cores da V4. O sistema cromático é estruturado a partir do vermelho como cor principal, apoiado por cores secundárias que garantem equilíbrio e consistência, além do amarelo como cor terciária para detalhes e ativação.</p>
+        <p>Cada cor possui função, semântica e hierarquia definidas, assegurando coerência visual, reconhecimento de marca e clareza nas aplicações em todos os pontos de contato.</p>
         <span class="bb-color__help">Clique em qualquer cor para copiar</span>
       </div>
-      <div class="bb-color__cols bb-color__cols--four">
-        <button class="bb-color__col bb-color-copy" data-copy="#FFFFFF" style="background:#FFFFFF;border:1px solid rgba(0,0,0,0.08);color:#050505">
-          <div class="bb-color__col-codes">
-            <div><strong>HEX</strong>FFFFFF</div>
-            <div><strong>RGB</strong>255 255 255</div>
-            <div><strong>Pantone</strong>—</div>
-            <div><strong>CMYK</strong>0 0 0 0</div>
-          </div>
+
+      <div class="bb-color__system">
+        <button class="bb-color__system-cell bb-color__system-cell--primary bb-color-copy" data-copy="#E50914" style="background:#E50914" aria-label="Copiar HEX E50914">
+          <span class="bb-color__system-hex">#E50914</span>
         </button>
-        <button class="bb-color__col bb-color-copy" data-copy="#F2F2F2" style="background:#F2F2F2;color:#050505">
-          <div class="bb-color__col-codes">
-            <div><strong>HEX</strong>F2F2F2</div>
-            <div><strong>RGB</strong>243 243 243</div>
-            <div><strong>Pantone</strong>Cool Grey 1 C</div>
-            <div><strong>CMYK</strong>10 7 5 0</div>
-          </div>
+        <button class="bb-color__system-cell bb-color__system-cell--white bb-color-copy" data-copy="#FFFFFF" style="background:#FFFFFF" aria-label="Copiar HEX FFFFFF">
+          <span class="bb-color__system-hex bb-color__system-hex--dark">#FFFFFF</span>
         </button>
-        <button class="bb-color__col bb-color-copy" data-copy="#312D2D" style="background:#312D2D;color:#FFFFFF">
-          <div class="bb-color__col-codes">
-            <div><strong>HEX</strong>312D2D</div>
-            <div><strong>RGB</strong>49 45 45</div>
-            <div><strong>Pantone</strong>Black C</div>
-            <div><strong>CMYK</strong>65 65 65 65</div>
-          </div>
+        <button class="bb-color__system-cell bb-color__system-cell--gray-light bb-color-copy" data-copy="#F2F2F2" style="background:#F2F2F2" aria-label="Copiar HEX F2F2F2">
+          <span class="bb-color__system-hex bb-color__system-hex--dark">#F2F2F2</span>
         </button>
-        <button class="bb-color__col bb-color-copy" data-copy="#280000" style="background:#280000;color:#FFFFFF">
-          <div class="bb-color__col-codes">
-            <div><strong>HEX</strong>280000</div>
-            <div><strong>RGB</strong>40 0 0</div>
-            <div><strong>Pantone</strong>2449 C</div>
-            <div><strong>CMYK</strong>28 89 60 77</div>
-          </div>
+        <button class="bb-color__system-cell bb-color__system-cell--gray-dark bb-color-copy" data-copy="#312D2D" style="background:#312D2D" aria-label="Copiar HEX 312D2D">
+          <span class="bb-color__system-hex">#312D2D</span>
+        </button>
+        <button class="bb-color__system-cell bb-color__system-cell--brown bb-color-copy" data-copy="#280000" style="background:#280000" aria-label="Copiar HEX 280000">
+          <span class="bb-color__system-hex">#280000</span>
+        </button>
+        <button class="bb-color__system-cell bb-color__system-cell--yellow bb-color-copy" data-copy="#FFDD00" style="background:#FFDD00" aria-label="Copiar HEX FFDD00">
+          <span class="bb-color__system-hex bb-color__system-hex--dark">#FFDD00</span>
         </button>
       </div>
     </div>
@@ -4476,27 +4536,27 @@ body.bb-lightbox-open { overflow: hidden; }
       <div class="bb-color__gradients">
         <!-- Peach -->
         <div class="bb-color__gradient" style="background:linear-gradient(180deg, #FFEBC8 0%, #FFB4A0 50%, #B4B4BE 100%)">
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#FFEBC8"><strong>HEX FFEBC8</strong>RGB 255 235 200</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#FFB4A0"><strong>HEX FFB4A0</strong>RGB 255 180 160</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#B4B4BE"><strong>HEX B4B4BE</strong>RGB 180 180 190</button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#FFEBC8"><strong>#FFEBC8</strong></button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#FFB4A0"><strong>#FFB4A0</strong></button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#B4B4BE"><strong>#B4B4BE</strong></button>
         </div>
         <!-- Red dark -->
         <div class="bb-color__gradient" style="background:linear-gradient(180deg, #FF481F 0%, #F0141E 50%, #280000 100%)">
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#FF481F"><strong>HEX FF481F</strong>RGB 255 72 31</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#F0141E"><strong>HEX F0141E</strong>RGB 240 20 30</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#280000"><strong>HEX 280000</strong>RGB 40 0 0</button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#FF481F"><strong>#FF481F</strong></button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#F0141E"><strong>#F0141E</strong></button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#280000"><strong>#280000</strong></button>
         </div>
         <!-- Gray to red dark -->
         <div class="bb-color__gradient" style="background:linear-gradient(180deg, #E1DCDC 0%, #E88A70 33%, #F0141E 66%, #280000 100%)">
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#E1DCDC"><strong>HEX E1DCDC</strong>RGB 225 220 220</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#E88A70"><strong>HEX E88A70</strong>RGB 232 138 112</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#F0141E"><strong>HEX F0141E</strong>RGB 240 20 30</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#280000"><strong>HEX 280000</strong>RGB 40 0 0</button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#E1DCDC"><strong>#E1DCDC</strong></button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--light bb-color-copy" data-copy="#E88A70"><strong>#E88A70</strong></button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#F0141E"><strong>#F0141E</strong></button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#280000"><strong>#280000</strong></button>
         </div>
         <!-- Red to darker red -->
         <div class="bb-color__gradient" style="background:linear-gradient(180deg, #FF481F 0%, #650E0F 100%)">
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#FF481F"><strong>HEX FF481F</strong>RGB 255 72 31</button>
-          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#650E0F"><strong>HEX 650E0F</strong>RGB 101 14 15</button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#FF481F"><strong>#FF481F</strong></button>
+          <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="#650E0F"><strong>#650E0F</strong></button>
         </div>
       </div>
     </div>
@@ -4541,71 +4601,6 @@ body.bb-lightbox-open { overflow: hidden; }
         <div class="bb-color__gradient" style="background:linear-gradient(180deg, #FF481F 0%, #650E0F 100%)">
           <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 3516 C / CMYK 0 88 100 0"><strong>Pantone 3516 C</strong>CMYK 0 88 100 0</button>
           <button class="bb-color__gradient-stop bb-color__gradient-stop--dark bb-color-copy" data-copy="Pantone 1815 C / CMYK 2 97 72 52"><strong>Pantone 1815 C</strong>CMYK 2 97 72 52</button>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- Card 5: Cores Proporção -->
-  <article class="bb-color__card bb-color__card--proportion">
-    <div class="bb-color__topbar">
-      <span>Identidade visual</span>
-      <div class="bb-color__topbar-meta"><span>Cores</span></div>
-      <span>57</span>
-    </div>
-    <h2 class="bb-color__title">
-      <span class="bb-color__title-main">Cores</span>
-      <span class="bb-color__title-sub">Proporção</span>
-    </h2>
-    <div class="bb-color__split">
-      <div class="bb-color__desc">
-        <p>O sistema cromático da V4 é orientado por dois princípios: protagonismo e função. A proporção de presença garante que o vermelho permaneça dominante nas composições, enquanto as demais cores estruturam, organizam e complementam a informação.</p>
-        <p>A barra ao lado apresenta a distribuição recomendada de uso e serve como guia para a construção de layouts institucionais e digitais.</p>
-        <p>Dentro desse sistema, cada cor exerce um papel específico: o vermelho atua como cor principal de ação; as cores secundárias estruturam a base visual; o chumbo sinaliza estados negativos ou desabilitados; e o amarelo funciona como acento estratégico para ativação e destaque.</p>
-        <span class="bb-color__help">Clique em qualquer cor para copiar</span>
-      </div>
-
-      <div class="bb-color__proportion-wrap">
-        <div class="bb-color__proportion-bar" role="presentation">
-          <button class="bb-color__proportion-stop bb-color-copy" data-copy="#E50914" style="background:#E50914;flex:50" aria-label="Copiar HEX E50914"></button>
-          <button class="bb-color__proportion-stop bb-color-copy" data-copy="#FFFFFF" style="background:#FFFFFF;flex:15;border-left:1px solid rgba(0,0,0,0.08);border-right:1px solid rgba(0,0,0,0.08)" aria-label="Copiar HEX FFFFFF"></button>
-          <button class="bb-color__proportion-stop bb-color-copy" data-copy="#280000" style="background:#280000;flex:10" aria-label="Copiar HEX 280000"></button>
-          <button class="bb-color__proportion-stop bb-color-copy" data-copy="#312D2D" style="background:#312D2D;flex:10" aria-label="Copiar HEX 312D2D"></button>
-          <button class="bb-color__proportion-stop bb-color-copy" data-copy="#F2F2F2" style="background:#F2F2F2;flex:10" aria-label="Copiar HEX F2F2F2"></button>
-          <button class="bb-color__proportion-stop bb-color-copy" data-copy="#FFDD00" style="background:#FFDD00;flex:5" aria-label="Copiar HEX FFDD00"></button>
-        </div>
-
-        <div class="bb-color__proportion-legends">
-          <div class="bb-color__proportion-legend" style="flex:50">
-            <strong>50%</strong>
-            <span class="bb-color__proportion-legend-name">vermelho</span>
-            Ação, movimento e decisão. É a cor protagonista da marca e simboliza energia, protagonismo e avanço.
-          </div>
-          <div class="bb-color__proportion-legend" style="flex:15">
-            <strong>15%</strong>
-            <span class="bb-color__proportion-legend-name">branco</span>
-            Clareza. Respiro e organização.
-          </div>
-          <div class="bb-color__proportion-legend" style="flex:10">
-            <strong>10%</strong>
-            <span class="bb-color__proportion-legend-name">marrom</span>
-            Solidez. Sustentação e complemento institucional.
-          </div>
-          <div class="bb-color__proportion-legend" style="flex:10">
-            <strong>10%</strong>
-            <span class="bb-color__proportion-legend-name">chumbo</span>
-            Inércia. Bloqueio e ausência de movimento, o oposto do vermelho V4.
-          </div>
-          <div class="bb-color__proportion-legend" style="flex:10">
-            <strong>10%</strong>
-            <span class="bb-color__proportion-legend-name">cinza</span>
-            Estrutura. Base e equilíbrio visual.
-          </div>
-          <div class="bb-color__proportion-legend" style="flex:5">
-            <strong>5%</strong>
-            <span class="bb-color__proportion-legend-name">amarelos</span>
-            Ativação. Destaque e início da ação.
-          </div>
         </div>
       </div>
     </div>
@@ -4847,35 +4842,13 @@ body.bb-lightbox-open { overflow: hidden; }
         </div>
       </div>
 
-      <div class="bb-type__panel" data-aos="fade-in">
-        <div class="bb-type__panel-title">
-          <span class="bb-type__panel-title-main">IBM PLEX SANS</span>
-          <span class="bb-type__panel-title-sub">Set de caracteres</span>
-        </div>
-        <div class="bb-type__charset">
-          <div class="bb-type__charset-row">
-            <span class="bb-type__charset-label">Caixa alta</span>
-            <p class="bb-type__charset-sample">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-          </div>
-          <div class="bb-type__charset-row">
-            <span class="bb-type__charset-label">Caixa baixa</span>
-            <p class="bb-type__charset-sample">abcdefghijklmnopqrstuvwxyz</p>
-          </div>
-          <div class="bb-type__charset-row">
-            <span class="bb-type__charset-label">Números</span>
-            <p class="bb-type__charset-sample">1234567890</p>
-          </div>
-          <div class="bb-type__charset-row">
-            <span class="bb-type__charset-label">Caracteres</span>
-            <p class="bb-type__charset-sample">(!?¡¿:.,;…)[&amp;@#]{-–—|·}&lt;&gt;«»“ ”„‟•/\</p>
-          </div>
-          <div class="bb-type__charset-row">
-            <span class="bb-type__charset-label">Símbolos e moedas</span>
-            <p class="bb-type__charset-sample">$¢£¤¥€©®™%</p>
-          </div>
-          <div class="bb-type__charset-row">
-            <span class="bb-type__charset-label">Setas</span>
-            <p class="bb-type__charset-sample">↖ ↗ ↘ ↙ ← ↑ ↓ → ↔ ↕ ⇆ ⇅ ↰ ↱ ↲ ↳</p>
+      <div class="bb-type__panel" data-aos="fade-in" style="display:flex;flex-direction:column;justify-content:space-between;grid-template-columns:none">
+        <p class="bb-type__panel-headline bb-type__panel-headline--plex">Apenas resultado importa.</p>
+        <div>
+          <hr class="bb-type__panel-divider"/>
+          <div class="bb-type__panel-footer">
+            <p class="bb-type__panel-foot-left bb-type__panel-foot-left--plex">1234567890@#$%&amp;</p>
+            <p class="bb-type__panel-foot-right bb-type__panel-foot-right--plex">IBM Plex Sans</p>
           </div>
         </div>
       </div>
