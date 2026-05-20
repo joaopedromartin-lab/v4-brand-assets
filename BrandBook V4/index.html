@@ -1938,6 +1938,7 @@ footer .wp-block-group.has-black-background-color {
   gap: 2px;
 }
 .bb-color-copy {
+  position: relative;
   background: none;
   border: 0;
   padding: 4px 0;
@@ -1951,6 +1952,21 @@ footer .wp-block-group.has-black-background-color {
 }
 .bb-color-copy:hover { opacity: 0.65; }
 .bb-color-copy strong { font-weight: 700; margin-right: 10px; }
+.bb-color-copy::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask: url('assets/content_copy_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg') center / contain no-repeat;
+  mask: url('assets/content_copy_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg') center / contain no-repeat;
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.bb-color-copy:hover::after { opacity: 0.9; }
 
 /* Cards 2/3/4 split layout */
 .bb-color__split {
