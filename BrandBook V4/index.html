@@ -2089,8 +2089,13 @@ footer .wp-block-group.has-black-background-color {
   font-size: clamp(28px, 2.6vw, 44px);
   font-weight: 500;
   letter-spacing: -0.015em;
-  color: #050505;
   margin: 0 0 clamp(56px, 9vh, 112px);
+  width: fit-content;
+  background: linear-gradient(to left, #FB2E0A 0%, #E50914 25%, #7A0A02 70%, #560303 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .bb-tov__hero {
   display: grid;
@@ -2347,8 +2352,13 @@ footer .wp-block-group.has-black-background-color {
   font-size: clamp(24px, 2.2vw, 36px);
   font-weight: 500;
   letter-spacing: -0.015em;
-  color: #050505;
   margin: 0 0 clamp(40px, 6vh, 80px);
+  width: fit-content;
+  background: linear-gradient(to left, #FB2E0A 0%, #E50914 25%, #7A0A02 70%, #560303 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .bb-vp__grid {
   display: grid;
@@ -2941,8 +2951,13 @@ footer .wp-block-group.has-black-background-color {
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.05;
-  color: #050505;
   margin: 0 0 clamp(40px, 6vh, 72px);
+  width: fit-content;
+  background: linear-gradient(to left, #FB2E0A 0%, #E50914 25%, #7A0A02 70%, #560303 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .bb-photo-guide__grid {
   display: grid;
@@ -3118,8 +3133,13 @@ footer .wp-block-group.has-black-background-color {
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1;
-  color: #050505;
   margin: 0;
+  width: fit-content;
+  background: linear-gradient(to left, #FB2E0A 0%, #E50914 25%, #7A0A02 70%, #560303 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .bb-photo-tabs__desc {
   font-family: var(--wp--preset--font-family--pp-telegraf);
@@ -3172,8 +3192,21 @@ footer .wp-block-group.has-black-background-color {
   font-weight: 500;
   letter-spacing: -0.015em;
   line-height: 1.05;
-  color: #050505;
   margin: 0 0 clamp(40px, 6vh, 72px);
+  width: fit-content;
+}
+.bb-glass__title:not(:has(> span)),
+.bb-glass__title > span:first-child {
+  width: fit-content;
+  background: linear-gradient(to left, #FB2E0A 0%, #E50914 25%, #7A0A02 70%, #560303 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.bb-glass__title > span:nth-child(n+2) {
+  -webkit-text-fill-color: rgba(5,5,5,0.78);
+  color: rgba(5,5,5,0.78);
 }
 .bb-glass__grid {
   display: grid;
