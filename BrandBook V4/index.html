@@ -2853,10 +2853,10 @@ footer .wp-block-group.has-black-background-color {
 .bb-type__download-btn--external:hover::after { transform: translate(2px, -2px); }
 
 /* Copy variant — copy icon instead of download arrow */
-.bb-glass__prompt-copy::after {
+.bb-prompt-copy::after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23050505' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg>");
 }
-.bb-glass__prompt-copy:hover::after {
+.bb-prompt-copy:hover::after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg>");
   transform: none;
 }
@@ -5059,6 +5059,7 @@ body.bb-lightbox-open { overflow: hidden; }
     <div class="bb-photo-guide__grid">
       <div class="bb-photo-guide__desc">
         <p>O estilo fotográfico da marca deve transmitir profissionalismo e excelência, com imagens bem cuidadas e visualmente consistentes. A linguagem pode se desdobrar em dois formatos: fotografia posada, com direção clara e acabamento refinado, e imagens ambientadas e espontâneas, com naturalidade e contexto real. Em ambos os casos, a composição deve reforçar credibilidade e manter um padrão elevado de qualidade.</p>
+        <button class="bb-type__download-btn bb-prompt-copy bb-photo-guide__prompt-copy" type="button" style="align-self:flex-start;margin-top:clamp(8px,1.4vw,20px)">Copiar prompt base</button>
       </div>
       <div class="bb-photo-guide__model" data-aos="fade-in">
         <div class="bb-photo-guide__model-bg" aria-hidden="true"></div>
@@ -5397,7 +5398,7 @@ body.bb-lightbox-open { overflow: hidden; }
           <p>Define o estilo visual da imagem, reforçando a estética Liquid Glass. Inclui orientações sobre modelagem 3D, renderização hiper-realista e definição do fundo, como estúdio, gradiente ou neutro.</p>
         </div>
 
-        <button class="bb-type__download-btn bb-glass__prompt-copy" type="button" style="align-self:flex-start;margin-top:clamp(8px,1.4vw,20px)">Copiar prompt base</button>
+        <button class="bb-type__download-btn bb-prompt-copy bb-glass__prompt-copy" type="button" style="align-self:flex-start;margin-top:clamp(8px,1.4vw,20px)">Copiar prompt base</button>
       </div>
 
       <div class="bb-glass__panel bb-glass__panel--image-card" data-aos="fade-in">
@@ -5722,6 +5723,53 @@ Direção de cor: predominância de tons vermelhos translúcidos, com variaçõe
 Palavras-chave visuais: vidro translúcido vermelho, acrílico translúcido, superfície vítrea brilhante, vidro fosco difuso, transparência, refração da luz, difusão da luz, liquid glass, glassmorphism, render 3D, render hiper-realista, fundo de estúdio premium, composição limpa e minimalista.
 
 Evitar: ilustração chapada, estilo cartoon, plástico opaco, excesso de textura, reflexos sujos, sombras muito duras, baixa qualidade de renderização, poluição visual, textos, logotipos, ícones, pessoas e excesso de cores.`;
+
+    function showToast(){
+      if (!toast) return;
+      toast.textContent = 'Prompt copiado';
+      toast.classList.add('is-visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function(){ toast.classList.remove('is-visible'); }, 1800);
+    }
+    function fallbackCopy(){
+      var ta = document.createElement('textarea');
+      ta.value = prompt;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast(); } catch(e){}
+      document.body.removeChild(ta);
+    }
+    trigger.addEventListener('click', function(){
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(prompt).then(showToast, fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    });
+  })();
+
+  // ── COPIAR PROMPT BASE (Diretrizes de fotografia) ──
+  (function bbPhotoPromptCopy(){
+    var trigger = document.querySelector('.bb-photo-guide__prompt-copy');
+    if (!trigger) return;
+    var toast = document.getElementById('bb-color-toast');
+    var toastTimer;
+
+    var prompt = `Crie um retrato fotográfico realista e profissional de {PERSONAGEM}, em estilo editorial corporativo premium. A pessoa deve estar em {POSE}, com {EXPRESSÃO}, transmitindo autoridade, confiança e presença. O enquadramento deve ser em {TIPO DE ENQUADRAMENTO}, mostrando a parte superior do corpo.
+
+A composição deve posicionar o personagem levemente deslocado para a direita da imagem, com espaço negativo à esquerda, mantendo uma leitura visual limpa, sofisticada e institucional.
+
+O fundo deve ser liso, minimalista e sem elementos, com um gradiente suave e uniforme em tons de vermelho vivo, puxando sutilmente para o vermelho-alaranjado/coral em algumas áreas. Esse gradiente não deve ficar escuro demais: evitar tons muito fechados, vinho, bordô intenso ou sombras pesadas no fundo. Priorizar uma transição mais clara, suave e elegante entre vermelhos médios, vermelhos quentes e leves nuances alaranjadas, mantendo um visual premium. O gradiente deve ser bem liso, sem textura, sem manchas, sem ruído e sem divisões bruscas.
+
+A iluminação deve ser suave e natural, com uma luz principal difusa iluminando o rosto com realismo e uma luz vermelha de apoio incidindo sobre a pele e a roupa, criando contraste visual elegante. O vermelho deve refletir de forma controlada no rosto, pescoço e vestimenta, gerando profundidade, identidade visual forte e aparência sofisticada. As sombras devem ser suaves, o contraste equilibrado e a textura da pele preservada de forma natural.
+
+A roupa deve ser {ROUPA}, nas cores {CORES DA ROUPA}. Aparência visual: {DETALHES VISUAIS}. O resultado final deve parecer uma fotografia publicitária feita em estúdio, com estética minimalista, premium, moderna e institucional.
+
+Direção visual: retrato corporativo em estúdio, fundo com gradiente vermelho e levemente alaranjado, iluminação suave com preenchimento vermelho sobre a pele, composição limpa e visual premium.
+
+Evitar: fundo muito escuro, gradiente fechado demais, tons excessivamente vinho ou bordô, textura no fundo, manchas no gradiente, transições bruscas, objetos extras, luz dura demais, neon exagerado, excesso de saturação, pele plastificada, baixa qualidade, estilo ilustrado ou cartoon.`;
 
     function showToast(){
       if (!toast) return;
