@@ -3323,6 +3323,18 @@ footer .wp-block-group.has-black-background-color {
 }
 .bb-glass__topbar-label { color: #050505; }
 .bb-glass__topbar-meta { display: flex; gap: clamp(24px, 4vw, 64px); align-items: center; }
+
+/* Oculta os números de página nos topbars das seções */
+.bb-glass__topbar-meta span:nth-child(2),
+.bb-type__topbar-meta span:nth-child(2),
+.bb-photo-guide__topbar-meta span:nth-child(2),
+.bb-photo-tabs__topbar-meta span:nth-child(2),
+.bb-tov__topbar-meta span:nth-child(2),
+.bb-vp__header-meta span:nth-child(2),
+.bb-color__topbar > span:last-child,
+.bb-perso__topbar-num {
+  display: none;
+}
 .bb-glass__title {
   font-family: var(--wp--preset--font-family--pp-telegraf);
   font-size: clamp(28px, 2.6vw, 44px);
