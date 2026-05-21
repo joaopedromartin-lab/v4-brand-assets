@@ -2851,6 +2851,15 @@ footer .wp-block-group.has-black-background-color {
 }
 .bb-type__download-btn--external:hover { transform: translateY(-1px); }
 .bb-type__download-btn--external:hover::after { transform: translate(2px, -2px); }
+
+/* Copy variant — copy icon instead of download arrow */
+.bb-glass__prompt-copy::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23050505' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg>");
+}
+.bb-glass__prompt-copy:hover::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg>");
+  transform: none;
+}
 .bb-type__download-btn::after {
   content: "";
   display: inline-block;
@@ -3100,10 +3109,9 @@ footer .wp-block-group.has-black-background-color {
 .bb-photo-guide__desc { display: flex; flex-direction: column; gap: clamp(16px, 1.6vw, 24px); }
 .bb-photo-guide__spec {
   display: block;
-  width: 100%;
-  max-width: clamp(220px, 22vw, 320px);
+  width: clamp(200px, 22vw, 320px);
+  flex-shrink: 0;
   height: auto;
-  margin-top: clamp(8px, 1.2vw, 16px);
   border-radius: 6px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.06);
 }
@@ -4292,6 +4300,7 @@ body.bb-lightbox-open { overflow: hidden; }
     <a href="#color_palette">Cor</a>
     <a href="#typography">Tipografia</a>
     <a href="#photography">Fotografia</a>
+    <a href="#graphics">Grafismos</a>
     <a href="#do_and_dont">Faça e Não Faça</a>
   </div>
 </nav>
@@ -5068,12 +5077,11 @@ body.bb-lightbox-open { overflow: hidden; }
     <div class="bb-photo-guide__grid">
       <div class="bb-photo-guide__desc">
         <p>As fotos oficiais dos colaboradores V4 devem manter um padrão único em todos os pontos de contato. A linguagem se divide em foto posada (principal/institucional) e foto ambientada (secundária/contextual), sempre com enquadramento meio-corpo, rosto em alta legibilidade e direção consistente (olhar para a câmera no institucional; variações leves no contextual).</p>
-        <p>O fundo deve usar obrigatoriamente o degradê radial indicado abaixo, com recorte limpo e acabamento cuidadoso, gerando as versões retangular (materiais e site) e circular (avatares). A iluminação e o tratamento devem ser uniformes e naturais, sem filtros, e o figurino deve priorizar peças neutras, evitando ruídos visuais.</p>
-        <img src="assets/FigmaSpec.png" alt="Especificação do degradê radial no Figma — stops em #FF481F, #E50914 e #280000" class="bb-photo-guide__spec"/>
+        <p>O fundo deve usar obrigatoriamente o degradê radial indicado ao lado, com recorte limpo e acabamento cuidadoso, gerando as versões retangular (materiais e site) e circular (avatares). A iluminação e o tratamento devem ser uniformes e naturais, sem filtros, e o figurino deve priorizar peças neutras, evitando ruídos visuais.</p>
       </div>
       <div class="bb-photo-guide__official-shots" data-aos="fade-in">
         <img src="assets/DiretrizesFotosOficiaisBig.png" alt="Foto oficial V4 — retrato principal sobre fundo radial vermelho" class="bb-photo-guide__official-shot bb-photo-guide__official-shot--big"/>
-        <img src="assets/DiretrizesFotosOficiaisMini.png" alt="Foto oficial V4 — versão circular para avatar" class="bb-photo-guide__official-shot bb-photo-guide__official-shot--mini"/>
+        <img src="assets/FigmaSpec.png" alt="Especificação do degradê radial no Figma — stops em #FF481F, #E50914 e #280000" class="bb-photo-guide__spec"/>
       </div>
     </div>
   </div>
@@ -5253,14 +5261,53 @@ body.bb-lightbox-open { overflow: hidden; }
       <span style="display:block;font-weight:400;color:rgba(5,5,5,0.78)">Reverberação</span>
     </h2>
 
-    <div class="bb-glass__grid">
-      <div class="bb-glass__desc">
-        <p>O grafismo também funciona como reverberação, trazendo movimento para a marca, reforçando o dinamismo e a presença visual da marca de forma controlada e coerente. Para o uso correto do grafismo, é necessário aplicar uma leve sombra em cada camada.</p>
-        <button class="bb-type__download-btn bb-reverb__download-trigger" type="button" style="margin-top:clamp(16px,2vw,28px)">Baixar componente HTML</button>
+    <div class="bb-photo-tabs__nav" role="tablist" aria-label="Tipos de reverberação">
+      <button class="bb-photo-tabs__arrow" data-direction="prev" aria-label="Tipo anterior" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="bb-photo-tabs__tabs-group">
+        <button class="bb-photo-tabs__tab is-active" data-tab="reverb-normal" role="tab" aria-selected="true" aria-controls="panel-reverb-normal" id="tab-reverb-normal">Normal</button>
+        <button class="bb-photo-tabs__tab" data-tab="reverb-gradiente" role="tab" aria-selected="false" aria-controls="panel-reverb-gradiente" id="tab-reverb-gradiente">Gradiente</button>
+        <button class="bb-photo-tabs__tab" data-tab="reverb-linhas" role="tab" aria-selected="false" aria-controls="panel-reverb-linhas" id="tab-reverb-linhas">Linhas</button>
+      </div>
+      <button class="bb-photo-tabs__arrow" data-direction="next" aria-label="Próximo tipo" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <div class="bb-photo-tabs__panels">
+      <div class="bb-photo-tabs__panel is-active" data-panel="reverb-normal" id="panel-reverb-normal" role="tabpanel" aria-labelledby="tab-reverb-normal">
+        <div class="bb-photo-tabs__content">
+          <h3 class="bb-photo-tabs__title">Normal</h3>
+          <p class="bb-photo-tabs__desc">O grafismo também funciona como reverberação, trazendo movimento para a marca, reforçando o dinamismo e a presença visual da marca de forma controlada e coerente. Para o uso correto do grafismo, é necessário aplicar uma leve sombra em cada camada.</p>
+          <button class="bb-type__download-btn bb-reverb__download-trigger" type="button" style="align-self:flex-start;margin-top:clamp(8px,1vw,16px)">Baixar componente HTML</button>
+        </div>
+        <div class="bb-photo-tabs__media">
+          <img src="assets/ReverbFoto.png" alt="Grafismo de reverberação V4 — camadas glass concêntricas sobre vermelho"/>
+        </div>
       </div>
 
-      <div class="bb-glass__panel bb-glass__panel--image" data-aos="fade-in">
-        <img src="assets/ReverbFoto.png" alt="Grafismo de reverberação V4 — camadas glass concêntricas sobre vermelho" class="bb-glass__panel-img"/>
+      <div class="bb-photo-tabs__panel" data-panel="reverb-gradiente" id="panel-reverb-gradiente" role="tabpanel" aria-labelledby="tab-reverb-gradiente">
+        <div class="bb-photo-tabs__content">
+          <h3 class="bb-photo-tabs__title">Gradiente</h3>
+          <p class="bb-photo-tabs__desc">O grafismo de reverberação pode também assumir a forma de gradientes, ampliando a sensação de profundidade, movimento e expansão visual. Essa variação reforça a ideia de propagação do elemento gráfico, permitindo composições mais dinâmicas sem comprometer a hierarquia ou a legibilidade do layout.</p>
+          <button class="bb-type__download-btn bb-reverb-grad__download-trigger" type="button" style="align-self:flex-start;margin-top:clamp(8px,1vw,16px)">Baixar componente HTML</button>
+        </div>
+        <div class="bb-photo-tabs__media">
+          <img src="assets/Reverbgradiente.png" alt="Grafismo de reverberação V4 em forma de gradiente — retângulos concêntricos sobre vermelho"/>
+        </div>
+      </div>
+
+      <div class="bb-photo-tabs__panel" data-panel="reverb-linhas" id="panel-reverb-linhas" role="tabpanel" aria-labelledby="tab-reverb-linhas">
+        <div class="bb-photo-tabs__content">
+          <h3 class="bb-photo-tabs__title">Linhas</h3>
+          <p class="bb-photo-tabs__desc">O grafismo de reverberação pode assumir um estilo em outline, enfatizando a estrutura e a propagação das formas.</p>
+          <p class="bb-photo-tabs__desc">Também pode ser aplicado em traço pontilhado, adicionando ritmo visual. Nesse caso, o valor de Dash deve sempre acompanhar o mesmo valor de Gap, garantindo espaçamento uniforme.</p>
+          <button class="bb-type__download-btn bb-reverb-line__download-trigger" type="button" style="align-self:flex-start;margin-top:clamp(8px,1vw,16px)">Baixar componente HTML</button>
+        </div>
+        <div class="bb-photo-tabs__media">
+          <img src="assets/grafismolinhas.png" alt="Grafismo de reverberação V4 em linhas — retângulos concêntricos com traço contínuo e pontilhado sobre vermelho"/>
+        </div>
       </div>
     </div>
   </div>
@@ -5338,10 +5385,7 @@ body.bb-lightbox-open { overflow: hidden; }
           <p>Define o estilo visual da imagem, reforçando a estética Liquid Glass. Inclui orientações sobre modelagem 3D, renderização hiper-realista e definição do fundo, como estúdio, gradiente ou neutro.</p>
         </div>
 
-        <div class="bb-glass__alert">
-          <span class="bb-glass__alert-icon" aria-hidden="true">!</span>
-          <span>As imagens são apenas referências inspiracionais, com objetivo de ilustrar possibilidades estéticas e não devem ser utilizadas diretamente em materiais da marca.</span>
-        </div>
+        <button class="bb-type__download-btn bb-glass__prompt-copy" type="button" style="align-self:flex-start;margin-top:clamp(8px,1.4vw,20px)">Copiar prompt base</button>
       </div>
 
       <div class="bb-glass__panel bb-glass__panel--image-card" data-aos="fade-in">
@@ -5642,6 +5686,57 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   })();
 
+  // ── COPIAR PROMPT BASE (Liquid Glass — IA) ──
+  (function bbPromptCopy(){
+    var trigger = document.querySelector('.bb-glass__prompt-copy');
+    if (!trigger) return;
+    var toast = document.getElementById('bb-color-toast');
+    var toastTimer;
+
+    var prompt = `Crie um render 3D hiper-realista de {ELEMENTO PRINCIPAL}, com estética premium, abstrata e sofisticada.
+
+O elemento principal deve ser {DESCRIÇÃO DO ELEMENTO}, com aparência limpa, elegante e futurista. Ele deve ser feito de {MATERIAL PRINCIPAL}, priorizando um material translúcido em tons de vermelho, com aparência de vidro ou acrílico, superfície brilhante e polida, detalhes foscos difusos e estética de liquid glass.
+
+O material deve destacar transparência, profundidade, refração e difusão da luz. A luz deve atravessar o objeto, criando refração translúcida, leve distorção óptica, brilho interno suave, reflexos delicados, sombras sutis e sensação realista de passagem de luz pelo material.
+
+A imagem deve seguir uma linguagem visual inspirada em glassmorphism, com modelagem 3D refinada, curvas suaves, bordas polidas, reflexos realistas e acabamento visual premium.
+
+Composição: {TIPO DE COMPOSIÇÃO}, com {ÂNGULO DA CÂMERA}, {ENQUADRAMENTO} e foco visual forte no elemento principal. O fundo deve ser {TIPO DE FUNDO}, preferencialmente limpo, neutro, em gradiente suave ou com aparência de estúdio, permitindo que o material vermelho translúcido se destaque.
+
+Iluminação: luz suave de estúdio, difusa e controlada, com aparência de fotografia premium de produto, reflexos sutis, sombras realistas, highlights limpos e contraste elegante.
+
+Direção de cor: predominância de tons vermelhos translúcidos, com variações suaves de vermelho, rosa e reflexos quentes, mantendo uma paleta minimalista, sofisticada e consistente.
+
+Palavras-chave visuais: vidro translúcido vermelho, acrílico translúcido, superfície vítrea brilhante, vidro fosco difuso, transparência, refração da luz, difusão da luz, liquid glass, glassmorphism, render 3D, render hiper-realista, fundo de estúdio premium, composição limpa e minimalista.
+
+Evitar: ilustração chapada, estilo cartoon, plástico opaco, excesso de textura, reflexos sujos, sombras muito duras, baixa qualidade de renderização, poluição visual, textos, logotipos, ícones, pessoas e excesso de cores.`;
+
+    function showToast(){
+      if (!toast) return;
+      toast.textContent = 'Prompt copiado';
+      toast.classList.add('is-visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function(){ toast.classList.remove('is-visible'); }, 1800);
+    }
+    function fallbackCopy(){
+      var ta = document.createElement('textarea');
+      ta.value = prompt;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast(); } catch(e){}
+      document.body.removeChild(ta);
+    }
+    trigger.addEventListener('click', function(){
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(prompt).then(showToast, fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    });
+  })();
+
   // ── SCROLL TEXT REVEAL (GSAP + Splitting.js) ──
   if (typeof Splitting !== 'undefined' && typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -5791,37 +5886,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   })();
 
-  // ── PHOTOGRAPHY TABS (Luz / Figurino / Acting) + arrow navigation ──
+  // ── TABS (Fotografia + Reverberação) — escopo por seção ──
   (function() {
-    const tabs = Array.from(document.querySelectorAll('.bb-photo-tabs__tab'));
-    const panels = document.querySelectorAll('.bb-photo-tabs__panel');
-    const arrows = document.querySelectorAll('.bb-photo-tabs__arrow');
-    if (!tabs.length) return;
+    // Cada .bb-photo-tabs__nav define um grupo independente de abas;
+    // o escopo é o elemento pai do nav (o __inner da seção).
+    document.querySelectorAll('.bb-photo-tabs__nav').forEach(nav => {
+      const scope = nav.parentElement;
+      if (!scope) return;
+      const tabs = Array.from(scope.querySelectorAll('.bb-photo-tabs__tab'));
+      const panels = scope.querySelectorAll('.bb-photo-tabs__panel');
+      const arrows = scope.querySelectorAll('.bb-photo-tabs__arrow');
+      if (!tabs.length) return;
 
-    function activate(target) {
-      tabs.forEach(t => {
-        const active = t.getAttribute('data-tab') === target;
-        t.classList.toggle('is-active', active);
-        t.setAttribute('aria-selected', active ? 'true' : 'false');
+      function activate(target) {
+        tabs.forEach(t => {
+          const active = t.getAttribute('data-tab') === target;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach(p => {
+          p.classList.toggle('is-active', p.getAttribute('data-panel') === target);
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => activate(tab.getAttribute('data-tab')));
       });
-      panels.forEach(p => {
-        p.classList.toggle('is-active', p.getAttribute('data-panel') === target);
-      });
-    }
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => activate(tab.getAttribute('data-tab')));
-    });
-
-    arrows.forEach(arrow => {
-      arrow.addEventListener('click', () => {
-        const dir = arrow.getAttribute('data-direction');
-        const currentIdx = tabs.findIndex(t => t.classList.contains('is-active'));
-        const total = tabs.length;
-        const nextIdx = dir === 'prev'
-          ? (currentIdx - 1 + total) % total
-          : (currentIdx + 1) % total;
-        activate(tabs[nextIdx].getAttribute('data-tab'));
+      arrows.forEach(arrow => {
+        arrow.addEventListener('click', () => {
+          const dir = arrow.getAttribute('data-direction');
+          const currentIdx = tabs.findIndex(t => t.classList.contains('is-active'));
+          const total = tabs.length;
+          const nextIdx = dir === 'prev'
+            ? (currentIdx - 1 + total) % total
+            : (currentIdx + 1) % total;
+          activate(tabs[nextIdx].getAttribute('data-tab'));
+        });
       });
     });
   })();
@@ -6043,6 +6144,211 @@ document.addEventListener('DOMContentLoaded', function() {
       const a = document.createElement('a');
       a.href = url;
       a.download = 'v4-reverb-effect.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+  })();
+
+  // ── DOWNLOAD REVERB GRADIENTE HTML COMPONENT ──
+  (function() {
+    const trigger = document.querySelector('.bb-reverb-grad__download-trigger');
+    if (!trigger) return;
+
+    const reverbGradHTML = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V4 — Reverberação (Gradiente)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /*
+    V4 REVERBERAÇÃO — GRADIENTE
+    Variação do grafismo de reverberação: em vez do efeito glass, cada
+    retângulo é preenchido com o gradiente V4 (esquerda -> direita).
+    O gradiente usa background-attachment: fixed, então todas as camadas
+    revelam o MESMO gradiente na MESMA posição — como janelas sobre um
+    único plano cromático contínuo.
+    A camada de trás é a maior; cada camada interna fica menor e
+    centralizada, gerando a sensação de reverberação/propagação.
+  */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: #1A0202;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+  }
+
+  /* ===== V4 REVERBERAÇÃO GRADIENTE — base ===== */
+  /* O gradiente V4 fixo na viewport garante que cada camada mostre
+     o mesmo trecho do gradiente, alinhado esquerda -> direita. */
+  .v4-reverb-grad {
+    position: relative;
+    border-radius: 24px;
+    background-image: linear-gradient(to right, #7A0A02 0%, #C41E08 35%, #E50914 65%, #FB2E0A 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Camadas aninhadas: a externa é a maior; cada interna fica menor
+     e centralizada dentro da anterior. */
+  .v4-reverb-grad--l1 {
+    width: clamp(320px, 66vw, 900px);
+    aspect-ratio: 16 / 9;
+    padding: clamp(20px, 3.4vw, 64px);
+  }
+  .v4-reverb-grad--l2 { width: 100%; height: 100%; padding: clamp(18px, 2.8vw, 52px); }
+  .v4-reverb-grad--l3 { width: 100%; height: 100%; padding: clamp(16px, 2.2vw, 40px); }
+  .v4-reverb-grad--l4 { width: 100%; height: 100%; }
+
+  .v4-meta {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+</style>
+</head>
+<body>
+  <div class="v4-reverb-grad v4-reverb-grad--l1">
+    <div class="v4-reverb-grad v4-reverb-grad--l2">
+      <div class="v4-reverb-grad v4-reverb-grad--l3">
+        <div class="v4-reverb-grad v4-reverb-grad--l4">
+          <span class="v4-meta">V4 · Reverberação Gradiente</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+    trigger.addEventListener('click', () => {
+      const blob = new Blob([reverbGradHTML], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'v4-reverb-gradiente.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+  })();
+
+  // ── DOWNLOAD REVERB LINHAS HTML COMPONENT ──
+  (function() {
+    const trigger = document.querySelector('.bb-reverb-line__download-trigger');
+    if (!trigger) return;
+
+    const reverbLineHTML = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V4 — Reverberação (Linhas)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /*
+    V4 REVERBERAÇÃO — LINHAS (outline)
+    Variação do grafismo de reverberação em estilo outline: cada retângulo
+    é apenas o contorno (sem preenchimento), enfatizando a estrutura e a
+    propagação das formas. As camadas alternam traço contínuo e pontilhado.
+    No traço pontilhado o valor de Dash acompanha o de Gap (espaçamento
+    uniforme). A camada de trás é a maior; cada interna fica menor e
+    centralizada, gerando a sensação de reverberação.
+  */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(to right, #7A0A02 0%, #C41E08 35%, #E50914 65%, #FB2E0A 100%);
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+  }
+
+  /* ===== V4 REVERBERAÇÃO LINHAS — base outline ===== */
+  .v4-reverb-line {
+    position: relative;
+    border-radius: 22px;
+    border: 1.5px solid rgba(255, 255, 255, 0.92);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Traço pontilhado — Dash = Gap (espaçamento uniforme) */
+  .v4-reverb-line--dashed {
+    border-style: dashed;
+  }
+  /* Camada interna preenchida (núcleo do grafismo) */
+  .v4-reverb-line--fill {
+    background: rgba(255, 255, 255, 0.10);
+  }
+
+  /* Camadas aninhadas: externa = maior; cada interna menor e centralizada */
+  .v4-reverb-line--l1 {
+    width: clamp(320px, 66vw, 900px);
+    aspect-ratio: 16 / 9;
+    padding: clamp(14px, 2.2vw, 40px);
+  }
+  .v4-reverb-line--l2 { width: 100%; height: 100%; padding: clamp(14px, 2.2vw, 40px); }
+  .v4-reverb-line--l3 { width: 100%; height: 100%; padding: clamp(14px, 2.2vw, 40px); }
+  .v4-reverb-line--l4 { width: 100%; height: 100%; padding: clamp(14px, 2.2vw, 40px); }
+  .v4-reverb-line--l5 { width: 100%; height: 100%; }
+
+  .v4-meta {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+</style>
+</head>
+<body>
+  <div class="v4-reverb-line v4-reverb-line--l1">
+    <div class="v4-reverb-line v4-reverb-line--l2 v4-reverb-line--dashed">
+      <div class="v4-reverb-line v4-reverb-line--l3">
+        <div class="v4-reverb-line v4-reverb-line--l4 v4-reverb-line--dashed">
+          <div class="v4-reverb-line v4-reverb-line--l5 v4-reverb-line--fill">
+            <span class="v4-meta">V4 · Reverberação Linhas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+    trigger.addEventListener('click', () => {
+      const blob = new Blob([reverbLineHTML], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'v4-reverb-linhas.html';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
