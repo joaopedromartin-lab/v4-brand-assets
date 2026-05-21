@@ -2852,14 +2852,6 @@ footer .wp-block-group.has-black-background-color {
 .bb-type__download-btn--external:hover { transform: translateY(-1px); }
 .bb-type__download-btn--external:hover::after { transform: translate(2px, -2px); }
 
-/* Copy variant — copy icon instead of download arrow */
-.bb-prompt-copy::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23050505' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg>");
-}
-.bb-prompt-copy:hover::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg>");
-  transform: none;
-}
 .bb-type__download-btn::after {
   content: "";
   display: inline-block;
@@ -2872,6 +2864,16 @@ footer .wp-block-group.has-black-background-color {
   transition: transform 0.2s ease;
 }
 .bb-type__download-btn:hover::after { transform: translateY(2px); }
+
+/* Copy variant — copy icon instead of download arrow (declarado após o
+   base pra vencer a cascata com a mesma especificidade) */
+.bb-prompt-copy::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23050505' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg>");
+}
+.bb-prompt-copy:hover::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/></svg>");
+  transform: none;
+}
 
 .bb-type__panel {
   position: relative;
@@ -5761,15 +5763,15 @@ Evitar: ilustração chapada, estilo cartoon, plástico opaco, excesso de textur
 
 A composição deve posicionar o personagem levemente deslocado para a direita da imagem, com espaço negativo à esquerda, mantendo uma leitura visual limpa, sofisticada e institucional.
 
-O fundo deve ser liso, minimalista e sem elementos, com um gradiente suave e uniforme em tons de vermelho vivo, puxando sutilmente para o vermelho-alaranjado/coral em algumas áreas. Esse gradiente não deve ficar escuro demais: evitar tons muito fechados, vinho, bordô intenso ou sombras pesadas no fundo. Priorizar uma transição mais clara, suave e elegante entre vermelhos médios, vermelhos quentes e leves nuances alaranjadas, mantendo um visual premium. O gradiente deve ser bem liso, sem textura, sem manchas, sem ruído e sem divisões bruscas.
+O fundo deve ser totalmente liso, limpo e minimalista, sem textura, sem ruído, sem manchas, sem formas, sem objetos e sem qualquer elemento adicional. A composição deve mostrar apenas um gradiente suave e uniforme em tons de vermelho. Esse gradiente deve fazer uma transição diagonal: partindo de um vermelho mais escuro, profundo e levemente bordô no canto inferior esquerdo, passando por vermelhos médios e vivos no centro, e chegando a um vermelho mais claro, intenso e levemente puxado para o vermelho-alaranjado no canto superior direito. O gradiente deve ser extremamente suave, homogêneo e sofisticado, sem divisões bruscas, sem contraste agressivo e sem aparência escura demais. O resultado deve parecer um fundo de estúdio premium, moderno e elegante, com aparência limpa e refinada.
 
 A iluminação deve ser suave e natural, com uma luz principal difusa iluminando o rosto com realismo e uma luz vermelha de apoio incidindo sobre a pele e a roupa, criando contraste visual elegante. O vermelho deve refletir de forma controlada no rosto, pescoço e vestimenta, gerando profundidade, identidade visual forte e aparência sofisticada. As sombras devem ser suaves, o contraste equilibrado e a textura da pele preservada de forma natural.
 
 A roupa deve ser {ROUPA}, nas cores {CORES DA ROUPA}. Aparência visual: {DETALHES VISUAIS}. O resultado final deve parecer uma fotografia publicitária feita em estúdio, com estética minimalista, premium, moderna e institucional.
 
-Direção visual: retrato corporativo em estúdio, fundo com gradiente vermelho e levemente alaranjado, iluminação suave com preenchimento vermelho sobre a pele, composição limpa e visual premium.
+Direção visual: retrato corporativo em estúdio, fundo com gradiente vermelho liso e uniforme, transição diagonal do vermelho escuro no canto inferior esquerdo para vermelho mais claro e levemente alaranjado no canto superior direito, iluminação suave com preenchimento vermelho sobre a pele, composição limpa e visual premium.
 
-Evitar: fundo muito escuro, gradiente fechado demais, tons excessivamente vinho ou bordô, textura no fundo, manchas no gradiente, transições bruscas, objetos extras, luz dura demais, neon exagerado, excesso de saturação, pele plastificada, baixa qualidade, estilo ilustrado ou cartoon.`;
+Evitar: fundo poluído, textura no fundo, manchas no gradiente, ruído, transições bruscas, objetos extras, luz dura demais, neon exagerado, excesso de saturação, pele plastificada, baixa qualidade, estilo ilustrado ou cartoon.`;
 
     function showToast(){
       if (!toast) return;
