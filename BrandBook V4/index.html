@@ -2352,7 +2352,7 @@ footer .wp-block-group.has-black-background-color {
   color: #7A0A02;
   margin: 0 0 clamp(24px, 3vh, 40px);
 }
-.bb-perso__title span {
+.bb-perso__title > span {
   display: block;
   width: fit-content;
   background: linear-gradient(to left, #FB2E0A 0%, #E50914 25%, #7A0A02 70%, #560303 100%);
@@ -3320,7 +3320,8 @@ footer .wp-block-group.has-black-background-color {
   font-size: clamp(28px, 2.6vw, 44px);
   font-weight: 500;
   letter-spacing: -0.015em;
-  line-height: 1.05;
+  line-height: 1.2;
+  padding-bottom: 0.12em;
   margin: 0 0 clamp(40px, 6vh, 72px);
   width: fit-content;
 }
@@ -3834,11 +3835,11 @@ footer .wp-block-group.has-black-background-color {
   margin: 0;
   text-shadow: 0 2px 24px rgba(0,0,0,0.3);
 }
-.bb-positioning-hero__title span {
+.bb-positioning-hero__title > span {
   display: block;
   margin-bottom: 0.12em;
 }
-.bb-positioning-hero__title span:last-child {
+.bb-positioning-hero__title > span:last-child {
   margin-bottom: 0;
 }
 .bb-positioning-hero__logo {
@@ -3881,19 +3882,22 @@ footer .wp-block-group.has-black-background-color {
 
 /* === BRANDBOOK V4 — HERO FULL-BLEED IMAGE === */
 .bb-brand-hero-image {
-  background-image: url('assets/ChatGPT%20Image%2020%20de%20mai.%20de%202026%2C%2015_31_12.png') !important;
+  background-image: url('assets/Fueto.png') !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
 }
 
 /* === BRANDBOOK V4 — HEADLINE SCRAMBLE (count-up de letras) === */
-.bb-headline-scramble { visibility: hidden; }
-.bb-headline-scramble.is-ready { visibility: visible; }
+.bb-headline-scramble,
+.bb-scramble { visibility: hidden; }
+.bb-headline-scramble.is-ready,
+.bb-scramble.is-ready { visibility: visible; }
 .bb-scramble-char {
   display: inline-block;
   white-space: pre;
   color: #FDFF87;
+  -webkit-text-fill-color: #FDFF87;
   opacity: 0.65;
   transform: translateY(0.04em);
   transition: color .18s ease, opacity .18s ease, transform .25s ease, text-shadow .25s ease;
@@ -3901,6 +3905,7 @@ footer .wp-block-group.has-black-background-color {
 }
 .bb-scramble-char--locked {
   color: inherit;
+  -webkit-text-fill-color: inherit;
   opacity: 1;
   transform: translateY(0);
   text-shadow: 0 0 0 transparent;
@@ -3912,7 +3917,7 @@ footer .wp-block-group.has-black-background-color {
   100% { text-shadow: 0 0 0    rgba(253,255,135,0);    }
 }
 @media (prefers-reduced-motion: reduce) {
-  .bb-scramble-char { color: inherit; opacity: 1; transform: none; transition: none; }
+  .bb-scramble-char { color: inherit; -webkit-text-fill-color: inherit; opacity: 1; transform: none; transition: none; }
   .bb-scramble-char--locked { animation: none; }
 }
 
@@ -4317,7 +4322,7 @@ body.bb-lightbox-open { overflow: hidden; }
 <section id="positioning" class="bb-positioning-hero alignfull" aria-label="Positioning V4">
   <img src="assets/Fuetos2.png" alt="V4 — silhueta sobre vermelho" class="bb-positioning-hero__img"/>
   <img src="assets/v4-logo-white.png" alt="V4 Company" class="bb-positioning-hero__logo" data-aos="fade-in"/>
-  <h2 class="bb-positioning-hero__title" data-aos="fade-in">
+  <h2 class="bb-positioning-hero__title bb-scramble">
     <span>Honrar e impulsionar</span>
     <span>empreendedores</span>
     <span>de todo o mundo.</span>
@@ -4418,7 +4423,7 @@ body.bb-lightbox-open { overflow: hidden; }
 <!-- ============================================================ -->
 <section id="visual_identity" class="bb-vi-hero alignfull" aria-label="Visual Identity V4">
   <img src="assets/Foto Luegos.png" alt="V4 — construção do logo" class="bb-vi-hero__img"/>
-  <h2 class="bb-vi-hero__title" data-aos="fade-in">Identidade visual</h2>
+  <h2 class="bb-vi-hero__title bb-scramble">Identidade visual</h2>
 </section>
 
 
@@ -5008,10 +5013,10 @@ body.bb-lightbox-open { overflow: hidden; }
 <!-- PHOTOGRAPHY (full-bleed image, antes de Linguagem Gráfica)    -->
 <!-- ============================================================ -->
 <section id="photography" class="bb-photo-hero alignfull" aria-label="Fotografia V4">
-  <img src="assets/ChatGPT Image 20 de mai. de 2026, 16_02_26.png" alt="V4 — diretrizes de fotografia" class="bb-photo-hero__img"/>
+  <img src="assets/ChatGPT Image 20 de mai. de 2026, 15_31_12.png" alt="V4 — diretrizes de fotografia" class="bb-photo-hero__img"/>
   <div class="bb-photo-hero__caption" data-aos="fade-in">
     <span class="bb-photo-hero__pill">Diretrizes</span>
-    <h2 class="bb-photo-hero__title">Fotografia</h2>
+    <h2 class="bb-photo-hero__title bb-scramble">Fotografia</h2>
   </div>
 </section>
 
@@ -5134,7 +5139,7 @@ body.bb-lightbox-open { overflow: hidden; }
 <!-- ============================================================ -->
 <section id="graphics" class="bb-graphics-hero alignfull" aria-label="Grafismos V4">
   <img src="assets/GrafismosImage.png" alt="Grafismos V4 — composição visual" class="bb-graphics-hero__img"/>
-  <h2 class="bb-graphics-hero__title" data-aos="fade-in">Grafismos</h2>
+  <h2 class="bb-graphics-hero__title bb-scramble">Grafismos</h2>
 </section>
 
 
@@ -5441,7 +5446,7 @@ body.bb-lightbox-open { overflow: hidden; }
 <!-- ============================================================ -->
 <section id="do_and_dont" class="bb-graphics-hero alignfull" aria-label="Do and Don't's V4">
   <img src="assets/Doedonts.png" alt="V4 — abertura da seção do que não fazer" class="bb-graphics-hero__img"/>
-  <h2 class="bb-graphics-hero__title" data-aos="fade-in">Do &amp; Don't's</h2>
+  <h2 class="bb-graphics-hero__title bb-scramble">Do &amp; Don't's</h2>
 </section>
 
 
@@ -6223,71 +6228,101 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // === BRANDBOOK V4 — HEADLINE SCRAMBLE / COUNT-UP DE LETRAS ===
   (function bbHeadlineScramble() {
-    const el = document.querySelector('h1.bb-headline-scramble');
-    if (!el) return;
+    const targets = document.querySelectorAll('.bb-headline-scramble, .bb-scramble');
+    if (!targets.length) return;
 
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const finalText = el.textContent;
     const pool = '!<>-_/\\[]{}=+*^?#$%ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const rnd = () => pool[Math.floor(Math.random() * pool.length)];
 
-    // Build per-char spans (preserve spaces).
-    el.textContent = '';
-    const letters = [];
-    for (let i = 0; i < finalText.length; i++) {
-      const ch = finalText[i];
-      const span = document.createElement('span');
-      span.style.whiteSpace = 'pre';
-      if (ch === ' ') {
-        span.textContent = ' ';
-        el.appendChild(span);
-        continue;
-      }
-      span.className = 'bb-scramble-char';
-      span.textContent = prefersReduce ? ch : rnd();
-      el.appendChild(span);
-      letters.push({ span, final: ch, locked: prefersReduce });
+    // Constrói os spans de letra. Se o título tiver <span> filhos (linhas),
+    // cada um é tratado como uma linha; senão o próprio elemento.
+    function setup(el) {
+      const childEls = Array.from(el.children);
+      const lines = childEls.length ? childEls : [el];
+      const letters = [];
+
+      lines.forEach(line => {
+        const text = line.textContent;
+        line.textContent = '';
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i];
+          const span = document.createElement('span');
+          span.style.whiteSpace = 'pre';
+          if (ch === ' ') {
+            span.textContent = ' ';
+            line.appendChild(span);
+            continue;
+          }
+          span.className = 'bb-scramble-char';
+          span.textContent = prefersReduce ? ch : rnd();
+          line.appendChild(span);
+          letters.push({ span, final: ch, locked: prefersReduce });
+        }
+      });
+      el.classList.add('is-ready');
+      return letters;
     }
-    el.classList.add('is-ready');
 
-    if (prefersReduce) {
-      letters.forEach(L => { L.span.classList.add('bb-scramble-char--locked'); });
-      return;
-    }
-
-    const startDelay   = 220;  // pequeno respiro antes de começar
-    const stagger      = 95;   // intervalo entre o início de cada letra
-    const scrambleDur  = 620;  // duração do scramble por letra
-    const tickInterval = 45;   // velocidade de troca dos caracteres aleatórios
-
-    const t0 = performance.now();
-    let lastTick = 0;
-
-    function tick(now) {
-      const elapsed = now - t0;
-      const shouldTick = (now - lastTick) > tickInterval;
-      if (shouldTick) lastTick = now;
-
-      let pending = false;
-      for (let i = 0; i < letters.length; i++) {
-        const L = letters[i];
-        if (L.locked) continue;
-        const start = startDelay + i * stagger;
-        const end   = start + scrambleDur;
-        if (elapsed >= end) {
+    function animate(letters) {
+      if (prefersReduce) {
+        letters.forEach(L => {
           L.span.textContent = L.final;
           L.span.classList.add('bb-scramble-char--locked');
-          L.locked = true;
-        } else if (elapsed >= start) {
-          if (shouldTick) L.span.textContent = rnd();
-          pending = true;
-        } else {
-          pending = true;
-        }
+        });
+        return;
       }
-      if (pending) requestAnimationFrame(tick);
+
+      const startDelay   = 220;  // respiro antes de começar
+      // títulos longos recebem stagger menor pra não arrastar demais
+      const stagger      = letters.length > 18 ? Math.max(30, 1100 / letters.length) : 95;
+      const scrambleDur  = 620;  // duração do scramble por letra
+      const tickInterval = 45;   // velocidade de troca dos caracteres aleatórios
+
+      const t0 = performance.now();
+      let lastTick = 0;
+
+      function tick(now) {
+        const elapsed = now - t0;
+        const shouldTick = (now - lastTick) > tickInterval;
+        if (shouldTick) lastTick = now;
+
+        let pending = false;
+        for (let i = 0; i < letters.length; i++) {
+          const L = letters[i];
+          if (L.locked) continue;
+          const start = startDelay + i * stagger;
+          const end   = start + scrambleDur;
+          if (elapsed >= end) {
+            L.span.textContent = L.final;
+            L.span.classList.add('bb-scramble-char--locked');
+            L.locked = true;
+          } else if (elapsed >= start) {
+            if (shouldTick) L.span.textContent = rnd();
+            pending = true;
+          } else {
+            pending = true;
+          }
+        }
+        if (pending) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     }
-    requestAnimationFrame(tick);
+
+    // Dispara cada título quando entra na viewport (uma única vez).
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animate(entry.target._bbLetters);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    targets.forEach(el => {
+      el._bbLetters = setup(el);
+      io.observe(el);
+    });
   })();
 
   // ── BrandBook mobile image lightbox (tap to zoom) ──
