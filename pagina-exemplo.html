@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Página de Exemplo · LP V4</title>
+<meta name="description" content="Página de exemplo (LP) construída com o Brand Book da V4 Company em ação: vermelho V4, Morganite, IBM Plex Sans e o gradiente 'blast'." />
+<meta name="theme-color" content="#280000" />
+<link href="BrandBook%20V4/assets/v4-logo.svg" rel="icon" type="image/svg+xml" />
+
+<!-- ===== Fonts: IBM Plex Sans (sistema) + Morganite (impacto, self-hosted) ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Base de tokens do Design System V4 (fonte da verdade: cores, escala, espaçamento, easings, animações) -->
+<link rel="stylesheet" href="tokens.css" />
+
+<style>
+  /* ============================================================
+     TOKENS DA PÁGINA — herdam a base do Design System (tokens.css).
+     Cores institucionais, CTA (#00A86B), amarelo (#FDFF87), escala
+     tipográfica, espaçamento, raios e easings vêm de tokens.css.
+     Aqui ficam só os tokens específicos desta página.
+     ============================================================ */
+  :root {
+    /* Vermelhos da marca usados nos gradientes "blast" desta página */
+    --v4-red:        #E50914;  /* Vermelho V4 — acento principal */
+    --v4-red-bright: #FF481F;  /* gradiente digital — topo */
+    --v4-red-mid:    #F0141E;  /* gradiente digital — meio */
+    --v4-red-deep:   #650E0F;  /* gradiente digital — profundo */
+    --v4-maroon:     #7A0A02;  /* stop institucional */
+    --v4-flame:      #FB2E0A;  /* stop institucional */
+    --v4-brown:      #280000;  /* base escura */
+    /* Display de impacto (mantido em Fjalla One) */
+    --font-impact: 'Fjalla One', 'IBM Plex Sans', sans-serif;
+    /* Layout local, apoiado na base do DS */
+    --maxw: var(--content-narrow);
+    --radius: var(--r-lg);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--v4-white);
+    color: var(--v4-dark-gray);
+    font-family: var(--font-sys);
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============================================================
+     "BLAST" — o gradiente vivo do design system do Academypass,
+     recriado nas cores do V4 (vermelhos institucionais).
+     Mesma anatomia: 5 radiais de cor + base linear, blur, scale
+     e animação contínua de 8s.
+     ============================================================ */
+  .v4-blast {
+    background:
+      radial-gradient(circle at 12% 10%, rgba(255, 72, 31, 0.95) 0%, rgba(255, 72, 31, 0.42) 24%, transparent 46%),
+      radial-gradient(circle at 46% 12%, rgba(229, 9, 20, 0.92) 0%, rgba(229, 9, 20, 0.40) 27%, transparent 52%),
+      radial-gradient(circle at 84% 22%, rgba(251, 46, 10, 0.92) 0%, rgba(251, 46, 10, 0.46) 28%, transparent 53%),
+      radial-gradient(circle at 32% 70%, rgba(101, 14, 15, 0.92) 0%, rgba(101, 14, 15, 0.42) 30%, transparent 56%),
+      radial-gradient(circle at 74% 74%, rgba(240, 20, 30, 0.86) 0%, rgba(240, 20, 30, 0.34) 32%, transparent 56%),
+      linear-gradient(140deg, #FB2E0A 0%, #7A0A02 44%, #E50914 100%);
+    filter: blur(18px) saturate(1.06);
+    transform: scale(1.06);
+    animation: v4-blast-shift 8s cubic-bezier(0.77, 0, 0.175, 1) infinite alternate;
+  }
+  @keyframes v4-blast-shift {
+    from { transform: scale(1.06) translate3d(-1.5%, -1%, 0); }
+    to   { transform: scale(1.10) translate3d(1.8%, 1.2%, 0); }
+  }
+
+  /* Backdrop sutil "blast" para o corpo da página (atrás de tudo) */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(circle at 16% 4%, rgba(229, 9, 20, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 88% 96%, rgba(255, 72, 31, 0.05) 0%, transparent 46%);
+  }
+
+  /* CTA da V4 — pill verde -> laranja no hover (Brand Book) */
+  .v4-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    border: 0; cursor: pointer;
+    background: var(--v4-cta); color: var(--v4-white);
+    font-family: var(--font-sys); font-weight: 600; font-size: 15px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 16px 30px; border-radius: 9999px;
+    box-shadow: 0 18px 46px rgba(14, 132, 32, 0.30);
+    transition: background-color .25s ease, transform .15s ease, box-shadow .25s ease;
+  }
+  .v4-btn:hover { background: var(--v4-cta-hover); box-shadow: 0 18px 46px rgba(255, 98, 0, 0.36); }
+  .v4-btn:active { background: var(--v4-cta-active); transform: scale(0.98); }
+  .v4-btn svg { width: 16px; height: 16px; transition: transform .25s ease; }
+  .v4-btn:hover svg { transform: translate(2px, -2px); }
+  .v4-btn--lg { padding: 20px 38px; font-size: 16px; }
+  .v4-btn--block { width: 100%; }
+  .v4-btn:disabled { opacity: .7; cursor: not-allowed; }
+
+  /* Botão fantasma (sobre blast) */
+  .v4-btn-ghost {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);
+    color: #fff; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em;
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .v4-btn-ghost:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.7); }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .eyebrow {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em;
+    font-weight: 600; color: var(--v4-red); margin: 0 0 18px;
+  }
+  .eyebrow--light { color: rgba(255,255,255,0.72); }
+
+  /* Títulos de impacto — Morganite condensada */
+  .impact {
+    font-family: var(--font-impact); font-weight: 700;
+    text-transform: uppercase; line-height: 0.98; letter-spacing: 0.01em;
+    margin: 0;
+  }
+
+  /* Chips de confiança */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500;
+    padding: 9px 16px; border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.26); background: rgba(255,255,255,0.10);
+    color: #fff; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  }
+
+  /* ============================================================
+     NAV — ilhas flutuantes de vidro (itens centralizados)
+     ============================================================ */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px;
+    padding: clamp(14px, 2vw, 22px) clamp(16px, 4vw, 48px);
+    transition: padding .35s ease;
+  }
+  .nav.is-stuck { padding-top: 12px; padding-bottom: 12px; }
+
+  /* logo em chip de vidro (legível sobre qualquer seção) */
+  .nav__logo-link { justify-self: start; display: inline-flex; align-items: center;
+    padding: 11px 18px; border-radius: 9999px;
+    background: rgba(18, 6, 6, 0.5); border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 12px 30px rgba(20,0,0,0.28);
+    -webkit-backdrop-filter: blur(20px) saturate(1.15); backdrop-filter: blur(20px) saturate(1.15); }
+  .nav__logo { height: 22px; width: auto; display: block; }
+
+  /* pílula de vidro com os itens centralizados */
+  .nav__pill { justify-self: center; display: none; align-items: center; gap: 2px;
+    padding: 7px 10px; border-radius: 9999px;
+    background: rgba(18, 6, 6, 0.5); border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 16px 38px rgba(20,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.06);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2); backdrop-filter: blur(24px) saturate(1.2); }
+  .nav__pill a { display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 16px; border-radius: 9999px;
+    color: rgba(255,255,255,0.82); font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
+    transition: background .2s ease, color .2s ease; }
+  .nav__pill a:hover { color: #fff; background: rgba(255,255,255,0.10); }
+  .nav__pill a svg { width: 12px; height: 12px; opacity: .7; }
+
+  .nav__cta { justify-self: end; }
+  .nav .v4-btn { padding: 12px 22px; font-size: 13px; }
+
+  @media (min-width: 1040px) { .nav__pill { display: inline-flex; } }
+
+  /* ============================================================
+     HERO — editorial (tipografia gigante + figura central, blast)
+     ============================================================ */
+  .hero { position: relative; overflow: hidden; background: var(--v4-brown); color: #fff;
+    padding-top: clamp(96px, 10vw, 148px); }
+  .hero__blast { position: absolute; inset: -12%; z-index: 0; pointer-events: none; }
+  .hero__vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(120% 85% at 50% 28%, transparent 42%, rgba(20, 0, 0, 0.5) 100%); }
+  .hero__inner {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; width: 100%; max-width: 1560px; margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 56px) clamp(26px, 3.4vw, 48px);
+  }
+
+  /* dupla em fluxo (define a altura do hero); ancorada na base, sem gap */
+  .hero__figure { position: relative; z-index: 2; display: block; margin: 0 auto;
+    width: clamp(380px, 76vw, 1320px); }
+  .hero__bigtitle {
+    position: absolute; left: 50%; bottom: 60%; transform: translateX(-50%); z-index: 1;
+    margin: 0; font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(72px, 17vw, 300px); line-height: .82; letter-spacing: .01em;
+    color: #fff; white-space: nowrap; pointer-events: none;
+  }
+  .hero__figure > img {
+    width: 100%; height: auto; display: block; position: relative; z-index: 2;
+    filter: contrast(1.04) saturate(1.06) drop-shadow(0 28px 50px rgba(40, 0, 0, 0.45));
+  }
+  /* card de nome (glass vermelho) preso à figura */
+  .hero__namecard {
+    position: absolute; z-index: 3; top: 28%; right: 2%;
+    padding: 12px 18px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(229,9,20,0.62), rgba(101,14,15,0.55));
+    border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 16px 40px rgba(40,0,0,0.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.1); backdrop-filter: blur(12px) saturate(1.1);
+  }
+  .hero__namecard b { display: block; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .hero__namecard span { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.78); margin-top: 2px; }
+  /* kicker "Inimigos da inércia" */
+  .hero__kicker { display: block; margin-bottom: 12px;
+    font-size: clamp(11px, 1vw, 13px); text-transform: uppercase; letter-spacing: 0.16em; color: rgba(255,255,255,0.92); }
+  .hero__kicker em { font-style: italic; }
+
+  /* faixa inferior: headline + descrição */
+  .hero__bottom { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr; gap: 18px 40px; align-items: end; margin-top: clamp(20px, 3vw, 40px); }
+  @media (min-width: 900px) { .hero__bottom { grid-template-columns: 1.15fr 0.85fr; } }
+  .hero__headline { margin: 0; font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(44px, 6.6vw, 96px); line-height: .98; }
+  .hero__desc { margin: 0 0 6px; font-size: clamp(15px, 1.25vw, 19px); line-height: 1.5; color: rgba(255,255,255,0.9); max-width: 44ch; }
+  .hero__desc strong { color: #fff; font-weight: 700; }
+  /* rótulo de canto */
+  .hero__pagelabel { position: absolute; z-index: 3; left: clamp(20px, 4vw, 56px); bottom: 12px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.6); }
+
+  @media (max-width: 720px) {
+    .hero__namecard { right: 0; top: 18%; }
+  }
+
+  /* Form card (glass) */
+  .form-card {
+    width: 100%; max-width: 470px; margin-left: auto;
+    border-radius: 30px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.26); background: rgba(255,255,255,0.16);
+    box-shadow: 0 28px 70px rgba(40, 0, 0, 0.34);
+    -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+    color: #fff;
+  }
+  .form-card__head { border-bottom: 1px solid rgba(255,255,255,0.16); padding: 20px; }
+  .form-card__badge {
+    border-radius: 22px; border: 1px solid rgba(255,255,255,0.22);
+    background: rgba(40, 0, 0, 0.55); padding: 16px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .form-card__badge .k { font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(255,255,255,0.7); }
+  .form-card__badge .v { font-family: var(--font-impact); font-size: 30px; font-weight: 600; line-height: .8; margin-top: 6px; text-transform: uppercase; }
+  .form-card__badge .sep { width: 1px; height: 38px; background: rgba(255,255,255,0.26); }
+  .form-card__body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+  .field label { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+  .field input {
+    width: 100%; height: 52px; border-radius: 16px; padding: 0 16px;
+    border: 1px solid rgba(255,255,255,0.28); background: rgba(255,255,255,0.78);
+    font-family: var(--font-sys); font-size: 15px; color: #1a1a1a; outline: none;
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .field input::placeholder { color: rgba(0,0,0,0.36); }
+  .field input:focus { border-color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.92); }
+  .form-card__foot { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.6); padding-top: 2px; }
+  .form-card__foot svg { width: 13px; height: 13px; }
+  .form-note {
+    margin-top: 14px; width: 100%; max-width: 470px; margin-left: auto;
+    border-radius: 22px; border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.12); padding: 16px 20px;
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); color: #fff;
+  }
+  .form-note .k { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.55); }
+  .form-note p { margin: 4px 0 0; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.82); }
+
+  /* Success state */
+  .form-success { display: none; padding: 40px 28px; text-align: center; }
+  .form-card.is-success .form-card__head,
+  .form-card.is-success .form-card__body { display: none; }
+  .form-card.is-success .form-success { display: block; }
+  .form-success h3 { font-family: var(--font-impact); font-weight: 600; text-transform: uppercase; font-size: 52px; line-height: 1.0; margin: 0; }
+  .form-success p { margin: 14px 0 24px; color: rgba(255,255,255,0.82); font-size: 15px; }
+
+  /* ============================================================
+     SOCIAL PROOF — marquee de logos (esteira infinita)
+     ============================================================ */
+  .marquee { position: relative; overflow: hidden; background: var(--v4-white);
+    border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .marquee::before, .marquee::after { content: ""; position: absolute; top: 0; bottom: 0; width: clamp(40px, 8vw, 120px); z-index: 2; pointer-events: none; }
+  .marquee::before { left: 0; background: linear-gradient(90deg, #fff, transparent); }
+  .marquee::after { right: 0; background: linear-gradient(270deg, #fff, transparent); }
+  .marquee__track { display: flex; width: max-content; animation: marquee-scroll 38s linear infinite; }
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+  .marquee__cell { flex: none; width: clamp(170px, 20vw, 240px); height: 118px;
+    display: grid; place-items: center; padding: 0 clamp(20px, 3vw, 40px); border-right: 1px solid rgba(0,0,0,0.10); }
+  .marquee__cell img { max-height: 30px; width: auto; filter: grayscale(1); opacity: .8;
+    transition: opacity .2s ease, filter .2s ease; }
+  .marquee__cell img:hover { opacity: 1; filter: grayscale(0); }
+  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
+
+  /* ============================================================
+     INSCRIÇÃO (form, blast)
+     ============================================================ */
+  .signup { position: relative; overflow: hidden; background: var(--v4-brown); color: #fff; }
+  .signup__blast { position: absolute; inset: -12%; z-index: 0; opacity: .95; }
+  .signup__vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 35%, rgba(20,0,0,0.5) 100%); }
+  .signup__inner { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto;
+    padding: clamp(64px, 8vw, 112px) 24px; display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; }
+  @media (min-width: 980px) { .signup__inner { grid-template-columns: 1.05fr 0.95fr; } }
+  .signup__title { margin: 0; font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(54px, 7vw, 96px); line-height: 1.0; }
+  .signup__title .accent { color: var(--v4-yellow); }
+  .signup__lead { margin: 22px 0 26px; font-size: 18px; line-height: 1.55; color: rgba(255,255,255,0.88); max-width: 44ch; }
+  .signup__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .signup__list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: rgba(255,255,255,0.9); }
+  .signup__list svg { flex: none; width: 20px; height: 20px; color: var(--v4-yellow); margin-top: 1px; }
+
+  /* ============================================================
+     INSCRIÇÃO — variante clara (fundo branco)
+     Mesma estrutura da seção; só troca o tema escuro/blast por um
+     fundo branco, com texto e card de formulário adaptados.
+     ============================================================ */
+  .signup--light { background: var(--v4-white); color: var(--v4-black); }
+  .signup--light .signup__blast,
+  .signup--light .signup__vignette { display: none; }
+  .signup--light .eyebrow--light { color: var(--v4-red); }
+  .signup--light .signup__title { color: var(--v4-black); }
+  .signup--light .signup__title .accent { color: var(--v4-red); }
+  .signup--light .signup__lead { color: var(--v4-gray); }
+  .signup--light .signup__list li { color: var(--v4-dark-gray); }
+  .signup--light .signup__list svg { color: var(--v4-red); }
+
+  /* Card do formulário — versão clara (sem glass) */
+  .signup--light .form-card {
+    background: var(--v4-white); color: var(--v4-black);
+    border: 1px solid rgba(0,0,0,0.10);
+    box-shadow: 0 28px 70px rgba(40,0,0,0.10);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .signup--light .form-card__head { border-bottom-color: rgba(0,0,0,0.08); }
+  /* badge mantém o acento escuro (vermelho profundo) sobre o card branco */
+  .signup--light .form-card__badge { background: var(--v4-red-deep); border-color: rgba(255,255,255,0.14); }
+  .signup--light .field label { color: var(--v4-gray); }
+  .signup--light .field input {
+    border: 1px solid rgba(0,0,0,0.14); background: var(--v4-light-gray); color: #1a1a1a;
+  }
+  .signup--light .field input::placeholder { color: rgba(0,0,0,0.4); }
+  .signup--light .field input:focus { border-color: var(--v4-red); background: var(--v4-white); }
+  .signup--light .form-card__foot { color: var(--v4-gray); }
+  .signup--light .form-success h3 { color: var(--v4-black); }
+  .signup--light .form-success p { color: var(--v4-gray); }
+
+  /* ============================================================
+     SECTION shells
+     ============================================================ */
+  .section { padding: var(--space-80) 0; }
+  .section--light { background: var(--v4-white); }
+  :where(section[id]) { scroll-margin-top: 100px; }
+  .section__head { max-width: 760px; margin: 0 0 clamp(40px, 6vw, 64px); }
+  .section__title { font-family: var(--font-impact); font-weight: 700; text-transform: uppercase; line-height: 1.0; letter-spacing: 0.01em; font-size: clamp(54px, 8vw, 104px); margin: 0; color: var(--v4-black); }
+  .section__title .accent { color: var(--v4-red); }
+  .section__lead { margin: 22px 0 0; font-size: 18px; line-height: 1.6; color: var(--v4-gray); max-width: 58ch; }
+
+  /* Método — 3 passos (cards verticais, gradiente vermelho→preto) */
+  .steps__head { max-width: 600px; margin: 0 0 clamp(28px, 4vw, 44px); }
+  .steps__title { font-family: var(--font-sys); font-weight: 400; color: var(--v4-black);
+    font-size: clamp(28px, 3.4vw, 40px); line-height: 1.18; letter-spacing: -0.02em; margin: 0; }
+  .steps__title strong { font-weight: 700; }
+
+  .steps { display: grid; grid-template-columns: 1fr; gap: 3px; }
+  @media (min-width: 720px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .step {
+    position: relative; overflow: hidden;
+    min-height: clamp(380px, 42vw, 480px);
+    padding: 32px 28px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    color: #fff;
+    background: linear-gradient(180deg, #F5121B 0%, #E50914 28%, #A50A08 56%, #4A0503 80%, #160101 100%);
+  }
+  .step__num { font-family: var(--font-sys); font-weight: 300; font-size: clamp(56px, 5vw, 76px);
+    line-height: 1; color: #fff; margin: 0 0 14px; }
+  .step__name { font-family: var(--font-sys); font-weight: 400; font-size: clamp(18px, 1.5vw, 21px);
+    line-height: 1.32; color: #fff; margin: 0 0 22px; max-width: 18ch; }
+  .step__name strong { font-weight: 700; }
+  .step__btn { align-self: flex-start; display: inline-flex; align-items: center;
+    padding: 11px 26px; border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.85); background: transparent; color: #fff;
+    font-family: var(--font-sys); font-size: 14px; font-weight: 600;
+    transition: background .2s ease, color .2s ease; }
+  .step__btn:hover { background: #fff; color: var(--v4-red); }
+
+  /* ============================================================
+     STAT BAND (blast)
+     ============================================================ */
+  .stats { position: relative; overflow: hidden; background: var(--v4-brown); color: #fff; }
+  .stats__blast { position: absolute; inset: -12%; z-index: 0; opacity: 0.92; }
+  .stats__inner { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; padding: clamp(64px, 9vw, 110px) 24px; }
+  .stats__grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  @media (min-width: 720px) { .stats__grid { grid-template-columns: repeat(3, 1fr); } }
+  .stat { text-align: center; }
+  .stat__num { font-family: var(--font-impact); font-weight: 700; text-transform: uppercase; font-size: clamp(80px, 11vw, 132px); line-height: .82; }
+  .stat__num .unit { color: var(--v4-yellow); }
+  .stat__label { margin: 12px auto 0; font-size: 15px; color: rgba(255,255,255,0.82); max-width: 26ch; }
+  .stats__intro { text-align: center; margin: 0 auto clamp(48px, 6vw, 72px); max-width: 720px; }
+  .stats__intro .section__title { color: #fff; }
+  .stats__intro .section__title .accent { color: var(--v4-yellow); }
+
+  /* ============================================================
+     BENEFITS (personalidade)
+     ============================================================ */
+  .benefits { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 880px) { .benefits { grid-template-columns: repeat(3, 1fr); } }
+  .benefit {
+    border-radius: var(--radius); padding: 32px 28px;
+    background: var(--v4-black); color: #fff; overflow: hidden; position: relative;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .benefit__icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+    background: rgba(229,9,20,0.18); border: 1px solid rgba(229,9,20,0.4); color: var(--v4-red-bright); margin-bottom: 22px; }
+  .benefit__icon svg { width: 22px; height: 22px; }
+  .benefit__title { font-family: var(--font-impact); font-weight: 600; text-transform: uppercase; font-size: 40px; line-height: 1.02; margin: 0 0 12px; }
+  .benefit__desc { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.74); margin: 0; }
+
+  /* ============================================================
+     TESTIMONIAL
+     ============================================================ */
+  .quote {
+    border-radius: var(--radius); padding: clamp(36px, 5vw, 60px);
+    background: var(--v4-light-gray); border: 1px solid rgba(0,0,0,0.06);
+    display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center;
+  }
+  @media (min-width: 820px) { .quote { grid-template-columns: 1fr auto; } }
+  .quote__text { font-family: var(--font-sys); font-weight: 500; font-size: clamp(22px, 3vw, 32px); line-height: 1.32; color: var(--v4-black); margin: 0; letter-spacing: -0.02em; }
+  .quote__text .mark { color: var(--v4-red); }
+  .quote__who { display: flex; align-items: center; gap: 16px; }
+  .quote__who img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; filter: grayscale(1); }
+  .quote__name { font-weight: 600; color: var(--v4-black); }
+  .quote__role { font-size: 14px; color: var(--v4-gray); }
+
+  /* ============================================================
+     FAQ
+     ============================================================ */
+  .faq { max-width: 880px; margin: 0 auto; }
+  .faq__item { border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .faq__q { width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
+    padding: 26px 4px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    font-family: var(--font-sys); font-size: 19px; font-weight: 600; color: var(--v4-black); }
+  .faq__q .icon { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+    border: 1px solid rgba(0,0,0,0.2); transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease; }
+  .faq__item.is-open .faq__q .icon { transform: rotate(45deg); background: var(--v4-red); color: #fff; border-color: var(--v4-red); }
+  .faq__a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  .faq__a p { margin: 0; padding: 0 4px 26px; color: var(--v4-gray); font-size: 16px; line-height: 1.6; max-width: 70ch; }
+
+  /* ============================================================
+     FINAL CTA (blast)
+     ============================================================ */
+  .final { position: relative; overflow: hidden; background: var(--v4-brown); color: #fff; }
+  .final__blast { position: absolute; inset: -12%; z-index: 0; }
+  .final__vignette { position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse at center, transparent 30%, rgba(20,0,0,0.5) 100%); }
+  .final__inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; text-align: center; padding: clamp(80px, 11vw, 150px) 24px; }
+  .final__title { font-family: var(--font-impact); font-weight: 700; text-transform: uppercase; font-size: clamp(64px, 11vw, 150px); line-height: .96; margin: 0; }
+  .final__title .accent { color: var(--v4-yellow); }
+  .final__sub { margin: 24px auto 38px; max-width: 50ch; font-size: 19px; color: rgba(255,255,255,0.88); }
+  .final__actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer { background: var(--v4-black); color: rgba(255,255,255,0.6); padding: 60px 0 40px; }
+  .footer__top { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; justify-content: space-between; }
+  .footer__logo { height: 30px; width: auto; }
+  .footer__links { display: flex; flex-wrap: wrap; gap: 22px; }
+  .footer__links a { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.66); transition: color .2s ease; }
+  .footer__links a:hover { color: #fff; }
+  .footer__legal { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 13px; line-height: 1.6; }
+  .footer__legal .badge { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--v4-yellow); border: 1px solid rgba(255,221,0,0.4); border-radius: 9999px; padding: 4px 12px; margin-bottom: 14px; }
+
+  /* ============================================================
+     Reveal on scroll
+     ============================================================ */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease-out-expo), transform .7s var(--ease-out-expo); }
+  .reveal.is-in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .v4-blast, .stats__blast, .final__blast, .hero__blast { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="topo">
+  <a class="nav__logo-link" href="#topo" aria-label="V4 Company — início">
+    <img src="BrandBook%20V4/assets/v4-logo-white.png" alt="V4 Company" class="nav__logo" />
+  </a>
+  <nav class="nav__pill">
+    <a href="#metodo">Método</a>
+    <a href="#marcas">Marcas</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#valores">Por que V4</a>
+    <a href="#faq">Dúvidas</a>
+  </nav>
+  <a href="#inscricao" class="v4-btn nav__cta">Contratar a V4</a>
+</header>
+
+<!-- ============================ HERO (editorial) ============================ -->
+<section class="hero">
+  <div class="v4-blast hero__blast" aria-hidden="true"></div>
+  <div class="hero__vignette" aria-hidden="true"></div>
+
+  <!-- dupla ancorada na base da seção, sem gap -->
+  <figure class="hero__figure">
+    <h1 class="hero__bigtitle">V4 Company</h1>
+    <img src="Doiscortado.png" alt="Especialistas da V4 Company" />
+    <figcaption class="hero__namecard">
+      <b>Time V4</b>
+      <span>Estrategistas de crescimento</span>
+    </figcaption>
+  </figure>
+
+  <div class="hero__inner">
+    <!-- faixa inferior -->
+    <div class="hero__bottom">
+      <div class="hero__bottom-left">
+        <span class="hero__kicker">Inimigos da <em>inércia</em></span>
+        <h2 class="hero__headline">Marketing digital<br/>para vender mais</h2>
+      </div>
+      <p class="hero__desc">V4 é marketing e marketing é venda. <strong>Desde 2012</strong> gerando receita com <strong>soluções de marketing digital.</strong></p>
+    </div>
+
+    <span class="hero__pagelabel">Página de exemplo · LP</span>
+  </div>
+</section>
+
+<!-- ============================ MARQUEE DE LOGOS ============================ -->
+<section class="marquee" id="marcas" aria-label="Marcas que confiam na V4">
+  <div class="marquee__track">
+    <!-- conjunto 1 -->
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/Addigy-Logo-2-300x79_f4b6bd6ed9a0.png" alt="Addigy" /></div>
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/Akeyless-Logo-1-300x79_2310b8dd1fc5.png" alt="Akeyless" /></div>
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/LimitFi-Logo-2-300x79_d1f7340d7ede.png" alt="LimitFi" /></div>
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/Market-Access-Logo-1-300x79_84ca5f2dce0e.png" alt="Market Access" /></div>
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/Memfault-Logo-3-300x79_2a5b23f83c2d.png" alt="Memfault" /></div>
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/RWE-Logo-4-300x79_85ae525b0d54.png" alt="RWE" /></div>
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/Searchspring-Logo-4-300x79_0b270e6fd4ad.png" alt="Searchspring" /></div>
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/TechEquity-Logo-2-300x79_37c57431f1f8.png" alt="TechEquity" /></div>
+    <div class="marquee__cell"><img src="BrandBook%20V4/assets/Yarrow-Logo-1-300x79_d684e608fc57.png" alt="Yarrow" /></div>
+    <!-- conjunto 2 (duplicata para loop contínuo) -->
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/Addigy-Logo-2-300x79_f4b6bd6ed9a0.png" alt="" /></div>
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/Akeyless-Logo-1-300x79_2310b8dd1fc5.png" alt="" /></div>
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/LimitFi-Logo-2-300x79_d1f7340d7ede.png" alt="" /></div>
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/Market-Access-Logo-1-300x79_84ca5f2dce0e.png" alt="" /></div>
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/Memfault-Logo-3-300x79_2a5b23f83c2d.png" alt="" /></div>
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/RWE-Logo-4-300x79_85ae525b0d54.png" alt="" /></div>
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/Searchspring-Logo-4-300x79_0b270e6fd4ad.png" alt="" /></div>
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/TechEquity-Logo-2-300x79_37c57431f1f8.png" alt="" /></div>
+    <div class="marquee__cell" aria-hidden="true"><img src="BrandBook%20V4/assets/Yarrow-Logo-1-300x79_d684e608fc57.png" alt="" /></div>
+  </div>
+</section>
+
+<!-- ============================ INSCRIÇÃO (form) ============================ -->
+<section class="signup signup--light" id="inscricao">
+  <div class="v4-blast signup__blast" aria-hidden="true"></div>
+  <div class="signup__vignette" aria-hidden="true"></div>
+  <div class="signup__inner">
+    <!-- copy -->
+    <div class="reveal">
+      <p class="eyebrow eyebrow--light">Inscrição</p>
+      <h2 class="signup__title">Destrave a <span class="accent">receita</span></h2>
+      <p class="signup__lead">Uma sessão ao vivo e gratuita com o método V4 para diagnosticar, planejar e executar até a receita virar previsível. Direto ao que funciona.</p>
+      <ul class="signup__list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> O passo a passo dos 4 tempos para receita previsível.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Diagnóstico, plano e execução em loop semanal.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Ao vivo, gratuito e com vagas limitadas.</li>
+      </ul>
+    </div>
+
+    <!-- form -->
+    <div>
+      <form class="form-card" id="leadForm" novalidate>
+        <div class="form-card__head">
+          <div class="form-card__badge">
+            <div>
+              <div class="k">Aula gratuita</div>
+              <div class="v">18 de junho</div>
+            </div>
+            <span class="sep" aria-hidden="true"></span>
+            <div style="text-align:right">
+              <div class="k">Ao vivo</div>
+              <div class="v">20h</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card__body">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" autocomplete="name" placeholder="Seu nome" required />
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="seu@email.com" required />
+          </div>
+          <div class="field">
+            <label for="tel">Telefone</label>
+            <input id="tel" name="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999" required />
+          </div>
+          <button type="submit" class="v4-btn v4-btn--block" style="margin-top:6px">
+            Garantir minha vaga
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </button>
+          <div class="form-card__foot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Ao vivo · Gratuito · Vagas limitadas
+          </div>
+        </div>
+
+        <div class="form-success">
+          <h3>Vaga<br/>garantida.</h3>
+          <p>Enviamos a confirmação para o seu e-mail. Chegue 5 minutos antes — a gente começa pontual.</p>
+          <a href="#metodo" class="v4-btn v4-btn--block">
+            Ver o que vem pela frente
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÉTODO ============================ -->
+<section class="section section--light" id="metodo">
+  <div class="wrap">
+    <div class="steps__head reveal">
+      <h2 class="steps__title"><strong>Transforme o Marketing</strong> da sua empresa em apenas 3 passos</h2>
+    </div>
+
+    <div class="steps">
+      <article class="step reveal">
+        <div class="step__num">01</div>
+        <h3 class="step__name">Conheça as <strong>soluções</strong> de marketing V4</h3>
+        <a href="#inscricao" class="step__btn">Conhecer</a>
+      </article>
+      <article class="step reveal">
+        <div class="step__num">02</div>
+        <h3 class="step__name">Escolha o <strong>Melhor Modelo</strong> de Entrega</h3>
+        <a href="#inscricao" class="step__btn">Conhecer</a>
+      </article>
+      <article class="step reveal">
+        <div class="step__num">03</div>
+        <h3 class="step__name">Escolha o <strong>Melhor Modelo</strong> de Entrega</h3>
+        <a href="#inscricao" class="step__btn">Conhecer</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ STATS (blast) ============================ -->
+<section class="stats" id="resultados">
+  <div class="v4-blast stats__blast" aria-hidden="true"></div>
+  <div class="stats__inner">
+    <div class="stats__intro reveal">
+      <p class="eyebrow eyebrow--light">Resultados</p>
+      <h2 class="section__title">Apenas <span class="accent">resultado</span> importa</h2>
+    </div>
+    <div class="stats__grid">
+      <div class="stat reveal">
+        <div class="stat__num">+3<span class="unit">mil</span></div>
+        <p class="stat__label">operações acompanhadas pela rede V4 no Brasil e no mundo.</p>
+      </div>
+      <div class="stat reveal">
+        <div class="stat__num">10<span class="unit">x</span></div>
+        <p class="stat__label">de crescimento em receita nos cases que rodaram o método em loop.</p>
+      </div>
+      <div class="stat reveal">
+        <div class="stat__num">90<span class="unit">%</span></div>
+        <p class="stat__label">dos participantes saem com um plano de ação claro para executar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BENEFITS (personalidade) ============================ -->
+<section class="section section--light" id="valores">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <p class="eyebrow">Por que V4</p>
+      <h2 class="section__title">Do nosso <span class="accent">jeito</span></h2>
+      <p class="section__lead">A personalidade da marca também é o jeito de entregar: sem enrolação, com sangue nos olhos e sempre à frente.</p>
+    </div>
+
+    <div class="benefits">
+      <article class="benefit reveal">
+        <div class="benefit__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </div>
+        <h3 class="benefit__title">Direto<br/>e reto</h3>
+        <p class="benefit__desc">O mundo já está cheio de marketing bonito que não vende. A gente prefere o que funciona — nada de enrolar ou complicar.</p>
+      </article>
+      <article class="benefit reveal">
+        <div class="benefit__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg>
+        </div>
+        <h3 class="benefit__title">Sangue<br/>nos olhos</h3>
+        <p class="benefit__desc">A gente joga pra ganhar. Tem problema, resolve. Tem desafio, encara. O que move é ver o número e as vendas crescerem.</p>
+      </article>
+      <article class="benefit reveal">
+        <div class="benefit__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6-6 6 6"/><path d="M12 3v12"/><path d="M5 21h14"/></svg>
+        </div>
+        <h3 class="benefit__title">Sempre<br/>à frente</h3>
+        <p class="benefit__desc">Não olhamos só para o que já foi feito. Perguntamos o que ainda dá pra fazer — e levamos o empreendedor junto.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TESTIMONIAL ============================ -->
+<section class="section section--light" style="padding-top:0">
+  <div class="wrap">
+    <figure class="quote reveal" style="margin:0">
+      <blockquote class="quote__text">
+        “Em três meses a gente <span class="mark">parou de adivinhar</span> e passou a operar por dado. O método destravou um funil de receita que estava parado havia mais de um ano.”
+      </blockquote>
+      <figcaption class="quote__who">
+        <img src="BrandBook%20V4/assets/Matt-Agronin-Headshot_a644e4e8251b.png" alt="" />
+        <div>
+          <div class="quote__name">Matt Agronin</div>
+          <div class="quote__role">Head de Growth · operação parceira</div>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="section section--light" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="section__head reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+      <p class="eyebrow" style="text-align:center">Dúvidas frequentes</p>
+      <h2 class="section__title">Antes de <span class="accent">entrar</span></h2>
+    </div>
+
+    <div class="faq">
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">
+          A aula é mesmo gratuita?
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+        </button>
+        <div class="faq__a"><p>Sim. É uma sessão ao vivo, 100% gratuita. Você só precisa garantir a vaga com nome, e-mail e telefone para receber o link de acesso.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">
+          Para quem é essa página?
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+        </button>
+        <div class="faq__a"><p>Para quem toca uma operação e quer transformar esforço em receita previsível — fundadores, líderes de growth e times comerciais que querem operar por dado, não por achismo.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">
+          Vou sair com algo prático?
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+        </button>
+        <div class="faq__a"><p>Sim. A proposta é você sair com o passo a passo dos quatro tempos — diagnosticar, planejar, executar e gerir em loop — pronto para aplicar na sua operação.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">
+          E se eu não puder assistir ao vivo?
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+        </button>
+        <div class="faq__a"><p>Garanta sua vaga mesmo assim. Quem se inscreve recebe os avisos e o material de apoio — o ao vivo é onde a troca acontece, então reserve o horário.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FINAL CTA (blast) ============================ -->
+<section class="final">
+  <div class="v4-blast final__blast" aria-hidden="true"></div>
+  <div class="final__vignette" aria-hidden="true"></div>
+  <div class="final__inner">
+    <p class="eyebrow eyebrow--light reveal" style="text-align:center">Última chamada</p>
+    <h2 class="final__title reveal">A receita não<br/>se destrava <span class="accent">sozinha.</span></h2>
+    <p class="final__sub reveal">Garanta sua vaga na aula gratuita e saia com um plano para virar o jogo da sua operação.</p>
+    <div class="final__actions reveal">
+      <a href="#inscricao" class="v4-btn v4-btn--lg">
+        Garantir minha vaga
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+      </a>
+      <a href="#metodo" class="v4-btn-ghost">Ver o método</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <img src="BrandBook%20V4/assets/v4-logo-white.png" alt="V4 Company" class="footer__logo" />
+      <nav class="footer__links">
+        <a href="#metodo">Método</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#valores">Por que V4</a>
+        <a href="#faq">Dúvidas</a>
+        <a href="#inscricao">Inscrição</a>
+      </nav>
+    </div>
+    <div class="footer__legal">
+      <span class="badge">Página de exemplo</span>
+      <p>Esta é uma LP (landing page) de demonstração construída para exemplificar o Brand Book da V4 Company em ação — paleta, tipografia (Morganite + IBM Plex Sans), CTA verde→laranja e o gradiente “blast”. Conteúdo, datas e números são fictícios.</p>
+      <p>© V4 Company · Honrar e impulsionar empreendedores de todo o mundo.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- Nav: estado "stuck" ao rolar ----
+  var nav = document.getElementById('topo');
+  function onScroll() {
+    if (window.scrollY > 24) nav.classList.add('is-stuck');
+    else nav.classList.remove('is-stuck');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---- Reveal on scroll ----
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.14 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  // ---- Form: estado de sucesso ----
+  var form = document.getElementById('leadForm');
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    form.classList.add('is-success');
+    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq__q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.closest('.faq__item');
+      var ans = item.querySelector('.faq__a');
+      var open = item.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      ans.style.maxHeight = open ? ans.scrollHeight + 'px' : '0px';
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -113,7 +113,7 @@ h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-backg
 <!-- FONTS: IBM Plex Sans via Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Fjalla+One&display=swap" rel="stylesheet">
 
 <!-- Morganite self-hosted (Google Fonts removeu do catálogo; servimos local) -->
 <style id="morganite-self-hosted">
@@ -2998,6 +2998,47 @@ footer .wp-block-group.has-black-background-color {
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
+.bb-type__panel-headline--fjalla {
+  font-family: 'Fjalla One', 'Oswald', 'Anton', sans-serif;
+  font-size: clamp(56px, 8vw, 132px);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin: 0;
+  color: #FFFFFF;
+}
+.bb-type__panel-headline--fjalla span { display: block; }
+.bb-type__panel-foot-left--fjalla,
+.bb-type__panel-foot-right--fjalla {
+  font-family: 'Fjalla One', 'Oswald', 'Anton', sans-serif;
+  font-weight: 400;
+  font-size: clamp(20px, 1.9vw, 32px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Typography section — opt out do bleed/grid do photo-tabs e troca o
+   show/hide absolute por display block para o container ajustar à altura
+   real do conteúdo (que é mais alto que o min-height padrão). */
+.bb-type .bb-photo-tabs__panels {
+  margin-right: 0;
+  min-height: 0;
+  position: relative;
+}
+.bb-type .bb-photo-tabs__panel {
+  position: relative;
+  display: none;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition: none;
+}
+.bb-type .bb-photo-tabs__panel.is-active { display: block; }
+@media (min-width: 960px) {
+  .bb-type .bb-photo-tabs__panel.is-active { display: block; grid-template-columns: 1fr; }
+}
 .bb-type__charset-sample--morganite {
   font-family: 'Morganite', 'Anton', sans-serif;
   font-size: clamp(22px, 2.2vw, 36px);
@@ -4988,7 +5029,7 @@ body.bb-lightbox-open { overflow: hidden; }
 <!-- ============================================================ -->
 <!-- SECTION 09b — TYPOGRAPHY MORGANITE (Títulos de impacto)       -->
 <!-- ============================================================ -->
-<section id="typography_morganite" class="bb-type alignfull" aria-label="Tipografia Morganite — Títulos de impacto">
+<section id="typography_morganite" class="bb-type alignfull" aria-label="Tipografia — Títulos de impacto">
   <div class="bb-type__inner">
     <div class="bb-type__topbar">
       <span class="bb-type__topbar-label">Identidade visual</span>
@@ -5002,25 +5043,68 @@ body.bb-lightbox-open { overflow: hidden; }
       <span>de impacto</span>
     </h2>
 
-    <div class="bb-type__grid">
-      <div class="bb-type__desc">
-        <p>Para títulos de apelo comercial, utiliza-se a tipografia Morganite. Sua presença mais marcante e condensada reforça impacto, urgência e destaque em chamadas promocionais. Deve ser aplicada de forma pontual, em contraste com a tipografia de sistema, garantindo hierarquia clara e preservando a coerência visual da marca.</p>
-        <div>
-          <p class="bb-type__download-label">Acesse o link abaixo para baixar a tipografia via Google Fonts:</p>
-          <a class="bb-type__download-btn" href="https://befonts.com/morganite-font-family.html" target="_blank" rel="noopener noreferrer">Baixar Morganite</a>
+    <div class="bb-photo-tabs__nav" role="tablist" aria-label="Fontes de impacto">
+      <button class="bb-photo-tabs__arrow" data-direction="prev" aria-label="Fonte anterior" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="bb-photo-tabs__tabs-group">
+        <button class="bb-photo-tabs__tab is-active" data-tab="type-morganite" role="tab" aria-selected="true" aria-controls="panel-type-morganite" id="tab-type-morganite">Morganite</button>
+        <button class="bb-photo-tabs__tab" data-tab="type-fjalla" role="tab" aria-selected="false" aria-controls="panel-type-fjalla" id="tab-type-fjalla">Fjalla One</button>
+      </div>
+      <button class="bb-photo-tabs__arrow" data-direction="next" aria-label="Próxima fonte" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <div class="bb-photo-tabs__panels bb-type__tabs">
+      <div class="bb-photo-tabs__panel bb-type__tab-panel is-active" data-panel="type-morganite" id="panel-type-morganite" role="tabpanel" aria-labelledby="tab-type-morganite">
+        <div class="bb-type__grid">
+          <div class="bb-type__desc">
+            <p>Para títulos de apelo comercial, utiliza-se a tipografia Morganite. Sua presença mais marcante e condensada reforça impacto, urgência e destaque em chamadas promocionais. Deve ser aplicada de forma pontual, em contraste com a tipografia de sistema, garantindo hierarquia clara e preservando a coerência visual da marca.</p>
+            <div>
+              <p class="bb-type__download-label">Acesse o link abaixo para baixar a tipografia via Google Fonts:</p>
+              <a class="bb-type__download-btn" href="https://befonts.com/morganite-font-family.html" target="_blank" rel="noopener noreferrer">Baixar Morganite</a>
+            </div>
+          </div>
+
+          <div class="bb-type__panel" data-aos="fade-in" style="display:flex;flex-direction:column;justify-content:space-between;grid-template-columns:none">
+            <p class="bb-type__panel-headline bb-type__panel-headline--morganite">
+              <span>Growth is the</span>
+              <span>new black</span>
+            </p>
+            <div>
+              <hr class="bb-type__panel-divider"/>
+              <div class="bb-type__panel-footer">
+                <p class="bb-type__panel-foot-left bb-type__panel-foot-left--morganite">1234567890@#$%&amp;</p>
+                <p class="bb-type__panel-foot-right bb-type__panel-foot-right--morganite">MORGANITE</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="bb-type__panel" data-aos="fade-in" style="display:flex;flex-direction:column;justify-content:space-between;grid-template-columns:none">
-        <p class="bb-type__panel-headline bb-type__panel-headline--morganite">
-          <span>Growth is the</span>
-          <span>new black</span>
-        </p>
-        <div>
-          <hr class="bb-type__panel-divider"/>
-          <div class="bb-type__panel-footer">
-            <p class="bb-type__panel-foot-left bb-type__panel-foot-left--morganite">1234567890@#$%&amp;</p>
-            <p class="bb-type__panel-foot-right bb-type__panel-foot-right--morganite">MORGANITE</p>
+      <div class="bb-photo-tabs__panel bb-type__tab-panel" data-panel="type-fjalla" id="panel-type-fjalla" role="tabpanel" aria-labelledby="tab-type-fjalla">
+        <div class="bb-type__grid">
+          <div class="bb-type__desc">
+            <p>Como alternativa à Morganite, a Fjalla One pode ser utilizada em títulos de impacto quando a Morganite não estiver disponível. Mantém a presença condensada e o caráter institucional, com excelente legibilidade em chamadas e destaques digitais.</p>
+            <div>
+              <p class="bb-type__download-label">Acesse o link abaixo para baixar a tipografia via Google Fonts:</p>
+              <a class="bb-type__download-btn" href="https://fonts.google.com/specimen/Fjalla+One" target="_blank" rel="noopener noreferrer">Baixar Fjalla One</a>
+            </div>
+          </div>
+
+          <div class="bb-type__panel" data-aos="fade-in" style="display:flex;flex-direction:column;justify-content:space-between;grid-template-columns:none">
+            <p class="bb-type__panel-headline bb-type__panel-headline--fjalla">
+              <span>Growth is the</span>
+              <span>new black</span>
+            </p>
+            <div>
+              <hr class="bb-type__panel-divider"/>
+              <div class="bb-type__panel-footer">
+                <p class="bb-type__panel-foot-left bb-type__panel-foot-left--fjalla">1234567890@#$%&amp;</p>
+                <p class="bb-type__panel-foot-right bb-type__panel-foot-right--fjalla">FJALLA ONE</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
