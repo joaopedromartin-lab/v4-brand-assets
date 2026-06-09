@@ -1,0 +1,115 @@
+/* =====================================================================
+   V4 — TOKENS BASE (Design System)
+   Extraído de "Design System/index.html" (fonte da verdade).
+   Cores, gradientes, escala tipográfica, espaçamento, raios, easings,
+   sombras e animações (keyframes). Use estes tokens como base de
+   qualquer página/peça nova antes de criar estilos próprios.
+   ===================================================================== */
+:root {
+  /* ---------- Cores institucionais ---------- */
+  --v4-black:      #050505;
+  --v4-white:      #FFFFFF;
+  --v4-yellow:     #FDFF87;   /* acento / ativação */
+  --v4-light-gray: #F2F2F2;
+  --v4-gray:       #606060;
+  --v4-dark-gray:  #1E2124;
+  --v4-black-70:   #1c1c1cb3; /* texto sobre claro */
+  --v4-white-70:   #ffffffb3; /* texto sobre escuro */
+
+  /* Vermelhos (stops dos gradientes da marca) */
+  --v4-maroon:   #560303;
+  --v4-red-deep: #7A0A02;
+  --v4-red-mid:  #8B1205;
+  --v4-red:      #C41E08;
+  --v4-flame:    #FB2E0A;
+
+  /* ---------- CTA (canônico do DS) ---------- */
+  --v4-cta:        #00A86B;
+  --v4-cta-hover:  #FF6200;
+  --v4-cta-active: #E55700;
+
+  /* ---------- Gradientes da marca ---------- */
+  --grad-brand-primary: linear-gradient(135deg, #560303 0%, #7A0A02 40%, #FB2E0A 100%);
+  --grad-brand-subtle:  linear-gradient(160deg, #560303 0%, #8B1205 50%, #C41E08 100%);
+  --grad-brand-radial:  radial-gradient(ellipse at 20% 80%, #FB2E0A 0%, #7A0A02 40%, #560303 100%);
+  --grad-black-radial-yellow: radial-gradient(circle at 100% 150%, rgba(253,255,135,1) 0%, rgba(5,5,5,1) 50%);
+
+  /* ---------- Tipografia ---------- */
+  --font-sys: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  /* Escala fluida (mesmos clamps do DS) */
+  --fs-small:   12px;
+  --fs-medium:  clamp(14px, 0.875rem + ((1vw - 5.8px) * 0.448), 20px);
+  --fs-large:   clamp(22.041px, 1.378rem + ((1vw - 5.8px) * 1.042), 36px);
+  --fs-x-large: clamp(25.014px, 1.563rem + ((1vw - 5.8px) * 1.268), 42px);
+  --fs-h1: clamp(2.7rem,  2.7rem  + ((1vw - 0.363rem) * 5.359), 115px);
+  --fs-h2: clamp(2.188rem, 2.188rem + ((1vw - 0.363rem) * 4.104), 90px);
+  --fs-h3: clamp(1.75rem, 1.75rem + ((1vw - 0.363rem) * 2.687), 64px);
+  --fs-h4: clamp(28px, 1.75rem + ((1vw - 5.8px) * 1.493), 48px);
+  --fs-h5: clamp(26px, 1.625rem + ((1vw - 5.8px) * 0.448), 32px);
+  --fs-p1: clamp(1.2rem, 1.2rem + ((1vw - 0.363rem) * 0.358), 24px);
+  --fs-p2: clamp(1rem, 1rem + ((1vw - 0.363rem) * 0.374), 21px);
+  --fs-p3: clamp(1rem, 1rem + ((1vw - 0.363rem) * 0.149), 18px);
+  --fs-p4: clamp(0.875rem, 0.875rem + ((1vw - 0.363rem) * 0.149), 16px);
+
+  /* ---------- Espaçamento (escala do DS) ---------- */
+  --space-20: 0.44rem;
+  --space-30: 24px;
+  --space-40: clamp(0.75rem, 0.1549rem + 1.6418vw, 2.125rem);
+  --space-50: clamp(1.625rem, 1.0299rem + 1.6418vw, 3rem);
+  --space-60: clamp(2rem, 1.2425rem + 2.0896vw, 3.75rem);
+  --space-70: clamp(3.125rem, 1.7724rem + 3.7313vw, 6.25rem);
+  --space-80: clamp(4.375rem, 2.2108rem + 5.9701vw, 9.375rem);
+  --space-90: clamp(5rem, 1.7537rem + 8.9552vw, 12.5rem);
+  --space-section: var(--space-90);
+  --content-size: 1720px;          /* container largo do DS */
+  --content-narrow: 1180px;        /* container de leitura */
+  --page-pad: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);
+
+  /* ---------- Raios ---------- */
+  --r-sm: 10px;
+  --r-md: 15px;
+  --r-lg: 25px;
+  --r-pill: 9999px;
+
+  /* ---------- Easings (do DS) ---------- */
+  --ease-out-expo:  cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---------- Sombras ---------- */
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+/* =====================================================================
+   Animações — keyframes do DS (ícones, loaders, microinterações)
+   ===================================================================== */
+@keyframes ds-spin { to { transform: rotate(360deg); } }
+@keyframes ds-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.18); opacity: 0.55; }
+}
+@keyframes ds-arrow-slide {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
+@keyframes ds-draw {
+  0%   { stroke-dashoffset: 32; opacity: 0.3; }
+  55%  { stroke-dashoffset: 0;  opacity: 1; }
+  100% { stroke-dashoffset: 0;  opacity: 1; }
+}
+@keyframes ds-str-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(10px); }
+}
+
+.ds-anim--spin  { animation: ds-spin 1s linear infinite; transform-origin: center; }
+.ds-anim--pulse { animation: ds-pulse 1.6s ease-in-out infinite; transform-origin: center; }
+.ds-anim--slide { animation: ds-arrow-slide 1.2s ease-in-out infinite; }
+.ds-anim--draw path, .ds-anim--draw polyline {
+  stroke-dasharray: 32;
+  animation: ds-draw 2.4s var(--ease-in-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-anim--spin, .ds-anim--pulse, .ds-anim--slide, .ds-anim--draw path, .ds-anim--draw polyline { animation: none; }
+}
