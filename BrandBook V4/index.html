@@ -3943,6 +3943,29 @@ footer .wp-block-group.has-black-background-color {
 /* Neutralize the orange circle-wipe on hero CTA */
 .wp-block-button .bb-hero-cta::after { display: none !important; }
 
+/* Variante outline — segundo CTA (Inimigos da Inércia) */
+.wp-block-button .bb-hero-cta--outline,
+.wp-block-button .bb-hero-cta--outline.wp-element-button {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #FFFFFF !important;
+  border: 2px solid rgba(255,255,255,0.6) !important;
+}
+.wp-block-button .bb-hero-cta--outline:hover,
+.wp-block-button .bb-hero-cta--outline.wp-element-button:hover,
+.wp-block-button:hover .bb-hero-cta--outline {
+  background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  color: #050505 !important;
+  border-color: #FFFFFF !important;
+}
+.wp-block-button .bb-hero-cta--outline:active,
+.wp-block-button .bb-hero-cta--outline.wp-element-button:active {
+  background: rgba(255,255,255,0.85) !important;
+  background-color: rgba(255,255,255,0.85) !important;
+  color: #050505 !important;
+}
+
 /* === BRANDBOOK V4 — HERO FULL-BLEED IMAGE === */
 .bb-brand-hero-image {
   background-image: url('assets/Fueto.png') !important;
@@ -4374,6 +4397,7 @@ body.bb-lightbox-open { overflow: hidden; }
 <h1 class="wp-block-heading bb-headline-scramble" style="margin-top:var(--wp--preset--spacing--30);margin-bottom:var(--wp--preset--spacing--40)">Brand Book V4</h1>
 <div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex" style="margin-top:var(--wp--preset--spacing--60)">
 <div class="wp-block-button aos-init aos-animate bb-hero-cta-wrap" data-aos="fade-in"><a class="wp-block-button__link wp-element-button bb-hero-cta" href="#positioning">PERCORRER O BRANDBOOK</a></div>
+<div class="wp-block-button aos-init aos-animate bb-hero-cta-wrap" data-aos="fade-in" data-aos-delay="120"><a class="wp-block-button__link wp-element-button bb-hero-cta bb-hero-cta--outline" href="https://inimigosdainercia-bb.vercel.app/" target="_blank" rel="noopener noreferrer">INIMIGOS DA INÉRCIA</a></div>
 </div>
 </div>
 </section>
