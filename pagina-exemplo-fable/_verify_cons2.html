@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --font-impact: 'Fjalla One', 'IBM Plex Sans', sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'IBM Plex Sans', sans-serif; background:#ddd; }
+  .vp { margin: 10px auto; outline: 2px dashed #00f; }
+  /* exact copies of index.html rules, with font-size fixed at the clamp minimum (64px),
+     which is what clamp(64px,12.5vw,220px) resolves to for any viewport < 512px */
+  .cons {
+    position: relative; overflow: hidden; color: #fff;
+    background: linear-gradient(180deg, #E50914 0%, #A50A08 36%, #4A0503 74%, #120101 100%);
+  }
+  .cons__inner { position: relative; z-index: 2; margin: 0 auto; padding: 64px 16px 48px; }
+  .cons__giant {
+    position: relative; z-index: 0; margin: 6px 0 0; text-align: center;
+    font-family: var(--font-impact); font-weight: 400; text-transform: uppercase;
+    font-size: 64px; line-height: .85; letter-spacing: .01em;
+  }
+  #report { font-family: monospace; font-size: 13px; background: #fff; padding: 8px; white-space: pre; }
+</style>
+</head>
+<body>
+
+<div class="vp" style="width:430px"><section class="cons"><div class="cons__inner"><h2 class="cons__giant" data-case="plain430">Conselheiros</h2></div></section></div>
+<div class="vp" style="width:390px"><section class="cons"><div class="cons__inner"><h2 class="cons__giant" data-case="plain390">Conselheiros</h2></div></section></div>
+<div class="vp" style="width:360px"><section class="cons"><div class="cons__inner"><h2 class="cons__giant" data-case="plain360">Conselheiros</h2></div></section></div>
+<div class="vp" style="width:320px"><section class="cons"><div class="cons__inner"><h2 class="cons__giant" data-case="plain320">Conselheiros</h2></div></section></div>
+<div class="vp" style="width:360px"><section class="cons"><div class="cons__inner"><h2 class="cons__giant" data-case="split360" id="split360">Conselheiros</h2></div></section></div>
+<div class="vp" style="width:320px"><section class="cons"><div class="cons__inner"><h2 class="cons__giant" data-case="split320" id="split320">Conselheiros</h2></div></section></div>
+
+<div id="report">pending</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>
+(function () {
+  function run() {
+    try {
+      gsap.registerPlugin(SplitText);
+      new SplitText('#split360', { type: 'chars' });
+      new SplitText('#split320', { type: 'chars' });
+    } catch (e) { document.getElementById('report').textContent = 'split error: ' + e; }
+    var out = [];
+    document.querySelectorAll('.cons__giant').forEach(function (h) {
+      var sec = h.closest('.cons');
+      var secRect = sec.getBoundingClientRect();
+      var range = document.createRange();
+      range.selectNodeContents(h);
+      var tr = range.getBoundingClientRect();
+      var clipL = (secRect.left - tr.left).toFixed(1);
+      var clipR = (tr.right - secRect.right).toFixed(1);
+      out.push(h.getAttribute('data-case') +
+        ': textW=' + tr.width.toFixed(1) +
+        ' textH=' + tr.height.toFixed(1) +
+        ' sectionW=' + secRect.width.toFixed(0) +
+        ' clippedLeft=' + clipL + 'px clippedRight=' + clipR + 'px' +
+        (parseFloat(clipL) > 0 || parseFloat(clipR) > 0 ? '  ==> CLIPPED' : '  ==> fits/overflow-visible-within-section'));
+    });
+    out.push("fontLoaded=" + document.fonts.check("64px 'Fjalla One'"));
+    document.getElementById('report').textContent = out.join('\n');
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { setTimeout(run, 150); });
+  } else {
+    window.addEventListener('load', function () { setTimeout(run, 400); });
+  }
+})();
+</script>
+</body>
+</html>

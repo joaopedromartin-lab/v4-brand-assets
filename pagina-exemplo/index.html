@@ -192,7 +192,8 @@
 
   /* dupla em fluxo (define a altura do hero); ancorada na base, sem gap */
   .hero__figure { position: relative; z-index: 2; display: block; margin: 0 auto;
-    width: clamp(380px, 76vw, 1320px); }
+    width: clamp(380px, 76vw, 1320px);
+    transform: translate3d(0, var(--par, 0px), 0); will-change: transform; }
   .hero__bigtitle {
     position: absolute; left: 50%; bottom: 60%; transform: translateX(-50%); z-index: 1;
     margin: 0; font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
@@ -201,7 +202,7 @@
   }
   .hero__figure > img {
     width: 100%; height: auto; display: block; position: relative; z-index: 2;
-    filter: contrast(1.04) saturate(1.06) drop-shadow(0 28px 50px rgba(40, 0, 0, 0.45));
+    filter: contrast(1.04) saturate(1.06);
   }
   /* card de nome (glass vermelho) preso à figura */
   .hero__namecard {
@@ -221,7 +222,7 @@
   /* faixa inferior: headline + descrição */
   .hero__bottom { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr; gap: 18px 40px; align-items: end; margin-top: clamp(20px, 3vw, 40px); }
   @media (min-width: 900px) { .hero__bottom { grid-template-columns: 1.15fr 0.85fr; } }
-  .hero__headline { margin: 0; font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+  .hero__headline { margin: 0; font-family: var(--font-impact); font-weight: 400; text-transform: uppercase;
     font-size: clamp(44px, 6.6vw, 96px); line-height: .98; }
   .hero__desc { margin: 0 0 6px; font-size: clamp(15px, 1.25vw, 19px); line-height: 1.5; color: rgba(255,255,255,0.9); max-width: 44ch; }
   .hero__desc strong { color: #fff; font-weight: 700; }
@@ -289,6 +290,8 @@
   .marquee::before, .marquee::after { content: ""; position: absolute; top: 0; bottom: 0; width: clamp(40px, 8vw, 120px); z-index: 2; pointer-events: none; }
   .marquee::before { left: 0; background: linear-gradient(90deg, #fff, transparent); }
   .marquee::after { right: 0; background: linear-gradient(270deg, #fff, transparent); }
+  /* wrapper do parallax (translateY) — o track cuida do translateX da esteira */
+  .marquee__inner { transform: translate3d(0, var(--par, 0px), 0); will-change: transform; }
   .marquee__track { display: flex; width: max-content; animation: marquee-scroll 38s linear infinite; }
   .marquee:hover .marquee__track { animation-play-state: paused; }
   .marquee__cell { flex: none; width: clamp(170px, 20vw, 240px); height: 118px;
@@ -369,7 +372,7 @@
     font-size: clamp(28px, 3.4vw, 40px); line-height: 1.18; letter-spacing: -0.02em; margin: 0; }
   .steps__title strong { font-weight: 700; }
 
-  .steps { display: grid; grid-template-columns: 1fr; gap: 3px; }
+  .steps { display: grid; grid-template-columns: 1fr; gap: 0; }
   @media (min-width: 720px) { .steps { grid-template-columns: repeat(3, 1fr); } }
   .step {
     position: relative; overflow: hidden;
@@ -397,9 +400,12 @@
      esconda .solucoes__device (display:none).
      ============================================================ */
   .solucoes { position: relative; overflow: hidden; color: #fff;
-    min-height: clamp(520px, 58vw, 780px);
-    background: #050505 url("assets/Fueto.png") center / cover no-repeat;
+    min-height: clamp(520px, 58vw, 780px); background: #050505;
   }
+  /* foto em camada própria (maior que a seção) para receber parallax sem revelar bordas */
+  .solucoes__bg { position: absolute; left: 0; right: 0; top: -18%; bottom: -18%; z-index: 0;
+    background: #050505 url("assets/Fueto.png") center / cover no-repeat;
+    transform: translate3d(0, var(--par, 0px), 0); will-change: transform; }
   /* leve escurecimento na base para legibilidade do texto sobre a foto */
   .solucoes::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg, transparent 52%, rgba(10,0,0,0.42) 100%); }
@@ -419,42 +425,53 @@
   }
 
   /* ============================================================
-     SOLUÇÕES — carrossel por abas (texto + imagem por solução)
+     SOLUÇÕES — acordeão lateral (lista à esquerda, imagem à direita)
      ============================================================ */
-  .sol-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
-    padding-bottom: clamp(20px, 3vw, 28px); border-bottom: 1px solid rgba(0,0,0,0.12); }
-  .sol-tab { flex: none; cursor: pointer; white-space: nowrap;
-    padding: 12px 24px; border-radius: 9999px;
-    border: 1px solid rgba(0,0,0,0.18); background: var(--v4-white);
-    font-family: var(--font-sys); font-size: 15px; font-weight: 600; color: var(--v4-black);
-    transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease; }
-  .sol-tab:hover { border-color: var(--v4-red); color: var(--v4-red); }
-  .sol-tab.is-active {
-    background: linear-gradient(135deg, #E50914 0%, #650E0F 100%);
-    border-color: transparent; color: #fff;
-    box-shadow: 0 10px 24px rgba(229,9,20,0.28); }
+  .sol-layout { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 52px); align-items: start; }
+  @media (min-width: 880px) { .sol-layout { grid-template-columns: 1fr 1.05fr; gap: clamp(40px, 6vw, 88px); } }
 
-  .sol-panels { margin-top: clamp(32px, 5vw, 60px); }
-  .sol-panel { display: none; grid-template-columns: 1fr; gap: 36px; align-items: center; }
-  @media (min-width: 880px) { .sol-panel { grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 6vw, 88px); } }
-  .sol-panel.is-active { display: grid; animation: sol-fade .45s var(--ease-out-expo); }
-  @keyframes sol-fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-  .sol-panel__title { font-family: var(--font-sys); font-weight: 700; margin: 0;
-    font-size: clamp(26px, 3vw, 34px); line-height: 1.18; letter-spacing: -0.02em; color: var(--v4-black); }
-  .sol-panel__sub { margin: 14px 0 0; font-weight: 400; color: var(--v4-black);
-    font-size: clamp(16px, 1.4vw, 19px); line-height: 1.4; }
-  .sol-panel__list { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
-  .sol-panel__list li { position: relative; padding-left: 28px; font-size: 15px; color: var(--v4-gray); }
-  .sol-panel__list li::before { content: ""; position: absolute; left: 6px; top: 7px;
+  .sol-list { display: flex; flex-direction: column; border-top: 1px solid rgba(0,0,0,0.14); }
+  .sol-item { border-bottom: 1px solid rgba(0,0,0,0.14); }
+  .sol-item__head { width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
+    display: block; padding: clamp(16px, 2.2vw, 26px) 2px;
+    font-family: var(--font-sys); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12;
+    font-size: clamp(21px, 2.5vw, 31px); color: rgba(5,5,5,0.34);
+    transition: color .28s ease; }
+  .sol-item__head:hover { color: rgba(5,5,5,0.72); }
+  .sol-item.is-active .sol-item__head { color: var(--v4-black); cursor: default; }
+  .sol-item__body { max-height: 0; overflow: hidden; transition: max-height .45s var(--ease-out-expo); }
+  .sol-item__inner { padding: 0 2px clamp(20px, 2.4vw, 30px); }
+  .sol-item__sub { margin: 0 0 18px; font-size: clamp(15px, 1.4vw, 18px); color: var(--v4-black); font-weight: 500; line-height: 1.4; }
+  .sol-item__bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .sol-item__bullets li { position: relative; padding-left: 28px; font-size: 15px; color: var(--v4-gray); }
+  .sol-item__bullets li::before { content: ""; position: absolute; left: 6px; top: 8px;
     width: 7px; height: 7px; border-radius: 50%; background: var(--v4-red); }
-  .sol-panel__media { border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 3;
+
+  /* SCROLL FIXO — a seção "prende" e avança de ponto a ponto conforme o scroll */
+  .sol { background: var(--v4-white); }
+  .sol-scroll { position: relative; height: calc(100vh + 6 * 62vh); }
+  .sol-sticky { position: sticky; top: 0; min-height: 100vh; display: grid; align-items: center;
+    padding: clamp(40px, 6vh, 84px) 0; }
+  .sol .wrap { position: relative; }
+  .sol-progress { position: absolute; left: 0; top: 8%; bottom: 8%; width: 3px;
+    border-radius: 3px; background: rgba(5,5,5,0.10); }
+  .sol-progress__fill { position: absolute; left: 0; right: 0; top: 0; height: 0;
+    background: var(--v4-red); border-radius: 3px; transition: height .15s linear; }
+
+  /* imagem à direita (troca conforme a solução ativa) */
+  .sol-figure { margin: 0; }
+  .sol-figure__media { border-radius: 22px; overflow: hidden; aspect-ratio: 5 / 4; max-height: 70vh;
     background: linear-gradient(215deg, #FF4517 0%, #E50914 32%, #7A0A06 66%, #160101 100%);
-    box-shadow: 0 24px 60px rgba(40,0,0,0.18); }
-  .sol-panel__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  @media (max-width: 720px) {
-    .sol-tabs { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto;
-      -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-    .sol-tabs::-webkit-scrollbar { display: none; }
+    box-shadow: 0 24px 60px rgba(40,0,0,0.18); transition: opacity .35s ease; }
+  .sol-figure__media.is-swapping { opacity: 0; }
+  .sol-figure__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* fallback: mobile e quem prefere menos movimento → acordeão por clique (sem pin) */
+  @media (max-width: 879px), (prefers-reduced-motion: reduce) {
+    .sol-scroll { height: auto; }
+    .sol-sticky { position: static; min-height: 0; display: block; padding: var(--space-80) 0; }
+    .sol-progress { display: none; }
+    .sol-figure__media { max-height: none; }
   }
 
   /* ============================================================
@@ -541,20 +558,132 @@
   .stats__intro .section__title .accent { color: var(--v4-yellow); }
 
   /* ============================================================
-     BENEFITS (personalidade)
+     CONSELHEIROS — carrossel "coverflow" (frente maior, laterais atrás)
      ============================================================ */
-  .benefits { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  @media (min-width: 880px) { .benefits { grid-template-columns: repeat(3, 1fr); } }
-  .benefit {
-    border-radius: var(--radius); padding: 32px 28px;
-    background: var(--v4-black); color: #fff; overflow: hidden; position: relative;
-    border: 1px solid rgba(255,255,255,0.08);
+  .cons { position: relative; overflow: hidden; background: var(--v4-brown); color: #fff; }
+  .cons__blast { position: absolute; inset: -12%; z-index: 0; opacity: 0.9; }
+  .cons__vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 42%, transparent 32%, rgba(15,0,0,0.62) 100%); }
+  .cons__inner { position: relative; z-index: 2; max-width: var(--content-size); margin: 0 auto;
+    padding: clamp(56px, 8vw, 104px) 16px clamp(44px, 6vw, 84px); }
+  .cons__head { text-align: center; margin: 0 auto clamp(18px, 3vw, 36px); }
+  .cons__eyebrow { color: rgba(255,255,255,0.72); }
+  .cons__title { font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(54px, 11vw, 150px); line-height: .9; letter-spacing: .01em; margin: 8px 0 0; }
+
+  /* palco do coverflow */
+  .cons__stage { position: relative; height: clamp(340px, 50vw, 520px); touch-action: pan-y; }
+  .cons__track { position: absolute; inset: 0; outline: none; }
+
+  .cons-card {
+    position: absolute; top: 50%; left: 50%; will-change: transform, opacity;
+    width: clamp(180px, 25vw, 312px); height: clamp(290px, 40vw, 480px);
+    border-radius: var(--radius); overflow: hidden;
+    background: #2b2b2b; border: 1px solid rgba(255,255,255,0.08);
+    transform: translate(-50%, -50%); opacity: 0;
+    transition: transform .6s cubic-bezier(0.22, 1, 0.36, 1), opacity .5s ease, box-shadow .5s ease, border-color .5s ease;
+    cursor: pointer; box-shadow: 0 28px 56px rgba(0,0,0,0.45);
   }
-  .benefit__icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
-    background: rgba(229,9,20,0.18); border: 1px solid rgba(229,9,20,0.4); color: var(--v4-red-bright); margin-bottom: 22px; }
-  .benefit__icon svg { width: 22px; height: 22px; }
-  .benefit__title { font-family: var(--font-impact); font-weight: 600; text-transform: uppercase; font-size: 40px; line-height: 1.02; margin: 0 0 12px; }
-  .benefit__desc { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.74); margin: 0; }
+  .cons-card__media { position: absolute; inset: 0; }
+  .cons-card__media img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  /* placeholder até a foto real entrar */
+  .cons-card__ph { position: absolute; inset: 0; display: grid; place-items: center;
+    background: linear-gradient(155deg, #3b3b3b 0%, #1b1b1b 100%); color: rgba(255,255,255,0.22); }
+  .cons-card__ph svg { width: 46%; height: 46%; }
+  .cons-card__grad { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .5s ease;
+    background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.12) 46%, rgba(0,0,0,0) 64%); }
+  .cons-card__cap { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(16px, 2vw, 24px);
+    opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+  .cons-card__name { font-family: var(--font-sys); font-weight: 600; font-size: clamp(18px, 2.4vw, 24px); line-height: 1.08; }
+  .cons-card__role { font-size: clamp(12px, 1.6vw, 14px); color: rgba(255,255,255,0.72); margin-top: 4px; }
+  .cons-card.is-active { box-shadow: 0 44px 96px rgba(0,0,0,0.62); border-color: rgba(255,72,31,0.85); }
+  .cons-card.is-active .cons-card__grad,
+  .cons-card.is-active .cons-card__cap { opacity: 1; transform: none; }
+  .cons-card.is-active::after { content: ""; position: absolute; inset: 0; border-radius: inherit;
+    box-shadow: inset 0 0 0 2px var(--v4-red-bright); pointer-events: none; }
+
+  /* navegação */
+  .cons__nav { display: flex; justify-content: center; gap: 18px; margin-top: clamp(26px, 4vw, 44px); }
+  .cons__arrow { width: 56px; height: 56px; border-radius: 50%; flex: none; display: grid; place-items: center;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.4); color: #fff;
+    cursor: pointer; transition: background .25s ease, border-color .25s ease, transform .2s ease; }
+  .cons__arrow:hover { background: var(--v4-red); border-color: var(--v4-red); transform: translateY(-2px); }
+  .cons__arrow:focus-visible { outline: 2px solid var(--v4-yellow); outline-offset: 3px; }
+  .cons__arrow svg { width: 20px; height: 20px; }
+
+  /* ============================================================
+     STACK PARALLAX — CONSELHEIROS sobe e passa À FRENTE dos NÚMEROS.
+     Os números "prendem" (sticky) enquanto a seção vermelha desliza
+     por cima; o conteúdo interno ganha um leve transform no scroll
+     (efeito mais "leve"). z-index garante a sobreposição.
+     ============================================================ */
+  .stack { position: relative; isolation: isolate; }
+  .stack > #numeros { position: sticky; top: 0; z-index: 1; }
+  .stack > #conselheiros { position: relative; z-index: 2; will-change: transform;
+    box-shadow: 0 -36px 70px rgba(20, 0, 0, 0.40); }
+  .stack > #conselheiros .cons__inner { will-change: transform; }
+  @media (prefers-reduced-motion: reduce) {
+    .stack > #numeros { position: static; }
+    .stack > #conselheiros { box-shadow: none; }
+  }
+
+  /* ============================================================
+     HISTÓRIA — carrossel grande (card central destacado; vizinhos
+     aparecem nas bordas). Fundo branco. Cada slide aceita gradiente,
+     <img> ou <video> — é só trocar o conteúdo de .hist-slide__media.
+     ============================================================ */
+  .hist { background: var(--v4-white); overflow: hidden; padding: var(--space-80) 0; }
+  .hist__head { text-align: center; max-width: 760px; }
+  .hist__title { font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(44px, 7vw, 96px); line-height: .98; letter-spacing: .01em; margin: 8px 0 0; color: var(--v4-black); }
+  .hist__title .accent { color: var(--v4-red); }
+
+  .hist__viewport { position: relative; margin-top: clamp(28px, 4vw, 52px); }
+  .hist__track { display: flex; gap: clamp(10px, 1vw, 16px);
+    transition: transform .6s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+
+  .hist-slide { position: relative; flex: 0 0 auto;
+    width: min(78vw, 1040px); aspect-ratio: 16 / 9; border-radius: clamp(16px, 1.6vw, 24px);
+    overflow: hidden; background: #1a1a1a; cursor: pointer;
+    opacity: .5; transform: scale(.965);
+    transition: opacity .55s ease, transform .55s ease; }
+  .hist-slide.is-active { opacity: 1; transform: scale(1); }
+  .hist-slide__media { position: absolute; inset: 0; }
+  .hist-slide__media img, .hist-slide__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hist-slide__shade { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0.14) 42%, rgba(0,0,0,0) 66%); }
+  .hist-slide__cap { position: absolute; left: clamp(20px, 3vw, 46px); right: clamp(20px, 3vw, 46px);
+    bottom: clamp(20px, 3vw, 42px); color: #fff;
+    opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+  .hist-slide.is-active .hist-slide__cap { opacity: 1; transform: none; }
+  .hist-slide__year { font-family: var(--font-sys); font-weight: 600; font-size: clamp(12px, 1.2vw, 15px);
+    letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,0.82); margin: 0 0 8px; }
+  .hist-slide__name { font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(28px, 3.6vw, 56px); line-height: .96; letter-spacing: .01em; margin: 0; }
+
+  /* setas sobre a viewport */
+  .hist__arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(0,0,0,0.42); border: 1px solid rgba(255,255,255,0.55); color: #fff; cursor: pointer;
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    transition: background .25s ease, border-color .25s ease, opacity .25s ease; }
+  .hist__arrow:hover { background: var(--v4-red); border-color: var(--v4-red); }
+  .hist__arrow:focus-visible { outline: 2px solid var(--v4-yellow); outline-offset: 3px; }
+  .hist__arrow.is-disabled { opacity: 0; pointer-events: none; }
+  .hist__arrow--prev { left: clamp(12px, 4vw, 64px); }
+  .hist__arrow--next { right: clamp(12px, 4vw, 64px); }
+  .hist__arrow svg { width: 22px; height: 22px; }
+
+  /* indicadores */
+  .hist__dots { display: flex; justify-content: center; gap: 10px; margin-top: clamp(24px, 3vw, 40px); }
+  .hist__dot { width: 9px; height: 9px; border-radius: 9999px; border: 0; padding: 0; cursor: pointer;
+    background: rgba(5,5,5,0.18); transition: background .25s ease, width .25s ease; }
+  .hist__dot.is-active { background: var(--v4-red); width: 28px; }
+
+  @media (max-width: 720px) {
+    .hist-slide { width: 86vw; aspect-ratio: 4 / 3; }
+    .hist__arrow { width: 46px; height: 46px; }
+  }
 
   /* ============================================================
      TESTIMONIAL
@@ -573,10 +702,18 @@
   .quote__role { font-size: 14px; color: var(--v4-gray); }
 
   /* ============================================================
-     FAQ
+     FAQ — duas colunas: texto à esquerda, accordion à direita
      ============================================================ */
-  .faq { max-width: 880px; margin: 0 auto; }
+  .faq-layout { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 48px); align-items: start; }
+  @media (min-width: 920px) { .faq-layout { grid-template-columns: 0.82fr 1.18fr; gap: clamp(48px, 6vw, 100px); } }
+  .faq-intro { margin: 0; }
+  @media (min-width: 920px) { .faq-intro { position: sticky; top: 100px; } }
+  .faq-intro .section__title { margin-top: 6px; }
+  .faq-intro .section__lead { margin-top: 18px; }
+
+  .faq { max-width: none; margin: 0; }
   .faq__item { border-bottom: 1px solid rgba(0,0,0,0.12); }
+  .faq__item:first-child { border-top: 1px solid rgba(0,0,0,0.12); }
   .faq__q { width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
     padding: 26px 4px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
     font-family: var(--font-sys); font-size: 19px; font-weight: 600; color: var(--v4-black); }
@@ -635,7 +772,7 @@
     <a href="#metodo">Método</a>
     <a href="#marcas">Marcas</a>
     <a href="#solucoes">Soluções</a>
-    <a href="#valores">Por que V4</a>
+    <a href="#conselheiros">Conselheiros</a>
     <a href="#faq">Dúvidas</a>
   </nav>
 </header>
@@ -646,7 +783,7 @@
   <div class="hero__vignette" aria-hidden="true"></div>
 
   <!-- dupla ancorada na base da seção, sem gap -->
-  <figure class="hero__figure">
+  <figure class="hero__figure" data-parallax="0.06">
     <h1 class="hero__bigtitle">V4 Company</h1>
     <img src="assets/Doiscortado.png" alt="Especialistas da V4 Company" />
     <figcaption class="hero__namecard">
@@ -671,6 +808,7 @@
 
 <!-- ============================ MARQUEE DE LOGOS ============================ -->
 <section class="marquee" id="marcas" aria-label="Marcas que confiam na V4">
+  <div class="marquee__inner" data-parallax="-0.05">
   <div class="marquee__track">
     <!-- conjunto 1 -->
     <div class="marquee__cell"><img src="assets/Addigy-Logo-2-300x79_f4b6bd6ed9a0.png" alt="Addigy" /></div>
@@ -692,6 +830,7 @@
     <div class="marquee__cell" aria-hidden="true"><img src="assets/Searchspring-Logo-4-300x79_0b270e6fd4ad.png" alt="" /></div>
     <div class="marquee__cell" aria-hidden="true"><img src="assets/TechEquity-Logo-2-300x79_37c57431f1f8.png" alt="" /></div>
     <div class="marquee__cell" aria-hidden="true"><img src="assets/Yarrow-Logo-1-300x79_d684e608fc57.png" alt="" /></div>
+  </div>
   </div>
 </section>
 
@@ -721,108 +860,117 @@
 
 <!-- ============================ SOLUÇÕES V4 (banner) ============================ -->
 <section class="solucoes" aria-label="Soluções V4">
+  <div class="solucoes__bg" data-parallax="0.14" aria-hidden="true"></div>
   <div class="solucoes__inner">
     <h2 class="solucoes__title">Soluções V4</h2>
     <p class="solucoes__text">Vorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan.</p>
   </div>
 </section>
 
-<!-- ============================ SOLUÇÕES (carrossel por abas) ============================ -->
-<section class="section section--light sol" id="solucoes" aria-label="Soluções V4">
-  <div class="wrap">
-    <!-- abas: navegação entre as soluções -->
-    <div class="sol-tabs" role="tablist" aria-label="Soluções">
-      <button class="sol-tab is-active" role="tab" aria-selected="true" type="button">Solução 1</button>
-      <button class="sol-tab" role="tab" aria-selected="false" type="button">Solução 2</button>
-      <button class="sol-tab" role="tab" aria-selected="false" type="button">Solução 3</button>
-      <button class="sol-tab" role="tab" aria-selected="false" type="button">Solução 4</button>
-      <button class="sol-tab" role="tab" aria-selected="false" type="button">Solução 5</button>
-      <button class="sol-tab" role="tab" aria-selected="false" type="button">Solução 6</button>
+<!-- ============================ SOLUÇÕES (acordeão lateral + imagem) ============================ -->
+<section class="sol section--light" id="solucoes" aria-label="Soluções V4">
+ <div class="sol-scroll">
+  <div class="sol-sticky">
+   <div class="wrap">
+    <!-- trilho de progresso do scroll (só no modo fixo) -->
+    <div class="sol-progress" aria-hidden="true"><span class="sol-progress__fill" id="solProgress"></span></div>
+    <div class="sol-layout">
+      <!-- ESQUERDA: lista de soluções. Ao rolar a seção, ela avança de ponto a ponto;
+           o clique também leva ao trecho. Para usar a foto real, preencha data-img="assets/SUA-IMAGEM.png". -->
+      <div class="sol-list">
+        <div class="sol-item is-active" data-grad="linear-gradient(215deg, #FF4517 0%, #E50914 32%, #7A0A06 66%, #160101 100%)" data-img="">
+          <button class="sol-item__head" type="button" aria-expanded="true" aria-controls="sol-body-1">Consultoria de Growth Marketing</button>
+          <div class="sol-item__body" id="sol-body-1" role="region">
+            <div class="sol-item__inner">
+              <p class="sol-item__sub">Gestão do Projeto e Desenvolvimento de Estratégias</p>
+              <ul class="sol-item__bullets">
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-item" data-grad="linear-gradient(135deg, #E50914 0%, #FF481F 45%, #650E0F 100%)" data-img="">
+          <button class="sol-item__head" type="button" aria-expanded="false" aria-controls="sol-body-2">Gestão de Tráfego e Mídia Paga</button>
+          <div class="sol-item__body" id="sol-body-2" role="region">
+            <div class="sol-item__inner">
+              <p class="sol-item__sub">Aquisição e canais de performance</p>
+              <ul class="sol-item__bullets">
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-item" data-grad="linear-gradient(160deg, #FB2E0A 0%, #7A0A02 60%, #160101 100%)" data-img="">
+          <button class="sol-item__head" type="button" aria-expanded="false" aria-controls="sol-body-3">Performance e CRO</button>
+          <div class="sol-item__body" id="sol-body-3" role="region">
+            <div class="sol-item__inner">
+              <p class="sol-item__sub">Otimização de conversão e funil</p>
+              <ul class="sol-item__bullets">
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-item" data-grad="linear-gradient(245deg, #FF481F 0%, #E50914 40%, #280000 100%)" data-img="">
+          <button class="sol-item__head" type="button" aria-expanded="false" aria-controls="sol-body-4">Branding e Conteúdo</button>
+          <div class="sol-item__body" id="sol-body-4" role="region">
+            <div class="sol-item__inner">
+              <p class="sol-item__sub">Posicionamento, criativos e narrativa</p>
+              <ul class="sol-item__bullets">
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-item" data-grad="linear-gradient(200deg, #F0141E 0%, #650E0F 55%, #160101 100%)" data-img="">
+          <button class="sol-item__head" type="button" aria-expanded="false" aria-controls="sol-body-5">CRM e Automação</button>
+          <div class="sol-item__body" id="sol-body-5" role="region">
+            <div class="sol-item__inner">
+              <p class="sol-item__sub">Relacionamento e jornada do cliente</p>
+              <ul class="sol-item__bullets">
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-item" data-grad="linear-gradient(120deg, #FF4517 0%, #7A0A06 70%, #050505 100%)" data-img="">
+          <button class="sol-item__head" type="button" aria-expanded="false" aria-controls="sol-body-6">Inteligência de Dados</button>
+          <div class="sol-item__body" id="sol-body-6" role="region">
+            <div class="sol-item__inner">
+              <p class="sol-item__sub">Dashboards e decisão por dado</p>
+              <ul class="sol-item__bullets">
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+                <li>Vorem amet, adipiscing elit.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIREITA: imagem que troca conforme a solução ativa -->
+      <figure class="sol-figure">
+        <div class="sol-figure__media" id="solMedia" aria-hidden="true"></div>
+      </figure>
     </div>
-
-    <!-- painéis: cada solução tem texto + imagem próprios.
-         Para usar a imagem real, troque a <div class="sol-panel__media"></div> por:
-         <div class="sol-panel__media"><img src="caminho/imagem.png" alt="..."/></div> -->
-    <div class="sol-panels">
-      <article class="sol-panel is-active" role="tabpanel">
-        <div class="sol-panel__text">
-          <h3 class="sol-panel__title">Consultoria de Growth Marketing</h3>
-          <p class="sol-panel__sub">Gestão do Projeto e Desenvolvimento de Estratégias</p>
-          <ul class="sol-panel__list">
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-          </ul>
-        </div>
-        <div class="sol-panel__media" aria-hidden="true"></div>
-      </article>
-
-      <article class="sol-panel" role="tabpanel" hidden>
-        <div class="sol-panel__text">
-          <h3 class="sol-panel__title">Gestão de Tráfego e Mídia Paga</h3>
-          <p class="sol-panel__sub">Aquisição e canais de performance</p>
-          <ul class="sol-panel__list">
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-          </ul>
-        </div>
-        <div class="sol-panel__media" aria-hidden="true"></div>
-      </article>
-
-      <article class="sol-panel" role="tabpanel" hidden>
-        <div class="sol-panel__text">
-          <h3 class="sol-panel__title">Performance e CRO</h3>
-          <p class="sol-panel__sub">Otimização de conversão e funil</p>
-          <ul class="sol-panel__list">
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-          </ul>
-        </div>
-        <div class="sol-panel__media" aria-hidden="true"></div>
-      </article>
-
-      <article class="sol-panel" role="tabpanel" hidden>
-        <div class="sol-panel__text">
-          <h3 class="sol-panel__title">Branding e Conteúdo</h3>
-          <p class="sol-panel__sub">Posicionamento, criativos e narrativa</p>
-          <ul class="sol-panel__list">
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-          </ul>
-        </div>
-        <div class="sol-panel__media" aria-hidden="true"></div>
-      </article>
-
-      <article class="sol-panel" role="tabpanel" hidden>
-        <div class="sol-panel__text">
-          <h3 class="sol-panel__title">CRM e Automação</h3>
-          <p class="sol-panel__sub">Relacionamento e jornada do cliente</p>
-          <ul class="sol-panel__list">
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-          </ul>
-        </div>
-        <div class="sol-panel__media" aria-hidden="true"></div>
-      </article>
-
-      <article class="sol-panel" role="tabpanel" hidden>
-        <div class="sol-panel__text">
-          <h3 class="sol-panel__title">Inteligência de Dados</h3>
-          <p class="sol-panel__sub">Dashboards e decisão por dado</p>
-          <ul class="sol-panel__list">
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-            <li>Vorem amet, adipiscing elit.</li>
-          </ul>
-        </div>
-        <div class="sol-panel__media" aria-hidden="true"></div>
-      </article>
-    </div>
+   </div>
   </div>
+ </div>
 </section>
 
 <!-- ============================ SHOWCASE (depoimento + marquee de fundo) ============================ -->
@@ -847,6 +995,9 @@
     <cite>— Ana Lindström, Empreendedora</cite>
   </blockquote>
 </section>
+
+<!-- ===== STACK: CONSELHEIROS sobe à frente da seção de NÚMEROS (parallax) ===== -->
+<div class="stack">
 
 <!-- ============================ BIG NUMBERS ============================ -->
 <section class="section section--light bignum" id="numeros" aria-label="Números que comprovam o método">
@@ -873,40 +1024,60 @@
   </div>
 </section>
 
-<!-- ============================ BENEFITS (personalidade) ============================ -->
-<section class="section section--light" id="valores">
-  <div class="wrap">
-    <div class="section__head reveal">
-      <p class="eyebrow">Por que V4</p>
-      <h2 class="section__title">Do nosso <span class="accent">jeito</span></h2>
-      <p class="section__lead">A personalidade da marca também é o jeito de entregar: sem enrolação, com sangue nos olhos e sempre à frente.</p>
+<!-- ============================ CONSELHEIROS (carrossel coverflow) ============================ -->
+<section class="cons" id="conselheiros" aria-label="Conselheiros V4">
+  <div class="cons__blast v4-blast" aria-hidden="true"></div>
+  <div class="cons__vignette" aria-hidden="true"></div>
+  <div class="cons__inner">
+    <div class="cons__head reveal">
+      <p class="eyebrow cons__eyebrow">Quem caminha com a gente</p>
+      <h2 class="cons__title">Conselheiros</h2>
     </div>
 
-    <div class="benefits">
-      <article class="benefit reveal">
-        <div class="benefit__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-        </div>
-        <h3 class="benefit__title">Direto<br/>e reto</h3>
-        <p class="benefit__desc">O mundo já está cheio de marketing bonito que não vende. A gente prefere o que funciona — nada de enrolar ou complicar.</p>
-      </article>
-      <article class="benefit reveal">
-        <div class="benefit__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg>
-        </div>
-        <h3 class="benefit__title">Sangue<br/>nos olhos</h3>
-        <p class="benefit__desc">A gente joga pra ganhar. Tem problema, resolve. Tem desafio, encara. O que move é ver o número e as vendas crescerem.</p>
-      </article>
-      <article class="benefit reveal">
-        <div class="benefit__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6-6 6 6"/><path d="M12 3v12"/><path d="M5 21h14"/></svg>
-        </div>
-        <h3 class="benefit__title">Sempre<br/>à frente</h3>
-        <p class="benefit__desc">Não olhamos só para o que já foi feito. Perguntamos o que ainda dá pra fazer — e levamos o empreendedor junto.</p>
-      </article>
+    <div class="cons__stage reveal">
+      <!-- coverflow: para trocar um placeholder por foto real, substitua o
+           bloco .cons-card__ph por: <div class="cons-card__media"><img src="assets/SUA-FOTO.png" alt="Nome" /></div> -->
+      <div class="cons__track" id="consTrack" role="group" aria-roledescription="carrossel" aria-label="Conselheiros">
+        <article class="cons-card">
+          <div class="cons-card__media"><img src="assets/Matt-Agronin-Headshot_a644e4e8251b.png" alt="Matt Agronin" /></div>
+          <div class="cons-card__grad"></div>
+          <div class="cons-card__cap"><div class="cons-card__name">Matt Agronin</div><div class="cons-card__role">Conselheiro · Growth</div></div>
+        </article>
+        <article class="cons-card">
+          <div class="cons-card__media"><img src="assets/Mocasozinha.png" alt="Marina Duarte" /></div>
+          <div class="cons-card__grad"></div>
+          <div class="cons-card__cap"><div class="cons-card__name">Marina Duarte</div><div class="cons-card__role">Conselheira · Marca</div></div>
+        </article>
+        <article class="cons-card">
+          <div class="cons-card__media"><img src="assets/Doiscortado.png" alt="Sócios V4" /></div>
+          <div class="cons-card__grad"></div>
+          <div class="cons-card__cap"><div class="cons-card__name">Flávio Augusto</div><div class="cons-card__role">Conselheiro · Negócios</div></div>
+        </article>
+        <article class="cons-card">
+          <div class="cons-card__ph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.69-8 6v2h16v-2c0-3.31-3.58-6-8-6Z"/></svg></div>
+          <div class="cons-card__grad"></div>
+          <div class="cons-card__cap"><div class="cons-card__name">Rafael Mendes</div><div class="cons-card__role">Conselheiro · Vendas</div></div>
+        </article>
+        <article class="cons-card">
+          <div class="cons-card__ph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.69-8 6v2h16v-2c0-3.31-3.58-6-8-6Z"/></svg></div>
+          <div class="cons-card__grad"></div>
+          <div class="cons-card__cap"><div class="cons-card__name">Carla Ribeiro</div><div class="cons-card__role">Conselheira · Dados</div></div>
+        </article>
+      </div>
+    </div>
+
+    <div class="cons__nav">
+      <button class="cons__arrow" id="consPrev" type="button" aria-label="Conselheiro anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="cons__arrow" id="consNext" type="button" aria-label="Próximo conselheiro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
     </div>
   </div>
 </section>
+</div>
+<!-- ===== /STACK ===== -->
 
 <!-- ============================ TESTIMONIAL ============================ -->
 <section class="section section--light" style="padding-top:0">
@@ -926,15 +1097,94 @@
   </div>
 </section>
 
+<!-- ============================ HISTÓRIA (carrossel grande) ============================ -->
+<section class="hist" id="historia" aria-label="A história da V4">
+  <div class="wrap hist__head reveal">
+    <p class="eyebrow">Nossa trajetória</p>
+    <h2 class="hist__title">A história da <span class="accent">V4</span></h2>
+  </div>
+
+  <!-- Cada .hist-slide__media aceita um gradiente (style="background:..."),
+       uma <img src="assets/..."> ou um <video> com poster. Por ora: imagens/gradientes. -->
+  <div class="hist__viewport reveal">
+    <div class="hist__track" id="histTrack">
+      <article class="hist-slide">
+        <div class="hist-slide__media" style="background: linear-gradient(150deg, #FF4517 0%, #E50914 38%, #650E0F 100%);"></div>
+        <div class="hist-slide__shade"></div>
+        <div class="hist-slide__cap">
+          <p class="hist-slide__year">2012 · O começo</p>
+          <h3 class="hist-slide__name">Onde tudo começou</h3>
+        </div>
+      </article>
+
+      <article class="hist-slide is-active">
+        <div class="hist-slide__media" style="background: linear-gradient(135deg, #E50914 0%, #FB2E0A 50%, #7A0A02 100%);"></div>
+        <div class="hist-slide__shade"></div>
+        <div class="hist-slide__cap">
+          <p class="hist-slide__year">2016 · Escala</p>
+          <h3 class="hist-slide__name">Modelo de franquias</h3>
+        </div>
+      </article>
+
+      <article class="hist-slide">
+        <div class="hist-slide__media"><img src="assets/Doiscortado.png" alt="Sócios da V4 Company" /></div>
+        <div class="hist-slide__shade"></div>
+        <div class="hist-slide__cap">
+          <p class="hist-slide__year">2019 · Brasil afora</p>
+          <h3 class="hist-slide__name">Expansão nacional</h3>
+        </div>
+      </article>
+
+      <article class="hist-slide">
+        <div class="hist-slide__media" style="background: linear-gradient(200deg, #F0141E 0%, #650E0F 55%, #160101 100%);"></div>
+        <div class="hist-slide__shade"></div>
+        <div class="hist-slide__cap">
+          <p class="hist-slide__year">2022 · Receita</p>
+          <h3 class="hist-slide__name">R$ bilhões gerados</h3>
+        </div>
+      </article>
+
+      <article class="hist-slide">
+        <div class="hist-slide__media" style="background: linear-gradient(120deg, #FF481F 0%, #7A0A06 70%, #050505 100%);"></div>
+        <div class="hist-slide__shade"></div>
+        <div class="hist-slide__cap">
+          <p class="hist-slide__year">2024 · Rede</p>
+          <h3 class="hist-slide__name">+270 franquias</h3>
+        </div>
+      </article>
+
+      <article class="hist-slide">
+        <div class="hist-slide__media"><img src="assets/Fueto.png" alt="O futuro da V4" /></div>
+        <div class="hist-slide__shade"></div>
+        <div class="hist-slide__cap">
+          <p class="hist-slide__year">2026 · O futuro</p>
+          <h3 class="hist-slide__name">Looking ahead 2026</h3>
+        </div>
+      </article>
+    </div>
+
+    <button class="hist__arrow hist__arrow--prev" id="histPrev" type="button" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button class="hist__arrow hist__arrow--next" id="histNext" type="button" aria-label="Próximo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="hist__dots" id="histDots" aria-hidden="true"></div>
+</section>
+
 <!-- ============================ FAQ ============================ -->
 <section class="section section--light" id="faq" style="padding-top:0">
   <div class="wrap">
-    <div class="section__head reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
-      <p class="eyebrow" style="text-align:center">Dúvidas frequentes</p>
-      <h2 class="section__title">Antes de <span class="accent">entrar</span></h2>
-    </div>
+    <div class="faq-layout">
+      <div class="faq-intro reveal">
+        <p class="eyebrow">Dúvidas frequentes</p>
+        <h2 class="section__title">Antes de <span class="accent">entrar</span></h2>
+        <p class="section__lead">Tudo o que você precisa saber antes de garantir sua vaga. Não encontrou sua dúvida? É só falar com a gente.</p>
+      </div>
 
-    <div class="faq">
+      <div class="faq reveal">
       <div class="faq__item">
         <button class="faq__q" aria-expanded="false">
           A aula é mesmo gratuita?
@@ -963,6 +1213,7 @@
         </button>
         <div class="faq__a"><p>Garanta sua vaga mesmo assim. Quem se inscreve recebe os avisos e o material de apoio — o ao vivo é onde a troca acontece, então reserve o horário.</p></div>
       </div>
+      </div>
     </div>
   </div>
 </section>
@@ -989,7 +1240,7 @@
       <nav class="footer__links">
         <a href="#metodo">Método</a>
         <a href="#solucoes">Soluções</a>
-        <a href="#valores">Por que V4</a>
+        <a href="#conselheiros">Conselheiros</a>
         <a href="#faq">Dúvidas</a>
       </nav>
     </div>
@@ -1019,21 +1270,258 @@
   }, { threshold: 0.14 });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
-  // ---- Soluções: carrossel por abas ----
+  // ---- Parallax leve no scroll (data-parallax="velocidade") ----
+  // Cada elemento se desloca conforme a distância do seu centro ao centro da
+  // viewport. Velocidade maior = reage mais (mais "peso"); valor negativo
+  // inverte o sentido (parece "mais leve", liderando o scroll).
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var items = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]')).map(function (el) {
+      return { el: el, speed: parseFloat(el.getAttribute('data-parallax')) || 0 };
+    });
+    if (!items.length) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      items.forEach(function (it) {
+        if (reduce.matches) { it.el.style.setProperty('--par', '0px'); return; }
+        var rect = it.el.getBoundingClientRect();
+        var center = (rect.top + rect.height / 2) - vh / 2;
+        it.el.style.setProperty('--par', (-center * it.speed).toFixed(1) + 'px');
+      });
+    }
+    function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    window.addEventListener('load', onScroll);
+    update();
+  })();
+
+  // ---- Soluções: acordeão dirigido pelo scroll (avança de ponto a ponto) ----
   (function () {
     var sol = document.getElementById('solucoes');
     if (!sol) return;
-    var tabs = sol.querySelectorAll('.sol-tab');
-    var panels = sol.querySelectorAll('.sol-panel');
-    tabs.forEach(function (tab, i) {
-      tab.addEventListener('click', function () {
-        tabs.forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
-        panels.forEach(function (p) { p.classList.remove('is-active'); p.hidden = true; });
-        tab.classList.add('is-active');
-        tab.setAttribute('aria-selected', 'true');
-        if (panels[i]) { panels[i].hidden = false; panels[i].classList.add('is-active'); }
+    var items = Array.prototype.slice.call(sol.querySelectorAll('.sol-item'));
+    var media = document.getElementById('solMedia');
+    var scroll = sol.querySelector('.sol-scroll');
+    var fill = document.getElementById('solProgress');
+    if (!items.length || !media) return;
+    var n = items.length;
+    var current = -1;
+    var swapTimer = null;
+
+    function openItem(item, open) {
+      var head = item.querySelector('.sol-item__head');
+      var body = item.querySelector('.sol-item__body');
+      item.classList.toggle('is-active', open);
+      head.setAttribute('aria-expanded', open ? 'true' : 'false');
+      body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+    }
+
+    function swapMedia(item) {
+      var img = item.getAttribute('data-img');
+      var grad = item.getAttribute('data-grad');
+      media.classList.add('is-swapping');
+      if (swapTimer) window.clearTimeout(swapTimer);
+      swapTimer = window.setTimeout(function () {
+        if (img) { media.innerHTML = '<img src="' + img + '" alt="" />'; media.style.background = 'none'; }
+        else { media.innerHTML = ''; if (grad) media.style.background = grad; }
+        media.classList.remove('is-swapping');
+      }, 200);
+    }
+
+    function setActive(idx) {
+      if (idx === current) return;
+      current = idx;
+      items.forEach(function (it, i) { openItem(it, i === idx); });
+      swapMedia(items[idx]);
+    }
+
+    // pin só faz sentido no desktop e sem "reduzir movimento"
+    var pinMQ = window.matchMedia('(min-width: 880px)');
+    var motionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function pinned() { return pinMQ.matches && !motionMQ.matches; }
+
+    var ticking = false;
+    function onScroll() {
+      if (!pinned() || !scroll || ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        var rect = scroll.getBoundingClientRect();
+        var total = scroll.offsetHeight - window.innerHeight;
+        var p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+        setActive(Math.min(n - 1, Math.floor(p * n + 0.0001)));
+        if (fill) fill.style.height = (p * 100) + '%';
+      });
+    }
+
+    // clique: no modo fixo rola até o trecho da solução; senão abre direto
+    items.forEach(function (item, i) {
+      item.querySelector('.sol-item__head').addEventListener('click', function () {
+        if (pinned() && scroll) {
+          var total = scroll.offsetHeight - window.innerHeight;
+          var base = scroll.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({ top: base + ((i + 0.5) / n) * total, behavior: 'smooth' });
+        } else {
+          setActive(i);
+        }
       });
     });
+
+    function refresh() {
+      var open = sol.querySelector('.sol-item.is-active');
+      if (open) { var b = open.querySelector('.sol-item__body'); b.style.maxHeight = b.scrollHeight + 'px'; }
+    }
+
+    setActive(0);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { refresh(); onScroll(); });
+    window.addEventListener('load', function () { refresh(); onScroll(); });
+    onScroll();
+  })();
+
+  // ---- Conselheiros: carrossel coverflow (frente maior, laterais recuadas) ----
+  (function () {
+    var track = document.getElementById('consTrack');
+    if (!track) return;
+    var cards = Array.prototype.slice.call(track.querySelectorAll('.cons-card'));
+    var n = cards.length;
+    if (!n) return;
+    var active = Math.floor(n / 2); // abre no card central
+
+    function layout() {
+      var unit = cards[0].offsetWidth || 280;
+      cards.forEach(function (card, i) {
+        var off = i - active;
+        if (off > n / 2) off -= n;       // posição circular: mais curto caminho
+        if (off < -n / 2) off += n;
+        var abs = Math.abs(off);
+        var x = off * unit * 0.55;        // deslocamento lateral
+        var scale = Math.max(0.55, 1 - abs * 0.16);
+        var opacity = abs > 2 ? 0 : (abs === 0 ? 1 : (abs === 1 ? 0.85 : 0.6));
+        card.style.transform = 'translate(-50%, -50%) translateX(' + x + 'px) scale(' + scale + ')';
+        card.style.opacity = opacity;
+        card.style.zIndex = String(100 - abs);
+        card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+        card.classList.toggle('is-active', off === 0);
+        card.setAttribute('aria-hidden', off === 0 ? 'false' : 'true');
+      });
+    }
+
+    function go(dir) { active = (active + dir + n) % n; layout(); }
+    function setActive(i) { active = ((i % n) + n) % n; layout(); }
+
+    document.getElementById('consPrev').addEventListener('click', function () { go(-1); });
+    document.getElementById('consNext').addEventListener('click', function () { go(1); });
+    cards.forEach(function (card, i) {
+      card.addEventListener('click', function () { if (i !== active) setActive(i); });
+    });
+
+    // teclado (setas) quando o palco está focado
+    track.setAttribute('tabindex', '0');
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { go(-1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { go(1); e.preventDefault(); }
+    });
+
+    // arrastar / swipe
+    var startX = null;
+    track.addEventListener('pointerdown', function (e) { startX = e.clientX; });
+    window.addEventListener('pointerup', function (e) {
+      if (startX === null) return;
+      var dx = e.clientX - startX; startX = null;
+      if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+    });
+
+    window.addEventListener('resize', layout);
+    window.addEventListener('load', layout); // recalcula após carregar imagens/fontes
+    layout();
+  })();
+
+  // ---- Conselheiros: parallax leve (a seção sobe à frente dos números) ----
+  (function () {
+    var cons = document.getElementById('conselheiros');
+    if (!cons) return;
+    var inner = cons.querySelector('.cons__inner');
+    if (!inner) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var ticking = false;
+    function update() {
+      ticking = false;
+      if (reduce.matches) { inner.style.transform = ''; return; }
+      var rect = cons.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      // p cresce conforme a seção entra/sobe pela viewport (0 → ~1.15)
+      var p = Math.max(0, Math.min(1.15, (vh - rect.top) / vh));
+      inner.style.transform = 'translate3d(0,' + (-p * 64).toFixed(1) + 'px,0)';
+    }
+    function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    window.addEventListener('load', onScroll);
+    update();
+  })();
+
+  // ---- História: carrossel grande (centraliza o card ativo) ----
+  (function () {
+    var root = document.getElementById('historia');
+    if (!root) return;
+    var track = document.getElementById('histTrack');
+    var viewport = root.querySelector('.hist__viewport');
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.hist-slide'));
+    var prev = document.getElementById('histPrev');
+    var next = document.getElementById('histNext');
+    var dotsWrap = document.getElementById('histDots');
+    if (!slides.length) return;
+    var n = slides.length;
+    var active = Math.min(1, n - 1); // começa no segundo card
+
+    var dots = slides.map(function (_, i) {
+      var b = document.createElement('button');
+      b.className = 'hist__dot'; b.type = 'button';
+      b.setAttribute('aria-label', 'Ir para o slide ' + (i + 1));
+      b.addEventListener('click', function () { setActive(i); });
+      dotsWrap.appendChild(b);
+      return b;
+    });
+
+    function center() {
+      var slide = slides[active];
+      var target = slide.offsetLeft - (viewport.clientWidth - slide.offsetWidth) / 2;
+      track.style.transform = 'translate3d(' + (-target).toFixed(1) + 'px,0,0)';
+      slides.forEach(function (s, i) {
+        s.classList.toggle('is-active', i === active);
+        s.setAttribute('aria-hidden', i === active ? 'false' : 'true');
+      });
+      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === active); });
+      prev.classList.toggle('is-disabled', active === 0);
+      next.classList.toggle('is-disabled', active === n - 1);
+    }
+    function setActive(i) { active = Math.max(0, Math.min(n - 1, i)); center(); }
+
+    prev.addEventListener('click', function () { setActive(active - 1); });
+    next.addEventListener('click', function () { setActive(active + 1); });
+    slides.forEach(function (s, i) { s.addEventListener('click', function () { if (i !== active) setActive(i); }); });
+
+    viewport.setAttribute('tabindex', '0');
+    viewport.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { setActive(active - 1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { setActive(active + 1); e.preventDefault(); }
+    });
+
+    var startX = null;
+    viewport.addEventListener('pointerdown', function (e) { startX = e.clientX; });
+    window.addEventListener('pointerup', function (e) {
+      if (startX === null) return;
+      var dx = e.clientX - startX; startX = null;
+      if (Math.abs(dx) > 45) setActive(active + (dx < 0 ? 1 : -1));
+    });
+
+    window.addEventListener('resize', center);
+    window.addEventListener('load', center); // recalcula após carregar imagens/fontes
+    center();
   })();
 
   // ---- FAQ accordion ----
