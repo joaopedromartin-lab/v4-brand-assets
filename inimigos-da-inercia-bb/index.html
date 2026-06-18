@@ -4451,7 +4451,8 @@ body.bb-lightbox-open { overflow: hidden; }
   transition: max-height 0.4s cubic-bezier(.22,.61,.36,1), opacity 0.3s ease, transform 0.3s ease, margin-top 0.3s ease;
 }
 .inm-nav.is-open .inm-nav__menu {
-  max-height: 420px;
+  max-height: min(640px, calc(100vh - 120px));
+  overflow-y: auto;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -6166,6 +6167,9 @@ body:has(.inm-preloader) .inm-hero:not(.is-revealed) {
     <div class="inm-shop__body">
       <!-- carrossel de thumbnails -->
       <div class="inm-shop__thumbs">
+        <button class="inm-shop__thumbs-arrow" id="inm-shop-prev" type="button" aria-label="Modelo anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
         <div class="inm-shop__thumbs-track" id="inm-shop-thumbs">
           <button class="inm-shop__thumb is-active" data-index="0" aria-label="Ver modelo 1"><img src="assets/Modelo1.png" alt="Linha Deviants"/></button>
           <button class="inm-shop__thumb" data-index="1" aria-label="Ver modelo 2"><img src="assets/Modelo2.png" alt="Linha Tennis"/></button>
@@ -6336,6 +6340,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var stage = document.getElementById('inm-shop-model');
     var thumbsWrap = document.getElementById('inm-shop-thumbs');
     var nextBtn = document.getElementById('inm-shop-next');
+    var prevBtn = document.getElementById('inm-shop-prev');
     var eyebrowEl = document.getElementById('inm-shop-eyebrow');
     var productEl = document.getElementById('inm-shop-product');
     if (!stage || !thumbsWrap) return;
@@ -6372,6 +6377,7 @@ document.addEventListener('DOMContentLoaded', function() {
       t.addEventListener('click', function(){ select(parseInt(t.getAttribute('data-index'), 10)); });
     });
     if (nextBtn) nextBtn.addEventListener('click', function(){ select(current + 1); });
+    if (prevBtn) prevBtn.addEventListener('click', function(){ select(current - 1); });
   })();
 
   // ── BrandBook color copy-to-clipboard ──
