@@ -5356,12 +5356,14 @@ body:has(.inm-preloader) .inm-hero:not(.is-revealed) {
   margin-bottom: clamp(40px, 9vh, 110px);
 }
 .inm-badges__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: clamp(14px, 1.6vw, 28px);
 }
-@media (min-width: 620px) { .inm-badges__grid { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 960px) { .inm-badges__grid { grid-template-columns: repeat(6, 1fr); } }
+.inm-badges__grid > .inm-badges__card {
+  flex: 0 1 clamp(150px, 20vw, 240px);
+}
 .inm-badges__card {
   position: relative;
   display: flex;
@@ -5399,6 +5401,349 @@ body:has(.inm-preloader) .inm-hero:not(.is-revealed) {
   .inm-badges__card:hover { transform: none; }
   .inm-badges__card:hover .inm-badges__img { transform: none; }
 }
+
+/* ---------- APLICAÇÕES — hero introdutória ---------- */
+.inm-apps-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #0A0A0A;
+}
+.inm-apps-hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* headline gigante sobreposta, centralizada verticalmente */
+.inm-apps-hero__title {
+  position: absolute;
+  top: 50%;
+  left: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);
+  right: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);
+  transform: translateY(-50%);
+  margin: 0;
+  text-align: center;
+  font-family: var(--wp--preset--font-family--pp-telegraf);
+  font-size: clamp(64px, 14vw, 280px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  color: #FFFFFF;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.35);
+  z-index: 2;
+  pointer-events: none;
+}
+/* bloco de metadados no canto inferior direito */
+.inm-apps-hero__meta {
+  position: absolute;
+  right: clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);
+  bottom: clamp(36px, 8vh, 96px);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.2vw, 16px);
+  text-align: left;
+  color: #FFFFFF;
+}
+.inm-apps-hero__meta-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(20px, 3vw, 56px);
+  font-family: var(--wp--preset--font-family--pp-telegraf);
+  font-size: clamp(15px, 1.6vw, 24px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.inm-apps-hero__coords {
+  margin: 0;
+  font-family: var(--wp--preset--font-family--pp-telegraf);
+  font-size: clamp(10px, 0.85vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* ---------- APLICAÇÕES — mock de e-commerce (PDP) ---------- */
+.inm-shop {
+  background: #FFFFFF;
+  padding: 0 clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);
+  font-family: var(--wp--preset--font-family--pp-telegraf);
+}
+.inm-shop__window {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+/* header */
+.inm-shop__header {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 36px);
+  padding: clamp(16px, 1.6vw, 24px) clamp(20px, 2.4vw, 40px);
+  border-bottom: 1px solid rgba(5,5,5,0.06);
+}
+.inm-shop__logo { height: clamp(20px, 1.8vw, 28px); width: auto; }
+.inm-shop__menu {
+  display: flex;
+  gap: clamp(14px, 1.8vw, 32px);
+  margin-left: clamp(8px, 2vw, 40px);
+}
+.inm-shop__menu a {
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #050505;
+  text-decoration: none;
+}
+.inm-shop__menu a:hover { color: var(--inm-red); }
+.inm-shop__search {
+  position: relative;
+  flex: 1;
+  max-width: 360px;
+  margin-left: auto;
+}
+.inm-shop__search input {
+  width: 100%;
+  border: 1px solid rgba(5,5,5,0.18);
+  border-radius: 9999px;
+  padding: 9px 38px 9px 16px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #050505;
+  background: #FFFFFF;
+}
+.inm-shop__search svg {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  color: rgba(5,5,5,0.45);
+}
+.inm-shop__icons { display: flex; gap: clamp(12px, 1.2vw, 18px); color: #050505; }
+.inm-shop__icons svg { width: 22px; height: 22px; }
+/* corpo */
+.inm-shop__body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 2.4vw, 40px);
+  padding: clamp(24px, 3vw, 48px) clamp(24px, 3vw, 48px) 0;
+  align-items: start;
+}
+@media (min-width: 860px) {
+  .inm-shop__body { grid-template-columns: clamp(120px, 13vw, 180px) 1fr clamp(280px, 30vw, 420px); }
+}
+/* thumbnails (carrossel) */
+.inm-shop__thumbs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;       /* centraliza o carrossel verticalmente */
+  align-self: center;            /* não cola no topo da linha do grid */
+  gap: clamp(10px, 1.2vw, 16px);
+}
+.inm-shop__thumbs-track {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: 100%;
+  overflow: hidden;
+}
+@media (min-width: 860px) {
+  .inm-shop__thumbs-track { flex-direction: column; max-height: clamp(360px, 48vh, 560px); }
+}
+.inm-shop__thumb {
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(5,5,5,0.10);
+  border-radius: 8px;
+  background: #F4F4F4;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.inm-shop__thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.inm-shop__thumb.is-active { border-color: var(--inm-red); box-shadow: 0 0 0 1px var(--inm-red); }
+.inm-shop__thumbs-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  color: #050505;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+.inm-shop__thumbs-arrow:hover { color: var(--inm-red); }
+.inm-shop__thumbs-arrow svg { width: 22px; height: 22px; }
+/* palco do modelo — imagem full height ancorada no rodapé da seção,
+   como se o modelo "subisse" de baixo */
+.inm-shop__stage {
+  position: relative;
+  align-self: stretch;        /* ocupa toda a altura da linha do grid */
+  display: flex;
+  align-items: flex-end;      /* ancora o modelo na base */
+  justify-content: center;
+  min-height: clamp(420px, 70vh, 760px);
+  overflow: hidden;
+}
+.inm-shop__model {
+  height: 100%;               /* full height do palco */
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+/* painel */
+.inm-shop__panel { display: flex; flex-direction: column; }
+.inm-shop__eyebrow {
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(5,5,5,0.5);
+}
+.inm-shop__product {
+  margin: clamp(4px, 0.6vw, 8px) 0 0;
+  font-size: clamp(40px, 4.4vw, 72px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--inm-red);
+}
+.inm-shop__product sup { font-size: 0.3em; vertical-align: super; font-weight: 600; }
+.inm-shop__price { display: flex; align-items: baseline; gap: 14px; margin: clamp(14px, 1.6vw, 22px) 0 0; }
+.inm-shop__price-old { font-size: clamp(14px, 1.1vw, 18px); color: rgba(5,5,5,0.4); text-decoration: line-through; }
+.inm-shop__price-now { font-size: clamp(30px, 3vw, 48px); font-weight: 700; color: #050505; }
+.inm-shop__price-now small { font-size: 0.5em; font-weight: 600; }
+.inm-shop__avail-label { margin: clamp(18px, 2vw, 28px) 0 10px; font-size: 14px; font-weight: 600; color: #050505; }
+.inm-shop__sizes { display: flex; gap: 8px; }
+.inm-shop__size {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(5,5,5,0.2);
+  border-radius: 7px;
+  background: #FFFFFF;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #050505;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.inm-shop__size:hover { border-color: var(--inm-red); }
+.inm-shop__size.is-active { background: var(--inm-red); border-color: var(--inm-red); color: #FFFFFF; }
+.inm-shop__select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: clamp(16px, 1.8vw, 24px);
+  padding: 12px 16px;
+  border: 1px solid rgba(5,5,5,0.18);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #050505;
+}
+.inm-shop__select svg { width: 16px; height: 16px; color: rgba(5,5,5,0.5); }
+.inm-shop__buy {
+  margin-top: clamp(16px, 1.8vw, 24px);
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  background: var(--inm-red);
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.inm-shop__buy:hover { background: #FF2A1A; }
+.inm-shop__notice {
+  margin-top: clamp(16px, 1.8vw, 24px);
+  padding: clamp(12px, 1.4vw, 18px);
+  background: #F4F4F4;
+  border-radius: 8px;
+}
+.inm-shop__notice p { margin: 0; font-size: clamp(10px, 0.85vw, 12px); color: rgba(5,5,5,0.6); line-height: 1.5; }
+.inm-shop__notice p strong { color: #050505; }
+.inm-shop__notice p:first-child { margin-bottom: 4px; }
+.inm-shop__installments { margin: clamp(16px, 1.8vw, 22px) 0 10px; font-size: 12px; color: rgba(5,5,5,0.55); }
+.inm-shop__cards { display: flex; gap: 8px; }
+.inm-shop__flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(5,5,5,0.12);
+  background: #FFFFFF;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(5,5,5,0.6);
+}
+.inm-shop__cep { display: flex; gap: 10px; margin-top: clamp(16px, 1.8vw, 24px); }
+.inm-shop__cep input {
+  flex: 1;
+  border: 1px solid rgba(5,5,5,0.18);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  color: #050505;
+}
+.inm-shop__cep-btn {
+  border: 0;
+  border-radius: 8px;
+  background: var(--inm-red);
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0 18px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.inm-shop__cep-btn:hover { background: #FF2A1A; }
+
+/* ---------- FOOTER ---------- */
+.inm-footer {
+  width: 100%;
+  background: var(--inm-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(72px, 16vh, 200px) clamp(1.5rem, -0.556rem + 5.6716vw, 6.25rem);
+}
+.inm-footer__logo {
+  width: clamp(240px, 38vw, 620px);
+  height: auto;
+  display: block;
+}
 </style>
 </head>
 
@@ -5427,6 +5772,8 @@ body:has(.inm-preloader) .inm-hero:not(.is-revealed) {
     <a href="#logo">Logo</a>
     <a href="#tipografia">Tipografia</a>
     <a href="#grafismos">Grafismos</a>
+    <a href="#aplicacoes">Aplicações</a>
+    <a href="#aplicacoes_shop">Loja</a>
   </div>
 </nav>
 
@@ -5768,14 +6115,127 @@ body:has(.inm-preloader) .inm-hero:not(.is-revealed) {
   </div>
 
   <div class="inm-badges__grid">
-    <div class="inm-badges__card inm-badges__card--light"><img src="assets/TRUST IN SCIENCE VERMELHO 1.png" alt="Badge Trust in Science — versão vermelha" class="inm-badges__img"/></div>
-    <div class="inm-badges__card inm-badges__card--dark"><img src="assets/TRUST IN SCIENCE VERMELHO 2.png" alt="Badge Trust in Science — versão branca" class="inm-badges__img"/></div>
     <div class="inm-badges__card inm-badges__card--light"><img src="assets/GTM TO LEARN FASTER vermelho 1.png" alt="Badge GTM to Learn Faster — versão vermelha" class="inm-badges__img"/></div>
     <div class="inm-badges__card inm-badges__card--dark"><img src="assets/GTM TO LEARN FASTER vermelho 2.png" alt="Badge GTM to Learn Faster — versão branca" class="inm-badges__img"/></div>
     <div class="inm-badges__card inm-badges__card--light"><img src="assets/GTM TO LEARN FASTER vermelho 3.png" alt="Badge Born in Rio Grande do Sul — versão vermelha" class="inm-badges__img"/></div>
     <div class="inm-badges__card inm-badges__card--dark"><img src="assets/GTM TO LEARN FASTER vermelho 4.png" alt="Badge Born in Rio Grande do Sul — versão branca" class="inm-badges__img"/></div>
   </div>
 </section>
+
+<!-- ============================================================ -->
+<!-- APLICAÇÕES — hero introdutória (foto full-bleed)             -->
+<!-- ============================================================ -->
+<section id="aplicacoes" class="inm-apps-hero alignfull" aria-label="Aplicações">
+  <img src="assets/Fullbleedaplicacoes.png" alt="Inimigos da Inércia — aplicação da marca em vestuário" class="inm-apps-hero__img"/>
+  <h2 class="inm-apps-hero__title">APLICAÇÕES</h2>
+  <div class="inm-apps-hero__meta">
+    <div class="inm-apps-hero__meta-line">
+      <span>EST 2012</span>
+      <span>//INIMIGOS DA INÉRCIA</span>
+      <span>V4</span>
+    </div>
+    <p class="inm-apps-hero__coords">CANOAS (-29.9078, -51.1847), SÃO LEOPOLDO (-29.7607, -51.1480),<br/>SÃO PAULO (-23.6086, -46.6946), CAMPINAS (-23.0101, -47.1166),<br/>NEW YORK (40.7554, -73.9860)</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- APLICAÇÕES — mock de e-commerce (PDP)                        -->
+<!-- ============================================================ -->
+<section id="aplicacoes_shop" class="inm-shop alignfull" aria-label="Aplicações — mock de e-commerce">
+  <div class="inm-shop__window">
+
+    <!-- header da loja -->
+    <header class="inm-shop__header">
+      <img src="assets/idivermelho-1.svg" alt="Inimigos da Inércia" class="inm-shop__logo"/>
+      <nav class="inm-shop__menu" aria-label="Menu da loja">
+        <a href="#aplicacoes_shop" onclick="return false">Início</a>
+        <a href="#aplicacoes_shop" onclick="return false">Masculino</a>
+        <a href="#aplicacoes_shop" onclick="return false">Feminino</a>
+      </nav>
+      <div class="inm-shop__search">
+        <input type="text" placeholder="Buscar" aria-label="Buscar" readonly/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="inm-shop__icons" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.4a1.5 1.5 0 0 0 1.5 1.2h8.7a1.5 1.5 0 0 0 1.5-1.2L22 7H6"/></svg>
+      </div>
+    </header>
+
+    <!-- corpo do PDP: thumbs | modelo | painel -->
+    <div class="inm-shop__body">
+      <!-- carrossel de thumbnails -->
+      <div class="inm-shop__thumbs">
+        <div class="inm-shop__thumbs-track" id="inm-shop-thumbs">
+          <button class="inm-shop__thumb is-active" data-index="0" aria-label="Ver modelo 1"><img src="assets/Modelo1.png" alt="Linha Deviants"/></button>
+          <button class="inm-shop__thumb" data-index="1" aria-label="Ver modelo 2"><img src="assets/Modelo2.png" alt="Linha Tennis"/></button>
+          <button class="inm-shop__thumb" data-index="2" aria-label="Ver modelo 3"><img src="assets/Modelo3.png" alt="Linha Office"/></button>
+          <button class="inm-shop__thumb" data-index="3" aria-label="Ver modelo 4"><img src="assets/Modelo4.png" alt="Linha Speed"/></button>
+          <button class="inm-shop__thumb" data-index="4" aria-label="Ver modelo 5"><img src="assets/Modelo5.png" alt="Linha Tennis feminino"/></button>
+          <button class="inm-shop__thumb" data-index="5" aria-label="Ver modelo 6"><img src="assets/Modelo6.png" alt="Linha Space"/></button>
+        </div>
+        <button class="inm-shop__thumbs-arrow" id="inm-shop-next" type="button" aria-label="Próximo modelo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+
+      <!-- modelo central (PNG que troca) -->
+      <div class="inm-shop__stage">
+        <img src="assets/Modelo1.png" alt="Modelo Inimigos da Inércia" class="inm-shop__model" id="inm-shop-model"/>
+      </div>
+
+      <!-- painel de produto -->
+      <div class="inm-shop__panel">
+        <span class="inm-shop__eyebrow" id="inm-shop-eyebrow">//JAQUETA LINHA</span>
+        <h3 class="inm-shop__product" id="inm-shop-product">Deviants<sup>™</sup></h3>
+        <div class="inm-shop__price">
+          <span class="inm-shop__price-old">R$ 2999</span>
+          <span class="inm-shop__price-now"><small>R$</small> 1599</span>
+        </div>
+
+        <p class="inm-shop__avail-label">Disponíveis:</p>
+        <div class="inm-shop__sizes">
+          <button class="inm-shop__size">P</button>
+          <button class="inm-shop__size">M</button>
+          <button class="inm-shop__size is-active">G</button>
+          <button class="inm-shop__size">GG</button>
+          <button class="inm-shop__size">XL</button>
+        </div>
+
+        <div class="inm-shop__select">
+          <span>Cor: Branco &amp; Vermelho V4</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+
+        <button class="inm-shop__buy" type="button">Comprar</button>
+
+        <div class="inm-shop__notice">
+          <p><strong>FRETE GRÁTIS</strong> em pedidos acima de R$999</p>
+          <p>INVESTIDOR V4 COMPANY TEM 30% OFF. <strong>USE O CUPOM #XABLAU</strong></p>
+        </div>
+
+        <p class="inm-shop__installments">Parcele em até 12x</p>
+        <div class="inm-shop__cards" aria-hidden="true">
+          <span class="inm-shop__flag inm-shop__flag--visa">VISA</span>
+          <span class="inm-shop__flag inm-shop__flag--master">MC</span>
+          <span class="inm-shop__flag inm-shop__flag--amex">AMEX</span>
+        </div>
+
+        <div class="inm-shop__cep">
+          <input type="text" placeholder="CEP" aria-label="CEP" readonly/>
+          <button class="inm-shop__cep-btn" type="button">Calcular frete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER — logo branca sobre vermelho (full-bleed)             -->
+<!-- ============================================================ -->
+<footer class="inm-footer alignfull" aria-label="Inimigos da Inércia">
+  <img src="assets/inimigoslogobrancaextensa.png" alt="Inimigos da Inércia" class="inm-footer__logo"/>
+</footer>
 
 </div><!-- .wp-site-blocks -->
 
@@ -5870,6 +6330,49 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
     lucide.createIcons();
   }
+
+  // ── APLICAÇÕES: mock de e-commerce (troca de modelo no carrossel) ──
+  (function inmShop(){
+    var stage = document.getElementById('inm-shop-model');
+    var thumbsWrap = document.getElementById('inm-shop-thumbs');
+    var nextBtn = document.getElementById('inm-shop-next');
+    var eyebrowEl = document.getElementById('inm-shop-eyebrow');
+    var productEl = document.getElementById('inm-shop-product');
+    if (!stage || !thumbsWrap) return;
+
+    var thumbs = Array.from(thumbsWrap.querySelectorAll('.inm-shop__thumb'));
+    // dados por modelo (eyebrow / nome da linha)
+    var data = [
+      { src: 'assets/Modelo1.png', eyebrow: '//JAQUETA LINHA',     name: 'Deviants' },
+      { src: 'assets/Modelo2.png', eyebrow: '//CARDIGÃ LINHA',     name: 'Tennis'   },
+      { src: 'assets/Modelo3.png', eyebrow: '//JAQUETA LINHA',     name: 'Office'   },
+      { src: 'assets/Modelo4.png', eyebrow: '//CAMISA POLO LINHA', name: 'Speed'    },
+      { src: 'assets/Modelo5.png', eyebrow: '//CARDIGÃ LINHA',     name: 'Tennis'   },
+      { src: 'assets/Modelo6.png', eyebrow: '//CAMISA LINHA',      name: 'Space'    }
+    ];
+    var current = 0;
+
+    function select(i){
+      current = (i + data.length) % data.length;
+      var d = data[current];
+      // fade rápido na troca da imagem
+      stage.style.opacity = '0';
+      setTimeout(function(){
+        stage.src = d.src;
+        stage.style.opacity = '1';
+      }, 180);
+      if (eyebrowEl) eyebrowEl.textContent = d.eyebrow;
+      if (productEl) productEl.innerHTML = d.name + '<sup>™</sup>';
+      thumbs.forEach(function(t, idx){ t.classList.toggle('is-active', idx === current); });
+      // garante que o thumb ativo fique visível no track
+      if (thumbs[current]) thumbs[current].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+    }
+
+    thumbs.forEach(function(t){
+      t.addEventListener('click', function(){ select(parseInt(t.getAttribute('data-index'), 10)); });
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function(){ select(current + 1); });
+  })();
 
   // ── BrandBook color copy-to-clipboard ──
   (function bbColorCopy(){
@@ -6628,27 +7131,41 @@ Evitar: fundo poluído, textura no fundo, manchas no gradiente, ruído, transiç
     });
   })();
 
-  // ── NAV (pílula): escondida na hero, aparece ao descer; hamburguer expande ──
+  // ── NAV (pílula): some ao rolar pra baixo, aparece ao rolar pra cima ──
   const nav = document.querySelector('.inm-nav');
   if (nav) {
     const heroEl = document.getElementById('brand');
     const navToggle = nav.querySelector('.inm-nav__toggle');
+    let lastY = window.scrollY;
+
+    const closeMenu = () => {
+      nav.classList.remove('is-open');
+      if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+    };
 
     const onScroll = () => {
-      // a nav só aparece depois que a hero sai (quase toda) da viewport
-      const heroH = heroEl ? heroEl.offsetHeight : window.innerHeight;
-      const trigger = heroH * 0.7;   // 70% da hero rolada
-      if (window.scrollY > trigger) {
+      const y = window.scrollY;
+      const goingDown = y > lastY;
+      const delta = Math.abs(y - lastY);
+
+      if (y < 10) {
+        // topo (hero): nav visível
         nav.classList.add('is-visible');
-      } else {
-        nav.classList.remove('is-visible');
-        // ao esconder a nav, fecha o menu também
-        nav.classList.remove('is-open');
-        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+      } else if (delta > 6) {
+        // esconde descendo, mostra subindo
+        if (goingDown) {
+          nav.classList.remove('is-visible');
+          closeMenu();
+        } else {
+          nav.classList.add('is-visible');
+        }
       }
+      lastY = y;
     };
     window.addEventListener('scroll', onScroll, { passive: true });
+    // mostra a nav assim que o preloader termina (a nav fica oculta durante ele)
     onScroll();
+    setTimeout(function(){ nav.classList.add('is-visible'); }, 2400);
 
     // ── HAMBURGUER TOGGLE (expande o menu de redirects) ──
     if (navToggle) {
