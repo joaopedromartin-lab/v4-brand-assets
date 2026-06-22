@@ -523,7 +523,8 @@
 
   .showcase__photo { position: relative; z-index: 2; margin: 0 auto;
     width: clamp(280px, 32vw, 460px); height: clamp(440px, 70vh, 720px);
-    overflow: hidden; background: #ededed; }
+    overflow: hidden; background: #ededed;
+    transform: translate3d(0, var(--par, 0px), 0); will-change: transform; }
   .showcase__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top;
     display: block; filter: grayscale(1) contrast(1.04); }
 
@@ -558,12 +559,18 @@
   .stats__intro .section__title .accent { color: var(--v4-yellow); }
 
   /* ============================================================
+     ZONA VERMELHA — Conselheiros + Cases dividem UM único blast,
+     formando um fundo contínuo (não duas seções separadas).
+     ============================================================ */
+  .redzone { position: relative; overflow: hidden; background: var(--v4-brown); }
+  .redzone__blast { position: absolute; inset: -6%; z-index: 0; opacity: 0.9; }
+  .redzone__vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 38%, transparent 44%, rgba(15,0,0,0.5) 100%); }
+
+  /* ============================================================
      CONSELHEIROS — carrossel "coverflow" (frente maior, laterais atrás)
      ============================================================ */
-  .cons { position: relative; overflow: hidden; background: var(--v4-brown); color: #fff; }
-  .cons__blast { position: absolute; inset: -12%; z-index: 0; opacity: 0.9; }
-  .cons__vignette { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: radial-gradient(ellipse at 50% 42%, transparent 32%, rgba(15,0,0,0.62) 100%); }
+  .cons { position: relative; z-index: 2; overflow: hidden; background: transparent; color: #fff; }
   .cons__inner { position: relative; z-index: 2; max-width: var(--content-size); margin: 0 auto;
     padding: clamp(56px, 8vw, 104px) 16px clamp(44px, 6vw, 84px); }
   .cons__head { text-align: center; margin: 0 auto clamp(18px, 3vw, 36px); }
@@ -612,19 +619,16 @@
   .cons__arrow svg { width: 20px; height: 20px; }
 
   /* ============================================================
-     STACK PARALLAX — CONSELHEIROS sobe e passa À FRENTE dos NÚMEROS.
-     Os números "prendem" (sticky) enquanto a seção vermelha desliza
-     por cima; o conteúdo interno ganha um leve transform no scroll
-     (efeito mais "leve"). z-index garante a sobreposição.
+     STACK PARALLAX — a ZONA VERMELHA (Conselheiros + Cases) sobe e
+     passa À FRENTE dos NÚMEROS. Os números "prendem" (sticky) enquanto
+     o bloco vermelho desliza por cima; z-index garante a sobreposição.
      ============================================================ */
   .stack { position: relative; isolation: isolate; }
   .stack > #numeros { position: sticky; top: 0; z-index: 1; }
-  .stack > #conselheiros { position: relative; z-index: 2; will-change: transform;
-    box-shadow: 0 -36px 70px rgba(20, 0, 0, 0.40); }
-  .stack > #conselheiros .cons__inner { will-change: transform; }
+  .stack > .redzone { z-index: 2; will-change: transform; }
+  #conselheiros .cons__inner { will-change: transform; }
   @media (prefers-reduced-motion: reduce) {
     .stack > #numeros { position: static; }
-    .stack > #conselheiros { box-shadow: none; }
   }
 
   /* ============================================================
@@ -639,15 +643,14 @@
   .hist__title .accent { color: var(--v4-red); }
 
   .hist__viewport { position: relative; margin-top: clamp(28px, 4vw, 52px); }
-  .hist__track { display: flex; gap: clamp(10px, 1vw, 16px);
+  .hist__track { display: flex; gap: 0;
     transition: transform .6s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
 
   .hist-slide { position: relative; flex: 0 0 auto;
-    width: min(78vw, 1040px); aspect-ratio: 16 / 9; border-radius: clamp(16px, 1.6vw, 24px);
+    width: min(78vw, 1040px); aspect-ratio: 16 / 9; border-radius: 0;
     overflow: hidden; background: #1a1a1a; cursor: pointer;
-    opacity: .5; transform: scale(.965);
-    transition: opacity .55s ease, transform .55s ease; }
-  .hist-slide.is-active { opacity: 1; transform: scale(1); }
+    opacity: .5; transition: opacity .55s ease; }
+  .hist-slide.is-active { opacity: 1; }
   .hist-slide__media { position: absolute; inset: 0; }
   .hist-slide__media img, .hist-slide__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hist-slide__shade { position: absolute; inset: 0; pointer-events: none;
@@ -684,6 +687,52 @@
     .hist-slide { width: 86vw; aspect-ratio: 4 / 3; }
     .hist__arrow { width: 46px; height: 46px; }
   }
+
+  /* ============================================================
+     CASES — "o que dizem sobre a V4": intro + imagem central
+     (com parallax) + números à direita. Mesmo gradiente blast
+     dos Conselheiros (continuação visual).
+     ============================================================ */
+  .cases { position: relative; z-index: 2; overflow: hidden; background: transparent; color: #fff; }
+  .cases__inner { position: relative; z-index: 2; max-width: var(--content-size); margin: 0 auto;
+    padding: clamp(40px, 5vw, 76px) clamp(24px, 5vw, 64px) clamp(56px, 8vw, 104px); }
+
+  .cases__grid { display: grid; grid-template-columns: 1fr; gap: clamp(32px, 5vw, 56px); align-items: stretch; }
+  @media (min-width: 900px) {
+    .cases__grid { grid-template-columns: 1fr 1.15fr 1fr; gap: clamp(32px, 4vw, 72px); }
+  }
+
+  /* coluna esquerda: título no topo, "Depoimentos" embaixo */
+  .cases__left { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  .cases__title { font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(34px, 4.4vw, 60px); line-height: .96; letter-spacing: .01em; margin: 0; }
+  .cases__title .accent { color: var(--v4-yellow); }
+  .cases__credit { }
+  .cases__name { margin: 0 0 10px; font-family: var(--font-sys); font-weight: 700;
+    font-size: clamp(20px, 1.9vw, 27px); letter-spacing: -0.01em; }
+  .cases__quote { margin: 0 0 12px; max-width: 40ch; font-weight: 500;
+    font-size: clamp(15px, 1.35vw, 18px); line-height: 1.45; color: rgba(255,255,255,0.94); }
+  .cases__label { margin: 0; font-size: clamp(14px, 1.3vw, 16px); color: rgba(255,255,255,0.7); font-style: italic; }
+
+  /* centro: imagem do case (parallax via --par) */
+  .cases__media { margin: 0; align-self: center; justify-self: center; width: 100%; max-width: 480px; aspect-ratio: 4 / 5;
+    border-radius: 0; overflow: hidden; background: #1a1a1a; box-shadow: 0 30px 70px rgba(20,0,0,0.4);
+    transform: translate3d(0, var(--par, 0px), 0); will-change: transform; }
+  .cases__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* coluna direita: números no topo, botão embaixo */
+  .cases__right { display: flex; flex-direction: column; justify-content: space-between; gap: clamp(28px, 4vw, 48px); }
+  .cases__nums { display: flex; flex-direction: column; }
+  .cases__num { padding: 0 0 clamp(14px, 2vw, 20px); margin-bottom: clamp(18px, 2.6vw, 28px);
+    border-bottom: 1px solid rgba(255,255,255,0.35); }
+  .cases__num:last-child { margin-bottom: 0; }
+  .cases__num-value { display: block; font-family: var(--font-impact); font-weight: 700; text-transform: uppercase;
+    font-size: clamp(36px, 3.8vw, 56px); line-height: .92; letter-spacing: .01em; color: #fff; }
+  .cases__num-value .accent { color: var(--v4-yellow); }
+  .cases__num-label { display: block; margin-top: 8px; font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 1.35; color: rgba(255,255,255,0.74); }
+  .cases__more { align-self: flex-start; }
+  @media (min-width: 900px) { .cases__more { align-self: flex-end; } }
 
   /* ============================================================
      TESTIMONIAL
@@ -986,7 +1035,7 @@
     </div>
   </div>
 
-  <figure class="showcase__photo">
+  <figure class="showcase__photo" data-parallax="-0.12">
     <img src="assets/Mocasozinha.png" alt="Cliente da V4 Company" />
   </figure>
 
@@ -1024,10 +1073,13 @@
   </div>
 </section>
 
+<!-- ===== ZONA VERMELHA: Conselheiros + Cases dividem UM único blast (BG contínuo) ===== -->
+<div class="redzone">
+  <div class="redzone__blast v4-blast" aria-hidden="true"></div>
+  <div class="redzone__vignette" aria-hidden="true"></div>
+
 <!-- ============================ CONSELHEIROS (carrossel coverflow) ============================ -->
 <section class="cons" id="conselheiros" aria-label="Conselheiros V4">
-  <div class="cons__blast v4-blast" aria-hidden="true"></div>
-  <div class="cons__vignette" aria-hidden="true"></div>
   <div class="cons__inner">
     <div class="cons__head reveal">
       <p class="eyebrow cons__eyebrow">Quem caminha com a gente</p>
@@ -1076,32 +1128,56 @@
     </div>
   </div>
 </section>
-</div>
-<!-- ===== /STACK ===== -->
 
-<!-- ============================ TESTIMONIAL ============================ -->
-<section class="section section--light" style="padding-top:0">
-  <div class="wrap">
-    <figure class="quote reveal" style="margin:0">
-      <blockquote class="quote__text">
-        “Em três meses a gente <span class="mark">parou de adivinhar</span> e passou a operar por dado. O método destravou um funil de receita que estava parado havia mais de um ano.”
-      </blockquote>
-      <figcaption class="quote__who">
-        <img src="assets/Matt-Agronin-Headshot_a644e4e8251b.png" alt="" />
-        <div>
-          <div class="quote__name">Matt Agronin</div>
-          <div class="quote__role">Head de Growth · operação parceira</div>
+<!-- ============================ CASES (depoimentos + números) ============================ -->
+<section class="cases" id="cases" aria-label="O que dizem sobre a V4">
+  <div class="cases__inner">
+    <div class="cases__grid">
+      <!-- ESQUERDA: intro no topo; nome do case + "Depoimentos" embaixo -->
+      <div class="cases__left reveal">
+        <h2 class="cases__title">O que dizem<br>sobre a <span class="accent">V4?</span></h2>
+        <div class="cases__credit">
+          <p class="cases__name">CVC Corp</p>
+          <blockquote class="cases__quote">“Em seis meses a V4 destravou a nossa máquina de aquisição. Saímos do achismo e passamos a bater meta de receita todos os meses — com previsibilidade.”</blockquote>
+          <p class="cases__label">— Mariana Lopes, Head de Marketing</p>
         </div>
-      </figcaption>
-    </figure>
+      </div>
+
+      <!-- CENTRO: imagem do case (troque o src pela foto real; tem parallax) -->
+      <figure class="cases__media reveal" data-parallax="-0.12">
+        <img src="assets/Mocasozinha.png" alt="Case de cliente da V4" />
+      </figure>
+
+      <!-- DIREITA: números de mudança no topo, "Mais Cases" embaixo -->
+      <div class="cases__right reveal">
+        <div class="cases__nums">
+          <div class="cases__num">
+            <span class="cases__num-value">+312<span class="accent">%</span></span>
+            <span class="cases__num-label">em leads qualificados no 1º trimestre</span>
+          </div>
+          <div class="cases__num">
+            <span class="cases__num-value">4,8<span class="accent">x</span></span>
+            <span class="cases__num-label">de retorno sobre o investimento (ROAS)</span>
+          </div>
+          <div class="cases__num">
+            <span class="cases__num-value">−41<span class="accent">%</span></span>
+            <span class="cases__num-label">no custo por aquisição (CAC)</span>
+          </div>
+        </div>
+        <a href="#" class="v4-btn-ghost cases__more" aria-disabled="true">Mais Cases</a>
+      </div>
+    </div>
   </div>
 </section>
+
+</div><!-- /.redzone -->
+</div><!-- /.stack -->
 
 <!-- ============================ HISTÓRIA (carrossel grande) ============================ -->
 <section class="hist" id="historia" aria-label="A história da V4">
   <div class="wrap hist__head reveal">
     <p class="eyebrow">Nossa trajetória</p>
-    <h2 class="hist__title">A história da <span class="accent">V4</span></h2>
+    <h2 class="hist__title">Grandes momentos da <span class="accent">V4</span></h2>
   </div>
 
   <!-- Cada .hist-slide__media aceita um gradiente (style="background:..."),
@@ -1180,7 +1256,7 @@
     <div class="faq-layout">
       <div class="faq-intro reveal">
         <p class="eyebrow">Dúvidas frequentes</p>
-        <h2 class="section__title">Antes de <span class="accent">entrar</span></h2>
+        <h2 class="section__title"><span class="accent">FAQ</span></h2>
         <p class="section__lead">Tudo o que você precisa saber antes de garantir sua vaga. Não encontrou sua dúvida? É só falar com a gente.</p>
       </div>
 
@@ -1214,20 +1290,6 @@
         <div class="faq__a"><p>Garanta sua vaga mesmo assim. Quem se inscreve recebe os avisos e o material de apoio — o ao vivo é onde a troca acontece, então reserve o horário.</p></div>
       </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ FINAL CTA (blast) ============================ -->
-<section class="final">
-  <div class="v4-blast final__blast" aria-hidden="true"></div>
-  <div class="final__vignette" aria-hidden="true"></div>
-  <div class="final__inner">
-    <p class="eyebrow eyebrow--light reveal" style="text-align:center">Última chamada</p>
-    <h2 class="final__title reveal">A receita não<br/>se destrava <span class="accent">sozinha.</span></h2>
-    <p class="final__sub reveal">Garanta sua vaga na aula gratuita e saia com um plano para virar o jogo da sua operação.</p>
-    <div class="final__actions reveal">
-      <a href="#metodo" class="v4-btn-ghost">Ver o método</a>
     </div>
   </div>
 </section>
