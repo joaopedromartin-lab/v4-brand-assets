@@ -623,6 +623,14 @@
      passa À FRENTE dos NÚMEROS. Os números "prendem" (sticky) enquanto
      o bloco vermelho desliza por cima; z-index garante a sobreposição.
      ============================================================ */
+  /* HEROSTACK — a marquee de logos sobe e empilha sobre o hero (sticky) ao rolar */
+  .herostack { position: relative; isolation: isolate; }
+  .herostack > .hero { position: sticky; top: 0; z-index: 1; }
+  .herostack > .marquee, .herostack > #metodo { position: relative; z-index: 2; }
+  @media (prefers-reduced-motion: reduce) {
+    .herostack > .hero { position: static; }
+  }
+
   .stack { position: relative; isolation: isolate; }
   .stack > #numeros { position: sticky; top: 0; z-index: 1; }
   .stack > .redzone { z-index: 2; will-change: transform; }
@@ -824,7 +832,13 @@
     <a href="#conselheiros">Conselheiros</a>
     <a href="#faq">Dúvidas</a>
   </nav>
+  <div class="nav__cta">
+    <a href="#" class="v4-btn">Contratar a V4</a>
+  </div>
 </header>
+
+<!-- ===== HEROSTACK: a marquee sobe e empilha sobre o hero (sticky) ao rolar ===== -->
+<div class="herostack">
 
 <!-- ============================ HERO (editorial) ============================ -->
 <section class="hero">
@@ -832,7 +846,7 @@
   <div class="hero__vignette" aria-hidden="true"></div>
 
   <!-- dupla ancorada na base da seção, sem gap -->
-  <figure class="hero__figure" data-parallax="0.06">
+  <figure class="hero__figure">
     <h1 class="hero__bigtitle">V4 Company</h1>
     <img src="assets/Doiscortado.png" alt="Especialistas da V4 Company" />
     <figcaption class="hero__namecard">
@@ -906,6 +920,8 @@
     </div>
   </div>
 </section>
+
+</div><!-- /.herostack -->
 
 <!-- ============================ SOLUÇÕES V4 (banner) ============================ -->
 <section class="solucoes" aria-label="Soluções V4">
@@ -1357,6 +1373,25 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     window.addEventListener('load', onScroll);
+    update();
+  })();
+
+  // ---- Hero: foto sobe ao descer a página (parallax por scroll; funciona mesmo com o hero "preso"/sticky) ----
+  (function () {
+    var fig = document.querySelector('.hero__figure');
+    if (!fig) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var ticking = false;
+    function update() {
+      ticking = false;
+      if (reduce.matches) { fig.style.setProperty('--par', '0px'); return; }
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var shift = Math.max(-280, -y * 0.18); // negativo = sobe ao descer; limite de segurança
+      fig.style.setProperty('--par', shift.toFixed(1) + 'px');
+    }
+    function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     update();
   })();
 
